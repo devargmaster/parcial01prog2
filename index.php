@@ -28,7 +28,7 @@ $seccion_elegida_ =  isset($_GET['sec']) ? $_GET['sec'] : 'home';
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Bella Casa</a>
+    <a class="navbar-brand" href="index.php">Bella Casa</a>
     <?PHP
     // armo los links de las secciones habilitadas
     for ($i=0; $i < count($seccion->secciones_completas()); $i++) {
