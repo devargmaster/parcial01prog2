@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "sec": "home",
+    "archivo": "home",
+    "nombre": "Home",
+    "habilitada": true
+  },
+    {
+        "id": 2,
+        "sec": "bazar",
+        "archivo": "bazar",
+        "nombre": "Bazar",
+        "habilitada": true
+    },
+    {
+      "id": 3,
+      "sec": "comedor",
+      "archivo": "comedor",
+      "nombre": "Comedor",
+      "habilitada": true
+    },
+    {
+      "id": 4,
+      "sec": "decor",
+      "archivo": "decor",
+      "nombre": "Decor",
+      "habilitada": true
+    },
+    {
+      "id": 5,
+      "archivo": "iluminacion",
+      "sec": "iluminacion",
+      "nombre": "Iluminación",
+      "habilitada": false
+    }
+]

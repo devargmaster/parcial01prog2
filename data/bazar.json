@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "producto_nombre": "Porta Utensilios Lines",
+    "producto_precio": 43900,
+    "producto_descripcion": "Con su practicidad característica, nuestro porta utensilios a rayas está hecho en mármol pulido en colores blanco y negro. Este organizador de bazar es perfecto para mantener la cocina ordenada de forma elegante y con estilo sofisticado, conteniendo utensilios prácticos para la hora de cocinar. Combina este porta utensilios con nuestra tabla de la misma colección. Las variaciones en el veteado natural hacen que cada pieza de mármol sea única.",
+    "producto_imagen": "img/bazar/accesorios/portautensillo/porta-utentensilios.webp",
+    "producto_categoria": "Utensillos",
+    "producto_stock": 10,
+    "producto_oferta": 0,
+    "producto_nuevo": 1,
+    "producto_destacado": 1,
+    "producto_fecha": "2020-01-01"
+  },
+  {
+    "id": 2,
+    "producto_nombre": "Posavasos Teak con Caja",
+    "producto_precio": 60400,
+    "producto_descripcion": "Hechos de acero pulido y madera natural de teca, nuestro set de posavasos agrega un detalle moderno y atemporal a la mesa mientras la protege de las manchas. Se apilan cuidadosamente en un soporte para mantenerlos organizados. Incluye 4 unidades.",
+    "producto_imagen": "img/bazar/accesorios/posavasosteak/posavasosteak1.webp",
+    "producto_categoria": "Accesorios",
+    "producto_stock": 10,
+    "producto_oferta": 0,
+    "producto_nuevo": 1,
+    "producto_destacado": 1,
+    "producto_fecha": "2020-01-01"
+  }
+]

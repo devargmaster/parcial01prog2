@@ -1,0 +1,173 @@
+[
+  {
+    "id": 1,
+    "producto_nombre": "Florero Tarff Ambar",
+    "producto_precio": 29500,
+    "producto_descripcion": "Espléndido por su forma y por su efecto tipo carey, nuestro florero Tarff está hecho en vidrio en color ámbar. Su diseño, sin dudas, logrará un acento en la decoración de su hogar, ya sea en mesas bajas o mesas de comedor. Disponible en dos tonalidades. Conoce toda nuestra línea de floreros.",
+    "producto_imagen": "img/decor/floreros/florero_tarff_ambar/ambar1.webp",
+    "producto_categoria": "Floreros",
+    "producto_stock": 10,
+    "producto_oferta": 0,
+    "producto_nuevo": 1,
+    "producto_destacado": 1,
+    "producto_fecha": "2020-01-01",
+    "producto_colores": [
+      {
+        "color": "Ambar",
+        "imagen": "img/decor/floreros/florero_tarff_ambar/ambar1.webp"
+      },
+      {
+        "color": "Verde",
+        "imagen": "img/decor/floreros/florero_tarff_ambar/verde1.webp"
+      }
+    ],
+    "producto_medidas": [
+      {
+        "medida": "Chico",
+        "precio": 29500
+      },
+      {
+        "medida": "Grande",
+        "precio": 39500
+      }
+    ],
+    "producto_materiales": [
+      {
+        "material": "Vidrio"
+      }
+    ],
+    "producto_origen": [
+      {
+        "origen": "China"
+      }
+    ],
+    "producto_imagenes" : [
+      {
+        "imagen": "img/decor/floreros/florero_tarff_ambar/ambar1.webp"
+      },
+      {
+        "imagen": "img/decor/floreros/florero_tarff_ambar/ambar2.webp"
+      },
+      {
+        "imagen": "img/decor/floreros/florero_tarff_ambar/ambar3.webp"
+      },
+      {
+        "imagen": "img/decor/floreros/florero_tarff_ambar/ambar4.webp"
+      }
+      ]
+  },
+  {
+    "id": 2,
+    "producto_nombre": "Florero Thay - Small",
+    "producto_precio": 19500,
+    "producto_descripcion": "Florero contemporáneo, hecho íntegramente en liso vidrio transparente en color ámbar. Su forma lo hace perfecto para mostrar un ramo de flores frescas, y sirve a su vez, como elemento decorativo para toda sala de estar o comedor. Disponible en dos medidas. Conoce toda nuestra línea de floreros.",
+    "producto_imagen": "img/decor/floreros/florero_thay_small/thay1.webp",
+    "producto_categoria": "Floreros",
+    "producto_stock": 10,
+    "producto_oferta": 0,
+    "producto_nuevo": 1,
+    "producto_destacado": 1,
+    "producto_fecha": "2020-01-01",
+    "producto_colores": [
+      {
+        "color": "Ambar",
+        "imagen": "img/decor/floreros/florero_thay_small/thay1.webp"
+      },
+      {
+        "color": "Verde",
+        "imagen": "img/decor/floreros/florero_thay_small/thay2.webp"
+      }
+    ],
+    "producto_medidas": [
+      {
+        "medida": "Chico",
+        "precio": 19500
+      },
+      {
+        "medida": "Grande",
+        "precio": 29500
+      }
+    ],
+    "producto_materiales": [
+      {
+        "material": "Vidrio"
+      }
+    ],
+    "producto_origen": [
+      {
+        "origen": "China"
+      }
+    ],
+    "producto_imagenes" : [
+      {
+        "imagen": "img/decor/floreros/florero_thay_small/thay1.webp"
+      },
+      {
+        "imagen": "img/decor/floreros/florero_thay_small/thay2.webp"
+      },
+      {
+        "imagen": "img/decor/floreros/florero_thay_small/thay3.webp"
+      },
+      {
+        "imagen": "img/decor/floreros/florero_thay_small/thay4.webp"
+      }
+      ]
+  },
+  {
+    "id": 3,
+    "producto_nombre": "Florero Leoti - Small",
+    "producto_precio": 81300,
+    "producto_descripcion": "De diseño llamativo, gracias a su patrón rítmico, este florero resaltará la decoración en cualquier hogar aportando mucho estilo y originalidad. Nuestro impresionante florero de vidrio tallado utiliza una forma cilíndrica con base lisa en color café. Los materiales y las formas simples, pero con gran presencia visual facilitan la decoración de mesas y consolas. Disponible en dos medidas. Conoce toda nuestra línea de floreros.",
+    "producto_imagen": "img/decor/floreros/floreroleoti_small/leotismall0.webp",
+    "producto_categoria": "Floreros",
+    "producto_stock": 10,
+    "producto_oferta": 0,
+    "producto_nuevo": 1,
+    "producto_destacado": 1,
+    "producto_fecha": "2020-01-01",
+    "producto_colores": [
+      {
+        "color": "Ambar",
+        "imagen": "img/decor/floreros/florero_thay_small/thay1.webp"
+      },
+      {
+        "color": "Verde",
+        "imagen": "img/decor/floreros/florero_thay_small/thay2.webp"
+      }
+    ],
+    "producto_medidas": [
+      {
+        "medida": "Chico",
+        "precio": 19500
+      },
+      {
+        "medida": "Grande",
+        "precio": 29500
+      }
+    ],
+    "producto_materiales": [
+      {
+        "material": "Vidrio"
+      }
+    ],
+    "producto_origen": [
+      {
+        "origen": "China"
+      }
+    ],
+    "producto_imagenes" : [
+      {
+        "imagen": "img/decor/floreros/florero_thay_small/thay1.webp"
+      },
+      {
+        "imagen": "img/decor/floreros/florero_thay_small/thay2.webp"
+      },
+      {
+        "imagen": "img/decor/floreros/florero_thay_small/thay3.webp"
+      },
+      {
+        "imagen": "img/decor/floreros/florero_thay_small/thay4.webp"
+      }
+    ]
+  }
+]
