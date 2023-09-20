@@ -1,9 +1,10 @@
 <?php
 require_once 'clases/Producto.php';
 $sec = $_GET['sec'];
-$bazar = new Producto();
+$productos = new Producto();
+$catalogo = $productos->todos_los_productos();
 echo "<pre>";
-print_r($bazar->productos_x_categoria("$sec"));
+print_r($catalogo);
 echo "</pre>";
 ?>
 
@@ -17,7 +18,6 @@ echo "</pre>";
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
   <link href="/css/styles.css" rel="stylesheet">
 </head>
 
@@ -27,19 +27,17 @@ echo "</pre>";
 
   <div class="row">
     <?PHP
-    // armo los links de las secciones habilitadas
-    for ($i = 0; $i < count($bazar->productos_x_categoria("$sec")); $i++) { ?>
+    foreach ($catalogo as $producto) {?>
       <div class="col-12 col-md-4">
         <div class='card mb-3'>
-          <img src="<?=$bazar->productos_x_categoria("$sec")[$i]->producto_imagen?>" class='card-img-top' alt='...'>
-          <a href=vistas/producto.php?sec="<?=$bazar->productos_x_categoria("$sec")[$i]->producto_nombre?>"><?=$bazar->productos_x_categoria("$sec")[$i]->producto_nombre?></a>
-          <p class="card-text"><?= $bazar->productos_x_categoria("$sec")[$i]->descripcion_limite() ?></p>
+          <img src="<?=$producto->producto_imagen?>" class='card-img-top' alt='...'>
+          <a href=vistas/producto.php?sec="<?=$producto->producto_nombre?>"><?=$producto->producto_nombre?></a>
+          <p class="card-text"><?= $producto->descripcion_limite() ?></p>
           <div class="card-body">
             <div class="fs-3 mb-3 fw-bold text-center text-danger">
-              <?= number_format($bazar->productos_x_categoria("$sec")[$i]->producto_precio, 2, ",", ".") ?></div>
-            <a href="vistas/producto.php?sec=<?= $bazar->productos_x_categoria("$sec")[$i]->producto_nombre ?> &id=<?= $bazar->productos_x_categoria("$sec")[$i]->id ?>"
+              <?= number_format($producto->producto_precio, 2, ",", ".") ?></div>
+            <a href="vistas/producto.php?sec=<?= $producto->producto_nombre ?> &id=<?= $producto->id ?>"
                class="btn btn-danger w-100 fw-bold">VER MÁS</a>
-
           </div>
         </div>
       </div>

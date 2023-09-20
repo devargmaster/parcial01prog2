@@ -1,6 +1,6 @@
 <?php
 require_once 'clases/Seccion.php';
-
+require_once 'clases/Producto.php';
 $seccion = new Seccion();
 
 //echo "<pre>";

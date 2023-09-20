@@ -33,7 +33,7 @@ echo "</pre>";
         <div class='card mb-3'>
           <img src="<?=$bazar->productos_x_categoria("$sec")[$i]->producto_imagen?>" class='card-img-top' alt='...'>
           <a href=vistas/producto.php?sec="<?=$bazar->productos_x_categoria("$sec")[$i]->producto_nombre?>"><?=$bazar->productos_x_categoria("$sec")[$i]->producto_nombre?></a>
-          <p class="card-text"><?= $bazar->productos_x_categoria("$sec")[$i]->descripcion_limite() ?></p>
+          <p class="card-text"><?= $bazar->productos_x_categoria("$sec")[$i]->producto_descripcion ?></p>
           <div class="card-body">
             <div class="fs-3 mb-3 fw-bold text-center text-danger">
               <?= number_format($bazar->productos_x_categoria("$sec")[$i]->producto_precio, 2, ",", ".") ?></div>
