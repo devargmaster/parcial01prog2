@@ -32,13 +32,12 @@ echo "</pre>";
       <div class="col-12 col-md-4">
         <div class='card mb-3'>
           <img src="<?=$iluminacion->productos_x_categoria("$sec")[$i]->producto_imagen?>" class='card-img-top' alt='...'>
-          <a href=vistas/producto.php?sec="<?=$iluminacion->productos_x_categoria("$sec")[$i]->producto_nombre?>"><?=$iluminacion->productos_x_categoria("$sec")[$i]->producto_nombre?></a>
+          <a href="vistas/producto.php?sec=<?= $sec ?> &id=<?= $iluminacion->productos_x_categoria("$sec")[$i]->id ?>"><?= $iluminacion->productos_x_categoria("$sec")[$i]->producto_nombre ?></a>
           <p class="card-text"><?= $iluminacion->productos_x_categoria("$sec")[$i]->descripcion_limite() ?></p>
           <div class="card-body">
             <div class="fs-3 mb-3 fw-bold text-center text-danger">
               <?= number_format($iluminacion->productos_x_categoria("$sec")[$i]->producto_precio, 2, ",", ".") ?></div>
-            <a href="vistas/producto.php?sec=<?= $iluminacion->productos_x_categoria("$sec")[$i]->producto_nombre ?> &id=<?= $iluminacion->productos_x_categoria("$sec")[$i]->id ?>"
-               class="btn btn-danger w-100 fw-bold">VER MÁS</a>
+            <a href="vistas/producto.php?sec=<?= $sec ?> &id=<?= $iluminacion->productos_x_categoria("$sec")[$i]->id ?>" class="btn btn-danger w-100 fw-bold">VER MÁS</a>
 
           </div>
         </div>
