@@ -3,9 +3,9 @@ require_once 'clases/Producto.php';
 $sec = $_GET['sec'];
 $productos = new Producto();
 $catalogo = $productos->todos_los_productos();
-echo "<pre>";
-print_r($catalogo);
-echo "</pre>";
+//echo "<pre>";
+//print_r($catalogo);
+//echo "</pre>";
 ?>
 
 <!DOCTYPE html>

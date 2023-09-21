@@ -7,6 +7,7 @@ class Producto
   private $producto_descripcion;
   private $producto_precio;
   private $producto_categoria;
+  private $producto_subcategoria;
   private $producto_imagen;
   private $producto_stock;
 
@@ -23,6 +24,9 @@ class Producto
       $p->producto_descripcion = $producto->producto_descripcion;
       $p->producto_precio = $producto->producto_precio;
       $p->producto_categoria = $producto->producto_categoria;
+      if (property_exists($producto, 'producto_subcategoria')) {
+        $p->producto_subcategoria = $producto->producto_subcategoria;
+      }
       $p->producto_imagen = $producto->producto_imagen;
       $p->producto_stock = $producto->producto_stock;
       $productos[] = $p;
@@ -42,6 +46,17 @@ class Producto
     return $productos;
   }
 
+public function productos_x_subcategoria($subcategoria): array
+  {
+    $catalogo_x_seccion = $this->todos_los_productos();
+    $productos = [];
+    foreach ($catalogo_x_seccion as $seccion) {
+      if ($seccion->producto_subcategoria == $subcategoria) {
+        $productos[] = $seccion;
+      }
+    }
+    return $productos;
+  }
   public function producto_x_id(int $idProducto): ?Producto
   {
     $catalogo = $this->todos_los_productos();
@@ -83,9 +98,14 @@ class Producto
   {
     return $this->producto_precio;
   }
-  public function getProducto_categoria(): string
+  public function getProducto_categoria()
   {
     return $this->producto_categoria;
+  }
+
+  public function getProducto_subcategoria()
+  {
+    return $this->producto_subcategoria;
   }
   public function getProducto_imagen(): string
   {

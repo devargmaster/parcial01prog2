@@ -2,14 +2,21 @@
 require_once 'clases/Seccion.php';
 require_once 'clases/Producto.php';
 $seccion = new Seccion();
+$secciones_completas = $seccion->secciones_completas();
 
 //echo "<pre>";
 //print_r($seccion->secciones_completas());
 //echo "</pre>";
 
+if (isset($_GET['subsec']) && isset($_GET['sec'])) {
+  $subsec = $_GET['subsec'];
+  $sec = $_GET['sec'];
+  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
+  $subseccion_elegida_ = isset($_GET['subsec']) ? $_GET['subsec'] : 'bazar';
+} else {
+  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
+}
 
-// me quedo con la seccion elegida
-$seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
 
 ?>
 <!DOCTYPE html>
@@ -30,30 +37,37 @@ $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
             aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <?PHP
-      // armo los links de las secciones habilitadas
-      foreach ($seccion->secciones_completas() as $sec_obj) {
-        if ($sec_obj['habilitada'] == 1) {
-          echo "<ul class='navbar-nav me-auto mb-2 mb-lg-0'>";
-          echo "<li class='nav-item dropdown'>";?>
-          <a class='nav-link dropdown-toggle' href=index.php?sec=<?=$sec_obj['sec'] ?>><?=$sec_obj['nombre'] ?>
-          </a>
-
-<?PHP
-          echo "</li>";
-          echo "</ul>";
-        }
-      }
-      ?>
-
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <?PHP foreach ($secciones_completas as $sec_obj) { ?>
+          <?PHP if ($sec_obj->getHabilitada() == 1) { ?>
+            <?PHP if (!empty($sec_obj->getSubseccionesSubsec())) { ?>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                   href="index.php?sec=<?= $sec_obj->getSec(); ?>"><?= $sec_obj->getNombre(); ?></a>
+                <ul class="dropdown-menu">
+                  <?PHP foreach ($sec_obj->getSubseccionesSubsec() as $subsec) { ?>
+                    <li><a class="dropdown-item" href="index.php?sec=<?= $sec_obj->getSec(); ?>&subsec=<?=$subsec['subsec']?>"><?= $subsec['nombre']; ?></a></li>
+                  <?PHP } ?>
+                </ul>
+              </li>
+            <?PHP } else { ?>
+              <li class="nav-item">
+                <a class="nav-link" href="index.php?sec=<?= $sec_obj->getSec(); ?>"><?= $sec_obj->getNombre(); ?></a>
+              </li>
+            <?PHP } ?>
+          <?PHP } ?>
+        <?PHP } ?>
+      </ul>
     </div>
+
   </div>
 </nav>
 <main>

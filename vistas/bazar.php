@@ -1,11 +1,20 @@
 <?php
 require_once 'clases/Producto.php';
-$sec = $_GET['sec'];
-$bazar = new Producto();
-$catalogo = $bazar->productos_x_categoria("$sec");
-echo "<pre>";
-print_r($bazar->productos_x_categoria("$sec"));
-echo "</pre>";
+if (isset($_GET['sec']) && isset($_GET['subsec'])) {
+  $sec = $_GET['sec'];
+  $subsec = $_GET['subsec'];
+  $bazar = new Producto();
+  $catalogo = $bazar->productos_x_subcategoria("$subsec");
+} else {
+  $sec = $_GET['sec'];
+  $bazar = new Producto();
+  $catalogo = $bazar->productos_x_categoria("$sec");
+}
+
+
+//echo "<pre>";
+//print_r($bazar->productos_x_categoria("$sec"));
+//echo "</pre>";
 ?>
 
 <!DOCTYPE html>

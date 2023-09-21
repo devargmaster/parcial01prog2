@@ -2,65 +2,67 @@
   {
     "id": 1,
     "sec": "home",
-    "subsecciones": [
-      {
-        "subsec": "accesorios"
-      },
-      {
-        "subsec": "textiles"
-      }
-    ],
+    "subsecciones": [],
     "nombre": "Home",
     "habilitada": true
   },
   {
     "id": 2,
     "sec": "catalogo",
-    "archivo": "catalogo",
+    "subsecciones": [],
     "nombre": "Catálogo",
     "habilitada": true
   },
   {
     "id": 3,
     "sec": "bazar",
-    "archivo": "bazar",
+    "subsecciones": [
+      {
+        "subsec" : "accesorios",
+        "nombre" : "Accesorios"
+      },
+      {
+        "subsec" : "textil",
+        "nombre" : "Textil"
+      }
+    ],
     "nombre": "Bazar",
     "habilitada": true
   },
   {
     "id": 4,
     "sec": "comedor",
-    "archivo": "comedor",
+    "subsecciones": [],
     "nombre": "Comedor",
     "habilitada": true
   },
   {
     "id": 5,
     "sec": "decor",
-    "archivo": "decor",
+    "subsecciones": [],
     "nombre": "Decor",
     "habilitada": true
   },
   {
     "id": 6,
-    "archivo": "iluminacion",
     "sec": "iluminacion",
+    "subsecciones": [],
     "nombre": "Iluminación",
     "habilitada": true
   },
   {
     "id": 7,
-    "archivo": "datos_alumno",
     "sec": "datos_alumno",
+    "subsecciones": [],
     "nombre": "Mis Datos",
-    "habilitada": true
+    "habilitada": false
   },
   {
     "id": 8,
-    "archivo": "contacto",
     "sec": "contacto",
+    "subsecciones": [],
     "nombre": "Contactanos!",
-    "habilitada": true
+    "habilitada": false
   }
 
 ]

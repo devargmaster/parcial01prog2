@@ -3,9 +3,9 @@ require_once 'clases/Producto.php';
 $sec = $_GET['sec'];
 $comedor = new Producto();
 $catalogo = $comedor->productos_x_categoria("$sec");
-echo "<pre>";
-print_r($comedor->productos_x_categoria("$sec"));
-echo "</pre>";
+//echo "<pre>";
+//print_r($comedor->productos_x_categoria("$sec"));
+//echo "</pre>";
 ?>
 
 <!DOCTYPE html>
