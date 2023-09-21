@@ -2,13 +2,13 @@
 
 class Producto
 {
-  public $id;
-  public $producto_nombre;
-  public $producto_descripcion;
-  public $producto_precio;
-  public $producto_categoria;
-  public $producto_imagen;
-  public $producto_stock;
+  private $id;
+  private $producto_nombre;
+  private $producto_descripcion;
+  private $producto_precio;
+  private $producto_categoria;
+  private $producto_imagen;
+  private $producto_stock;
 
   public function todos_los_productos(): array
   {
@@ -67,4 +67,33 @@ class Producto
 
     return $resultado;
   }
+  public function getID()
+  {
+    return $this->id;
+  }
+  public function getProducto_nombre()
+  {
+    return $this->producto_nombre;
+  }
+  public function getProducto_descripcion(): string
+  {
+    return $this->producto_descripcion;
+  }
+  public function getProducto_precio(): float
+  {
+    return $this->producto_precio;
+  }
+  public function getProducto_categoria(): string
+  {
+    return $this->producto_categoria;
+  }
+  public function getProducto_imagen(): string
+  {
+    return $this->producto_imagen;
+  }
+  public function getProducto_stock(): int
+  {
+    return $this->producto_stock;
+  }
+
 }

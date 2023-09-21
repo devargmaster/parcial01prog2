@@ -2,7 +2,14 @@
   {
     "id": 1,
     "sec": "home",
-    "archivo": "home",
+    "subsecciones": [
+      {
+        "subsec": "accesorios"
+      },
+      {
+        "subsec": "textiles"
+      }
+    ],
     "nombre": "Home",
     "habilitada": true
   },

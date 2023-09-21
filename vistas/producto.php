@@ -21,7 +21,9 @@ echo "</pre>";
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">Bella Casa</a>
+    <a class="navbar-brand" href="#">
+      <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,12 +45,12 @@ echo "</pre>";
   <div class="row">
     <div class="col-12 col-md-4">
       <div class='card mb-3'>
-        <img src="<?= "../". $producto->producto_imagen ?>" class='card-img-top' alt='...'>
-        <p class="card-text"><?= $producto->producto_descripcion ?></p>
+        <img src="<?= "../". $producto->getProducto_imagen() ?>" class='card-img-top' alt='...'>
+        <p class="card-text"><?= $producto->getProducto_descripcion() ?></p>
         <div class="card-body">
           <div class="fs-3 mb-3 fw-bold text-center text-danger">
-            <?= number_format($producto->producto_precio, 2, ",", ".") ?></div>
-          <a href="vistas/producto.php?sec=<?= $producto->producto_nombre ?> &id=<?= $producto->id ?>"
+            <?= number_format($producto->getProducto_precio(), 2, ",", ".") ?></div>
+          <a href="vistas/producto.php?sec=<?= $producto->getProducto_nombre() ?> &id=<?= $producto->getID() ?>"
              class="btn btn-danger w-100 fw-bold">VER MÁS</a>
         </div>
       </div>
