@@ -32,14 +32,44 @@
   {
     "id": 4,
     "sec": "comedor",
-    "subsecciones": [],
+    "subsecciones": [
+      {
+        "subsec" : "vajilla",
+        "nombre" : "Vajilla"
+      },
+      {
+        "subsec" : "cristaleria",
+        "nombre" : "Cristalería"
+      },
+      {
+        "subsec" : "cuberteria",
+        "nombre" : "Cubertería"
+      },
+      {
+        "subsec" : "bandejas",
+        "nombre" : "Bandejas"
+      },
+      {
+        "subsec" : "ollas",
+        "nombre" : "Ollas"
+      },
+      {
+        "subsec" : "electrodomesticos",
+        "nombre" : "Electrodomésticos"
+      }
+    ],
     "nombre": "Comedor",
     "habilitada": true
   },
   {
     "id": 5,
     "sec": "decor",
-    "subsecciones": [],
+    "subsecciones": [
+      {
+        "subsec" : "cuadros",
+        "nombre" : "Cuadros"
+      }
+    ],
     "nombre": "Decor",
     "habilitada": true
   },
