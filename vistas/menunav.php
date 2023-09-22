@@ -1,12 +1,12 @@
 <?php
-require_once dirname(__DIR__) .'/clases/Seccion.php';
-// Obtener la ruta actual del archivo
+require_once dirname(__DIR__) . '/clases/Seccion.php';
+// aca obtengo la ruta actual del archivo, esto me sirvio mucho para meterlo en el hosting y que quede ordenado
 $currentPath = $_SERVER['PHP_SELF'];
 
 // Definir una variable que represente la ruta base para los enlaces
 $basePath = '';
 
-// Si el archivo está en la carpeta "vistas", retrocede un nivel para la ruta base
+// Aca lo hago retroceder un nivel para manejar la jerarquia del index respecto a las vistas
 if (strpos($currentPath, '/vistas/') !== false) {
   $basePath = '../';
 }
@@ -25,13 +25,9 @@ if (isset($_GET['subsec']) && isset($_GET['sec'])) {
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <?PHP foreach ($secciones_completas as $sec_obj) { ?>
@@ -42,7 +38,9 @@ if (isset($_GET['subsec']) && isset($_GET['sec'])) {
                    href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getSec(); ?>"><?= $sec_obj->getNombre(); ?></a>
                 <ul class="dropdown-menu">
                   <?PHP foreach ($sec_obj->getSubseccionesSubsec() as $subsec) { ?>
-                    <li><a class="dropdown-item" href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getSec(); ?>&subsec=<?=$subsec['subsec']?>"><?= $subsec['nombre']; ?></a></li>
+                    <li><a class="dropdown-item"
+                           href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getSec(); ?>&subsec=<?= $subsec['subsec'] ?>"><?= $subsec['nombre']; ?></a>
+                    </li>
                   <?PHP } ?>
                 </ul>
               </li>
@@ -55,6 +53,5 @@ if (isset($_GET['subsec']) && isset($_GET['sec'])) {
         <?PHP } ?>
       </ul>
     </div>
-
   </div>
 </nav>

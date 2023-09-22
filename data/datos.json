@@ -102,7 +102,7 @@
   "producto_nombre": "Textil",
   "producto_precio": 60400,
   "producto_descripcion": "De aspecto industrial sumamente elegante, nuestra lámpara de mesa pensada para espacios de trabajo como en escritorios o espacios de lectura como en mesas auxiliares, está compuesta íntegramente en metal pintado con terminación brillante. Inspirada en antiguas lámparas utilizadas en boticarios, posee un brazo regulable que direcciona la luz según necesidad. Foco no incluido.",
-  "producto_imagen": "img/bazar/textiles/Individual Bouro/individualbouro1.webp",
+  "producto_imagen": "img/bazar/textiles/individualbouro/individualbouro1.webp",
   "producto_categoria": "bazar",
   "producto_subcategoria" : "textil",
   "producto_stock": 10,
