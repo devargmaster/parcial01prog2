@@ -1,3 +1,4 @@
+<h1>Bella Casa</h1>
 <?php
 require_once dirname(__DIR__) . '/clases/Seccion.php';
 // aca obtengo la ruta actual del archivo, esto me sirvio mucho para meterlo en el hosting y que quede ordenado

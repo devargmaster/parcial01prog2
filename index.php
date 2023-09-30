@@ -12,8 +12,10 @@ require_once 'clases/Producto.php';
 </head>
 <body>
 <?PHP require_once 'vistas/menunav.php'; ?>
-<main>
-  <?PHP  require_once 'vistas/main.php';   ?>
+<main  class="container">
+  <div class="row">
+    <?PHP  require_once 'vistas/main.php';   ?>
+  </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 <?PHP require_once 'vistas/footer.php'; ?>

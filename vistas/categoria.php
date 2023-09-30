@@ -23,8 +23,6 @@ echo "</pre>";
 
 <body>
 <main class="container">
-
-
   <div class="row">
     <?PHP
     // armo los links de las secciones habilitadas
