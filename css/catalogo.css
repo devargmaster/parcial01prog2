@@ -1,0 +1,26 @@
+.boton_estilo {
+  margin-top: 20px;
+  background-color: beige;
+  color: #333;
+  border: 2px solid #333;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 0.2em;
+}
+
+
+.boton_estilo:hover  {
+  background-color: #333;
+  color: beige;
+  border: 0.2em solid #333;
+}
+.producto_precio_estilo {
+  font-size: 2rem;
+  color: black;
+  font-weight: bold;
+  margin-top: 20px;
+}

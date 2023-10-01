@@ -10,6 +10,7 @@ class Producto
   private $producto_subcategoria;
   private $producto_imagen;
   private $producto_stock;
+  private $producto_info_adicional;
 
   public function todos_los_productos(): array
   {
@@ -29,6 +30,7 @@ class Producto
       }
       $p->producto_imagen = $producto->producto_imagen;
       $p->producto_stock = $producto->producto_stock;
+      $p->producto_info_adicional = property_exists($producto, 'producto_info_adicional') ? $producto->producto_info_adicional : [];
       $productos[] = $p;
     }
     return $productos;
@@ -115,5 +117,11 @@ public function productos_x_subcategoria($subcategoria): array
   {
     return $this->producto_stock;
   }
+
+  public function getProductoInfoAdicional(): array
+  {
+    return $this->producto_info_adicional;
+  }
+
 
 }

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="css/producto.css">
 <?php
 require_once 'clases/Producto.php';
 if (isset($_GET['sec']) && isset($_GET['subsec'])) {
@@ -22,14 +23,14 @@ if (isset($_GET['sec']) && isset($_GET['subsec'])) {
     foreach ($catalogo as $producto) {?>
       <div class="col-12 col-md-4">
         <div class='card mb-3'>
-          <img src="<?=$producto->getProducto_imagen()?>" class='card-img-top' alt='...'>
-          <a href="vistas/producto.php?sec=<?=$sec?>&id=<?= $producto->getID(); ?>"><?=$producto->getProducto_nombre(); ?></a>
-          <p class="card-text"><?= $producto->descripcion_limite() ?></p>
+          <img src="<?=$producto->getProducto_imagen()?>" class='card-img-top' alt='<?=$producto->getProducto_nombre()?>'>
           <div class="card-body">
-            <div class="fs-3 mb-3 fw-bold text-center text-danger">
-              <?= number_format($producto->getProducto_precio(), 2, ",", ".") ?></div>
-            <a href="vistas/producto.php?sec=<?= $sec?> &id=<?= $producto->getID() ?>"
-               class="btn btn-danger w-100 fw-bold">VER MÁS</a>
+          <h2 class="card-title mb-2"><a href="index.php?sec=producto&id=<?= $producto->getID(); ?>" class="producto_titulo_estilo"><?=$producto->getProducto_nombre(); ?></a></h2>
+          <p class="card-text mb-2"><?= $producto->descripcion_limite() ?></p>
+            <div class="fs-3 mb-3 fw-bold text-center">
+              <?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS</div>
+            <a href="vistas/producto.php?sec=producto&id=<?= $producto->getID() ?>"
+               class="btn carrito_boton_estilo w-100 fw-bold mt-2">VER MÁS</a>
           </div>
         </div>
       </div>

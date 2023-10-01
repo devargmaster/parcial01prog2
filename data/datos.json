@@ -11,7 +11,26 @@
     "producto_oferta": 0,
     "producto_nuevo": 1,
     "producto_destacado": 1,
-    "producto_fecha": "2020-01-01"
+    "producto_fecha": "2020-01-01",
+    "producto_info_adicional": [
+      {
+        "caracteristica_nombre": "Color",
+        "caracteristica_valor": "Ambar"
+      },
+      {
+        "caracteristica_nombre": "Material",
+        "caracteristica_valor": "Vidrio"
+      },
+      {
+        "caracteristica_nombre": "Medidas",
+        "caracteristica_valor": "18 x 18 x 30 cm"
+      },
+      {
+        "caracteristica_nombre": "Peso",
+        "caracteristica_valor": "2,5 kg"
+      }
+    ],
+    "producto_origen": "China"
   },
   {
     "id": 2,
@@ -25,7 +44,25 @@
     "producto_oferta": 0,
     "producto_nuevo": 1,
     "producto_destacado": 1,
-    "producto_fecha": "2020-01-01"
+    "producto_fecha": "2020-01-01",
+    "producto_info_adicional": [
+      {
+        "caracteristica_nombre": "Color",
+        "caracteristica_valor": "Amarillo"
+      },
+      {
+        "caracteristica_nombre": "Material",
+        "caracteristica_valor": "Vidrio"
+      },
+      {
+        "caracteristica_nombre": "Medidas",
+        "caracteristica_valor": "18 x 18 x 50 cm"
+      },
+      {
+        "caracteristica_nombre": "Peso",
+        "caracteristica_valor": "1,5 kg"
+      }
+    ]
   },
   {
     "id": 3,
@@ -85,7 +122,7 @@
 
   {
     "id": 7,
-    "producto_nombre": "Lamapara de Mesa",
+    "producto_nombre": "Lampara de Mesa",
     "producto_precio": 60400,
     "producto_descripcion": "De aspecto industrial sumamente elegante, nuestra lámpara de mesa pensada para espacios de trabajo como en escritorios o espacios de lectura como en mesas auxiliares, está compuesta íntegramente en metal pintado con terminación brillante. Inspirada en antiguas lámparas utilizadas en boticarios, posee un brazo regulable que direcciona la luz según necesidad. Foco no incluido.",
     "producto_imagen": "img/iluminacion/lampara_mesa/lampara_mesa_curl_brillante/curl01.webp",

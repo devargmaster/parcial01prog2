@@ -85,14 +85,14 @@
     "sec": "datos_alumno",
     "subsecciones": [],
     "nombre": "Mis Datos",
-    "habilitada": false
+    "habilitada": true
   },
   {
     "id": 8,
     "sec": "contacto",
     "subsecciones": [],
     "nombre": "Contactanos!",
-    "habilitada": false
+    "habilitada": true
   }
 
 ]
