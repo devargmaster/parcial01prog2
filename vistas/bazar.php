@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/producto.css">
+<link rel="stylesheet" href="css/formularios_botones_estilos.css">
 <?php
 require_once 'clases/Producto.php';
 if (isset($_GET['sec']) && isset($_GET['subsec'])) {

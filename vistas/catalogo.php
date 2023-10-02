@@ -15,7 +15,7 @@ $catalogo = $productos->todos_los_productos();
         <div class='card mb-3'>
           <img src="<?=$producto->getProducto_imagen()?>" class='card-img-top' alt='<?=$producto->getProducto_nombre(); ?>'>
           <div class="card-body">
-          <h2 class="card-title mb-2"><a href="index.php?sec=producto&id=<?= $producto->getID(); ?>" class="titulo"><?=$producto->getProducto_nombre(); ?></a></h2>
+          <h2 class="card-title mb-2"><a href="index.php?sec=producto&id=<?= $producto->getID(); ?>" class="estilo_titulo"><?=$producto->getProducto_nombre(); ?></a></h2>
           <p class="card-text mb-2"><?= $producto->descripcion_limite() ?></p>
 
             <div class="fs-3 mb-3 fw-bold text-center producto_precio_estilo">
