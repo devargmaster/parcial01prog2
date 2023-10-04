@@ -6,9 +6,8 @@
         <p>CEO de Decora Tutti</p>
         <p>Dirección: Av. Siempre Viva 742</p>
         <div class="social-icons">
-          <a href="[URL de Instagram]"><i class="fab fa-instagram"></i></a>
-          <a href="[URL de Facebook]"><i class="fab fa-facebook"></i></a>
-          <a href="[URL de LinkedIn]"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/3dvoto/"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/walterarce/"><i class="fab fa-linkedin"></i></a>
         </div>
       </div>
       <div class="col-md-4">

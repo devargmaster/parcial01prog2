@@ -1,5 +1,5 @@
 <div class="container">
-  <form action="procesar_formulario.php" method="post">
+  <form action="index.php?sec=procesar_formulario" method="post">
     <div class="form-row">
       <div class="col-md-6">
         <label for="nombre">Nombre:</label>
