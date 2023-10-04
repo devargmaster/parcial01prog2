@@ -16,7 +16,9 @@ if (isset($_GET['subsec']) && isset($_GET['sec'])) {
   $subsec = $_GET['subsec'];
   $sec = $_GET['sec'];
   $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
-  $subseccion_elegida_ = isset($_GET['subsec']) ? $_GET['subsec'] : 'bazar';
+}
+if (isset($_GET['producto'])) {
+  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'catalogo';
 } else {
   $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
 }
@@ -24,7 +26,8 @@ if (isset($_GET['subsec']) && isset($_GET['sec'])) {
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php"><img src="img/logo.png" class="logo" alt="Decora Tutti"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -45,12 +48,18 @@ if (isset($_GET['subsec']) && isset($_GET['sec'])) {
               </li>
             <?PHP } else { ?>
               <li class="nav-item">
-                <a class="nav-link" href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getSec(); ?>"><?= $sec_obj->getNombre(); ?></a>
+                <a class="nav-link"
+                   href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getSec(); ?>"><?= $sec_obj->getNombre(); ?></a>
               </li>
             <?PHP } ?>
           <?PHP } ?>
         <?PHP } ?>
       </ul>
+      <form class="d-flex" action="index.php" method="get" role="search">
+        <input class="form-control me-2" type="search" name="producto" placeholder="Buscar" aria-label="Search">
+
+        <button class="btn carrito_boton_estilo" type="submit">Buscar</button>
+      </form>
     </div>
   </div>
 </nav>

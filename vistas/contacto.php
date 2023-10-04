@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="css/formularios_botones_estilos.css">
 <div class="container">
   <form action="procesar_formulario.php" method="post">
     <div class="form-row">
@@ -24,7 +23,7 @@
     <div class="form-row">
       <div class="col-md-6">
         <label for="consulta">Consulta:</label>
-        <textarea  class="form-control campos_estilos" id="consulta" name="consulta" required></textarea>
+        <textarea class="form-control campos_estilos" id="consulta" name="consulta" required></textarea>
       </div>
     </div>
     <div class="form-group">

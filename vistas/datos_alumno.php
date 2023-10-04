@@ -1,12 +1,9 @@
-<?php
-
-?>
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="info-container">
         <img src="img/walter.png" alt="Walter Arce" class="img-fluid rounded-circle">
-        <h2 class="text-center">Mi Información</h2>
+        <h2 class="text-center">Datos del alumno</h2>
         <p class="info-label">Nombre: Walter </p>
         <p class="info-label">Apellido: Arce</p>
         <p class="info-label">Edad: 47</p>
