@@ -1,6 +1,4 @@
 <?php
-$obj = new Producto();
-$catalogo = $obj->todos_los_productos();
 class Seccion
 {
   private $id;
