@@ -1,9 +1,16 @@
 <link rel="stylesheet" href="css/formularios_botones_estilos.css">
 <?php
 require_once 'clases/Producto.php';
-$sec = $_GET['sec'];
-$iluminacion = new Producto();
-$catalogo = $iluminacion->productos_x_categoria("$sec");
+if (isset($_GET['sec']) && isset($_GET['subsec'])) {
+  $sec = $_GET['sec'];
+  $subsec = $_GET['subsec'];
+  $iluminacion = new Producto();
+  $catalogo = $iluminacion->productos_x_subcategoria("$subsec");
+} else {
+  $sec = $_GET['sec'];
+  $iluminacion = new Producto();
+  $catalogo = $iluminacion->productos_x_categoria("$sec");
+}
 //echo "<pre>";
 //print_r($iluminacion->productos_x_categoria("$sec"));
 //echo "</pre>";

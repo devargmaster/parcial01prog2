@@ -8,24 +8,18 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/bannerhvdecoratutti.png" class="d-block w-100" alt="imagen banner1">
+      <img src="img/home1.png" class="d-block w-100" alt="imagen banner1">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Decora Tutti Piensa en vos!</h5>
-        <p>Nuestra mejor linea de floreros estan disponibles para esta temporada.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="img/bannerhvdecoratutti.png" class="d-block w-100" alt="imagen banner2">
+      <img src="img/home2.png" class="d-block w-100" alt="imagen banner2">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="img/bannerhvdecoratutti.png" class="d-block w-100" alt="imagen banner3">
+      <img src="img/home3.png" class="d-block w-100" alt="imagen banner3">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
       </div>
     </div>
   </div>

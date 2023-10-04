@@ -27,24 +27,16 @@
 }
 
 .carrito_boton_estilo {
-  margin-top: 20px;
   background-color: beige;
   color: #333;
-  border: 2px solid #333;
-  padding: 10px 20px;
-  font-size: 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  font-size: 14px;
   cursor: pointer;
-  border-radius: 0.2em;
 }
 
 
 .carrito_boton_estilo:hover  {
   background-color: #333;
   color: beige;
-  border: 0.2em solid #333;
 }
 .informacion_adicional_estilo{
   margin-top: 20px;

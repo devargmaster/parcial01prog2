@@ -1,10 +1,8 @@
-<h1>Bella Casa</h1>
+<h1>Decora Tutti</h1>
 <?php
 require_once dirname(__DIR__) . '/clases/Seccion.php';
 // aca obtengo la ruta actual del archivo, esto me sirvio mucho para meterlo en el hosting y que quede ordenado
 $currentPath = $_SERVER['PHP_SELF'];
-
-// Definir una variable que represente la ruta base para los enlaces
 $basePath = '';
 
 // Aca lo hago retroceder un nivel para manejar la jerarquia del index respecto a las vistas
@@ -25,7 +23,7 @@ if (isset($_GET['subsec']) && isset($_GET['sec'])) {
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="img/logo.png" class="logo" alt="Decora Tutti"></a>
+    <a class="navbar-brand" href="index.php"><img src="img/logo.png" class="logo" alt="Decora Tutti"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

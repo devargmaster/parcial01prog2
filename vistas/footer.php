@@ -1,9 +1,9 @@
-<footer class="bg-body-secondary text-light p-4">
+<footer class="bg-body-secondary text-light p-4 ">
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <h5>Walter Arce</h5>
-        <p>CEO de Bella Casa</p>
+        <p class="estilo_titulo">Walter Arce</p>
+        <p>CEO de Decora Tutti</p>
         <p>Dirección: Av. Siempre Viva 742</p>
         <div class="social-icons">
           <a href="[URL de Instagram]"><i class="fab fa-instagram"></i></a>
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <h5>Categorías</h5>
+        <p>Categorías</p>
         <ul class="list-unstyled">
           <?php foreach ($secciones_completas as $sec_obj) { ?>
             <?php if ($sec_obj->getHabilitada() == 1) { ?>
@@ -22,7 +22,7 @@
         </ul>
       </div>
       <div class="col-md-4">
-        <h5>Contacto</h5>
+        <p>Contacto</p>
         <p>Email: walter.arce@davinci.edu.ar</p>
         <p>Teléfono: 5551115550</p>
       </div>

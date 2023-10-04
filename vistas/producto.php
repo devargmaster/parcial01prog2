@@ -8,7 +8,7 @@
 //  print_r($producto);
 //  echo "</pre>";
   ?>
-  <div class="container mt-4">
+  <div class="container mt-4 mb-4">
     <div class="row">
 
       <div class="col-md-6">

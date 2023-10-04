@@ -10,6 +10,7 @@ class Producto
   private $producto_subcategoria;
   private $producto_imagen;
   private $producto_stock;
+  private $producto_destacado;
   private $producto_info_adicional;
 
   public function todos_los_productos(): array
@@ -30,6 +31,7 @@ class Producto
       }
       $p->producto_imagen = $producto->producto_imagen;
       $p->producto_stock = $producto->producto_stock;
+      $p->producto_destacado = property_exists($producto, 'producto_destacado') ? $producto->producto_destacado : [];
       $p->producto_info_adicional = property_exists($producto, 'producto_info_adicional') ? $producto->producto_info_adicional : [];
       $productos[] = $p;
     }
@@ -69,7 +71,18 @@ public function productos_x_subcategoria($subcategoria): array
     }
     return null;
   }
-
+public function productos_destacados(): array
+  {
+    $catalogo = $this->todos_los_productos();
+    $productos = [];
+    foreach ($catalogo as $producto) {
+      if ($producto->producto_destacado == true) {
+        $productos[] = $producto;
+      }
+    }
+    $productosDestacados = array_slice($productos, 0, 3);
+    return $productosDestacados;
+  }
   public function descripcion_limite(int $cantidad = 20): string
   {
     $texto = $this->producto_descripcion;
@@ -116,6 +129,10 @@ public function productos_x_subcategoria($subcategoria): array
   public function getProducto_stock(): int
   {
     return $this->producto_stock;
+  }
+  public function getProducto_destacado(): array
+  {
+    return $this->producto_destacado;
   }
 
   public function getProductoInfoAdicional(): array

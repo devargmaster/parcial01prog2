@@ -1,9 +1,16 @@
-<link rel="stylesheet" href="css/producto.css">
+<link rel="stylesheet" href="css/formularios_botones_estilos.css">
 <?php
 require_once 'clases/Producto.php';
-$sec = $_GET['sec'];
-$decor = new Producto();
-$catalogo = $decor->productos_x_categoria("$sec");
+if (isset($_GET['sec']) && isset($_GET['subsec'])) {
+  $sec = $_GET['sec'];
+  $subsec = $_GET['subsec'];
+  $decor = new Producto();
+  $catalogo = $decor->productos_x_subcategoria("$subsec");
+} else {
+  $sec = $_GET['sec'];
+  $decor = new Producto();
+  $catalogo = $decor->productos_x_categoria("$sec");
+}
 //echo "<pre>";
 //print_r($decor->productos_x_categoria("$sec"));
 //echo "</pre>";
@@ -14,7 +21,7 @@ $catalogo = $decor->productos_x_categoria("$sec");
     foreach ($catalogo as $producto) {?>
       <div class="col-12 col-md-4">
         <div class='card mb-3'>
-          <img src="<?=$producto->getProducto_imagen()?>" class='card-img-top' alt='...'>
+          <img src="<?=$producto->getProducto_imagen()?>" class='card-img-top' alt='<?=$producto->getProducto_imagen()?>'>
           <div class="card-body">
             <h2 class="card-title mb-2"><a href="index.php?sec=producto&id=<?= $producto->getID(); ?>" class="producto_titulo_estilo"><?=$producto->getProducto_nombre(); ?></a></h2>
           <p class="card-text mb-2"><?= $producto->descripcion_limite() ?></p>

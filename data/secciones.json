@@ -34,28 +34,12 @@
     "sec": "comedor",
     "subsecciones": [
       {
-        "subsec" : "vajilla",
-        "nombre" : "Vajilla"
+        "subsec" : "mesas",
+        "nombre" : "Mesas"
       },
       {
-        "subsec" : "cristaleria",
-        "nombre" : "Cristalería"
-      },
-      {
-        "subsec" : "cuberteria",
-        "nombre" : "Cubertería"
-      },
-      {
-        "subsec" : "bandejas",
-        "nombre" : "Bandejas"
-      },
-      {
-        "subsec" : "ollas",
-        "nombre" : "Ollas"
-      },
-      {
-        "subsec" : "electrodomesticos",
-        "nombre" : "Electrodomésticos"
+        "subsec" : "sillas",
+        "nombre" : "Sillas"
       }
     ],
     "nombre": "Comedor",
@@ -68,6 +52,18 @@
       {
         "subsec" : "floreros",
         "nombre" : "Floreros"
+      },
+      {
+        "subsec" : "cuadros",
+        "nombre" : "Cuadros"
+      },
+      {
+        "subsec" : "carteles",
+        "nombre" : "Carteles"
+      },
+      {
+        "subsec" : "almacenaje",
+        "nombre" : "Almacenaje"
       }
     ],
     "nombre": "Decor",
@@ -76,7 +72,16 @@
   {
     "id": 6,
     "sec": "iluminacion",
-    "subsecciones": [],
+    "subsecciones": [
+      {
+        "subsec" : "iluminacion_mesa",
+        "nombre" : "Lamparas de mesa"
+      },
+      {
+        "subsec" : "iluminacion_pie",
+        "nombre" : "Lamparas de pie"
+      }
+    ],
     "nombre": "Iluminación",
     "habilitada": true
   },

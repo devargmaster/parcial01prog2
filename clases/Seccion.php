@@ -1,5 +1,6 @@
 <?php
-
+$obj = new Producto();
+$catalogo = $obj->todos_los_productos();
 class Seccion
 {
   private $id;
@@ -9,10 +10,9 @@ class Seccion
   private $url;
   private $habilitada;
 
-  // Constructor
+
   public function __construct()
   {
-    // Inicializa la propiedad subsecciones como un array vacío
     $this->subsecciones = [];
   }
 
@@ -21,8 +21,6 @@ class Seccion
     $rutadelarchivo = dirname(__FILE__) . '/../data/secciones.json';
     $secciones_json = file_get_contents($rutadelarchivo);
     $secciones_json_decode = json_decode($secciones_json);
-
-    // Creamos un array para almacenar las instancias de Seccion
     $secciones = [];
 
     foreach ($secciones_json_decode as $seccion_data) {
@@ -30,10 +28,14 @@ class Seccion
       $seccion->setSec($seccion_data->sec);
       $seccion->setNombre($seccion_data->nombre);
       $seccion->setHabilitada($seccion_data->habilitada);
+
+
       if (property_exists($seccion_data, 'subsecciones')) {
         $seccion->setSubsecciones($seccion_data->subsecciones);
       }
-      // Agregamos la instancia al array de secciones
+      else{
+        $seccion->setSubsecciones([]);
+      }
       $secciones[] = $seccion;
     }
 
@@ -52,7 +54,7 @@ class Seccion
     }
     return $subseccionesSubsec;
   }
-  // Resto de los métodos getters y setters
+
   public function getSec()
   {
     return $this->sec;

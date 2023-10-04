@@ -21,6 +21,12 @@
         <input type="tel" class="form-control campos_estilos" id="telefono" name="telefono">
       </div>
     </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <label for="consulta">Consulta:</label>
+        <textarea  class="form-control campos_estilos" id="consulta" name="consulta" required></textarea>
+      </div>
+    </div>
     <div class="form-group">
       <input type="submit" class="btn carrito_boton_estilo mt-2 mb-2" value="Enviar">
     </div>

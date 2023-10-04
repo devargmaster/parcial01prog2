@@ -1,45 +1,31 @@
+<link rel="stylesheet" href="css/catalogo.css">
 <?php
-?>
-<!-- Sección de Destacados -->
+require_once 'clases/Producto.php';
+$productos_destacados = new Producto();
+$catalogo = $productos_destacados->productos_destacados();
+//echo "<pre>";
+//print_r($catalogo);
+//echo "</pre>";
+//?>
 <section class="destacados">
-  <div class="container">
+  <div class="container mt-5 mb-5">
     <h2 class="text-center">Productos Destacados</h2>
     <div class="row">
-      <!-- Tarjeta de producto destacado 1 -->
+      <?PHP
+      foreach ($catalogo as $producto) {?>
       <div class="col-md-4">
         <div class="card">
-          <img src="img/bannerhvdecoratutti.png" class="card-img-top" alt="Producto 1">
+          <img src="<?=$producto->getProducto_imagen()?>" class='card-img-top' alt='<?=$producto->getProducto_nombre(); ?>'>
           <div class="card-body">
-            <h5 class="card-title">Producto 1</h5>
-            <p class="card-text">Descripción del producto 1.</p>
-            <a href="#" class="btn btn-primary">Ver Detalles</a>
+            <h2 class="card-title mb-2"><a href="index.php?sec=producto&id=<?= $producto->getID(); ?>" class="estilo_titulo"><?=$producto->getProducto_nombre(); ?></a></h2>
+            <div class="fs-3 mb-3 fw-bold text-center producto_precio_estilo">
+              <?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS</div>
+            <a href="index.php?sec=producto&id=<?= $producto->getID() ?>"
+               class="btn boton_estilo  mt-2">VER MÁS</a>
           </div>
         </div>
       </div>
-
-      <!-- Tarjeta de producto destacado 2 -->
-      <div class="col-md-4">
-        <div class="card">
-          <img src="imagen2.jpg" class="card-img-top" alt="Producto 2">
-          <div class="card-body">
-            <h5 class="card-title">Producto 2</h5>
-            <p class="card-text">Descripción del producto 2.</p>
-            <a href="#" class="btn btn-primary">Ver Detalles</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tarjeta de producto destacado 3 -->
-      <div class="col-md-4">
-        <div class="card">
-          <img src="imagen3.jpg" class="card-img-top" alt="Producto 3">
-          <div class="card-body">
-            <h5 class="card-title">Producto 3</h5>
-            <p class="card-text">Descripción del producto 3.</p>
-            <a href="#" class="btn btn-primary">Ver Detalles</a>
-          </div>
-        </div>
-      </div>
+      <?PHP } ?>
     </div>
   </div>
 </section>
