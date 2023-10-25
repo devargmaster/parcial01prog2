@@ -23,9 +23,9 @@ if (isset($_GET['sec'])) {
   }
 }
 
-//echo "<pre>";
-//print_r($catalogo);
-//echo "</pre>";
+echo "<pre>";
+print_r($catalogo);
+echo "</pre>";
 ?>
 
 <?PHP

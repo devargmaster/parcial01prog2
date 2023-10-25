@@ -15,7 +15,7 @@
         <ul class="list-unstyled">
           <?php foreach ($secciones_completas as $sec_obj) { ?>
             <?php if ($sec_obj->getHabilitada() == 1) { ?>
-              <li><a href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getSec(); ?>"><?= $sec_obj->getNombre(); ?></a>
+              <li><a href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getDescripcion(); ?>"><?= $sec_obj->getNombre(); ?></a>
               </li>
             <?php } ?>
           <?php } ?>

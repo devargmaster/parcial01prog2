@@ -1,6 +1,7 @@
 <h1>Decora Tutti</h1>
 <?php
-require_once dirname(__DIR__) . '/clases/Seccion.php';
+require_once dirname(__DIR__) . '/clases/Categoria.php';
+require_once dirname(__DIR__) . '/clases/Subcategoria.php';
 // aca obtengo la ruta actual del archivo, esto me sirvio mucho para meterlo en el hosting y que quede ordenado
 $currentPath = $_SERVER['PHP_SELF'];
 $basePath = '';
@@ -10,18 +11,27 @@ if (strpos($currentPath, '/vistas/') !== false) {
   $basePath = '../';
 }
 
-$seccion = new Seccion();
-$secciones_completas = $seccion->secciones_completas();
+$seccion = new Categoria();
+$secciones_completas = $seccion->categorias_completas();
+
 if (isset($_GET['subsec']) && isset($_GET['sec'])) {
   $subsec = $_GET['subsec'];
   $sec = $_GET['sec'];
   $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
 }
-if (isset($_GET['producto'])) {
-  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'catalogo';
-} else {
+else {
   $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
 }
+
+//if (isset($_GET['producto'])) {
+//  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'catalogo';
+//} else {
+//  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
+//}
+
+//echo "<pre>";
+//print_r($secciones_completas);
+//echo "</pre>";
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -32,28 +42,32 @@ if (isset($_GET['producto'])) {
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <?PHP foreach ($secciones_completas as $sec_obj) { ?>
-          <?PHP if ($sec_obj->getHabilitada() == 1) { ?>
-            <?PHP if (!empty($sec_obj->getSubseccionesSubsec())) { ?>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                   href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getSec(); ?>"><?= $sec_obj->getNombre(); ?></a>
-                <ul class="dropdown-menu">
-                  <?PHP foreach ($sec_obj->getSubseccionesSubsec() as $subsec) { ?>
-                    <li><a class="dropdown-item"
-                           href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getSec(); ?>&subsec=<?= $subsec['subsec'] ?>"><?= $subsec['nombre']; ?></a>
-                    </li>
-                  <?PHP } ?>
-                </ul>
+        <?php foreach ($secciones_completas as $sec_obj) { ?>
+        <?php if ($sec_obj->getHabilitada() == 1) {
+        $subcategorias = $sec_obj->obtenerSubcategorias();
+        if (count($subcategorias) > 0) { ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+             href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getDescripcion(); ?>"><?= $sec_obj->getNombre(); ?></a>
+          <ul class="dropdown-menu">
+            <?php foreach ($subcategorias as $subcategoria) { ?>
+              <li>
+                <a class="dropdown-item"
+                   href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getDescripcion(); ?>&subsec=<?= $subcategoria->getDescripcion(); ?>">
+                  <?= $subcategoria->getNombre(); ?>
+                </a>
               </li>
-            <?PHP } else { ?>
-              <li class="nav-item">
-                <a class="nav-link"
-                   href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getSec(); ?>"><?= $sec_obj->getNombre(); ?></a>
-              </li>
-            <?PHP } ?>
-          <?PHP } ?>
-        <?PHP } ?>
+            <?php } ?>
+          </ul>
+        </li>
+        <?php } else { ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getDescripcion(); ?>"><?= $sec_obj->getNombre(); ?></a>
+        </li>
+        <?php } ?>
+        <?php } ?>
+        <?php } ?>
+
       </ul>
       <form class="d-flex" action="index.php" method="get" role="search">
         <input class="form-control me-2" type="search" name="producto" placeholder="Buscar" aria-label="Search">

@@ -6,8 +6,6 @@ class Producto
   private $producto_nombre;
   private $producto_descripcion;
   private $producto_precio;
-  private $producto_categoria;
-  private $producto_subcategoria;
   private $producto_imagen;
   private $producto_stock;
   private $producto_destacado;
@@ -21,25 +19,50 @@ class Producto
   public function todos_los_productos(): array
   {
     $productos = [];
-    $rutadelarchivo = dirname(__FILE__) . '/../data/datos.json';
-    $productos_json = file_get_contents($rutadelarchivo);
-    $productos_json_decode = json_decode($productos_json);
-    foreach ($productos_json_decode as $producto) {
+//    $rutadelarchivo = dirname(__FILE__) . '/../data/datos.json';
+//    $productos_json = file_get_contents($rutadelarchivo);
+//    $productos_json_decode = json_decode($productos_json);
+//    foreach ($productos_json_decode as $producto) {
+//      $p = new self();
+//      $p->id = $producto->id;
+//      $p->producto_nombre = $producto->producto_nombre;
+//      $p->producto_descripcion = $producto->producto_descripcion;
+//      $p->producto_precio = $producto->producto_precio;
+//      $p->producto_categoria = $producto->producto_categoria;
+//      if (property_exists($producto, 'producto_subcategoria')) {
+//        $p->producto_subcategoria = $producto->producto_subcategoria;
+//      }
+//      $p->producto_imagen = $producto->producto_imagen;
+//      $p->producto_stock = $producto->producto_stock;
+//      $p->producto_destacado = property_exists($producto, 'producto_destacado') ? $producto->producto_destacado : [];
+//      $p->producto_info_adicional = property_exists($producto, 'producto_info_adicional') ? $producto->producto_info_adicional : [];
+//      $productos[] = $p;
+//    }
+
+    $conexion = new Conexion('localhost', 'decotutti', 'root', 'Nvidia2022');
+    $conexion->conectar();
+
+    $consulta = "SELECT * FROM productos";
+    $resultado = $conexion->ejecutarConsulta($consulta);
+
+
+    foreach ($resultado as $producto) {
       $p = new self();
-      $p->id = $producto->id;
-      $p->producto_nombre = $producto->producto_nombre;
-      $p->producto_descripcion = $producto->producto_descripcion;
-      $p->producto_precio = $producto->producto_precio;
-      $p->producto_categoria = $producto->producto_categoria;
-      if (property_exists($producto, 'producto_subcategoria')) {
-        $p->producto_subcategoria = $producto->producto_subcategoria;
-      }
-      $p->producto_imagen = $producto->producto_imagen;
-      $p->producto_stock = $producto->producto_stock;
-      $p->producto_destacado = property_exists($producto, 'producto_destacado') ? $producto->producto_destacado : [];
-      $p->producto_info_adicional = property_exists($producto, 'producto_info_adicional') ? $producto->producto_info_adicional : [];
+      $p->id = $producto['id'];
+      $p->producto_nombre = $producto['producto_nombre'];
+      $p->producto_descripcion = $producto['producto_descripcion'];
+      $p->producto_precio = $producto['producto_precio'];
+    //  $p->producto_categoria = $producto['producto_categoria'];
+     // $p->producto_subcategoria = $producto['producto_subcategoria'];
+      $p->producto_imagen = $producto['producto_imagen'];
+      $p->producto_stock = $producto['producto_stock'];
+      $p->producto_destacado = $producto['producto_destacado'];
+    //  $p->producto_info_adicional = $producto['producto_info_adicional'];
       $productos[] = $p;
+
     }
+
+    $conexion->cerrarConexion();
     return $productos;
   }
   /**

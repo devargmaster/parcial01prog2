@@ -5,4 +5,5 @@ if (file_exists($archivo)) {
 } else {
   require_once 'vistas/404.php';
 }
+
 ?>

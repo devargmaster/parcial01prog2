@@ -1,5 +1,8 @@
 <?php
 require_once 'clases/Producto.php';
+require_once 'clases/Conexion.php';
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
