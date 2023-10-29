@@ -9,7 +9,7 @@ if (isset($_GET['sec']) && isset($_GET['subsec'])) {
 } else {
   $sec = $_GET['sec'];
   $bazar = new Producto();
-  $catalogo = $bazar->productos_x_categoria("$sec");
+  $catalogo = $bazar->obtenerPorCategoria("$sec");
 }
 
 

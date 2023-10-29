@@ -8,7 +8,7 @@ if (isset($_GET['sec']) && isset($_GET['subsec'])) {
 } else {
   $sec = $_GET['sec'];
   $comedor = new Producto();
-  $catalogo = $comedor->productos_x_categoria("$sec");
+  $catalogo = $comedor->obtenerPorCategoria("$sec");
 }
 //echo "<pre>";
 //print_r($comedor->productos_x_categoria("$sec"));

@@ -11,6 +11,9 @@ class Producto
   private $producto_destacado;
   private $producto_info_adicional;
 
+  private $producto_categoria;
+  private $producto_subcategoria;
+
   /**
    * Devuelve el catalogo completo de productos
    *
@@ -52,35 +55,71 @@ class Producto
       $p->producto_nombre = $producto['producto_nombre'];
       $p->producto_descripcion = $producto['producto_descripcion'];
       $p->producto_precio = $producto['producto_precio'];
-    //  $p->producto_categoria = $producto['producto_categoria'];
-     // $p->producto_subcategoria = $producto['producto_subcategoria'];
       $p->producto_imagen = $producto['producto_imagen'];
       $p->producto_stock = $producto['producto_stock'];
       $p->producto_destacado = $producto['producto_destacado'];
-    //  $p->producto_info_adicional = $producto['producto_info_adicional'];
+      $p->producto_info_adicional = $this->getInfoAdicional($p->id);
+      $p->producto_categoria = isset($producto['producto_categoria']) ? $producto['producto_categoria'] : null;
+      $p->producto_subcategoria = isset($producto['producto_subcategoria']) ? $producto['producto_subcategoria'] : null;
       $productos[] = $p;
-
     }
-
     $conexion->cerrarConexion();
     return $productos;
   }
+
+
+  public function getInfoAdicional($idProducto): array {
+    $conexion = new Conexion('localhost', 'decotutti', 'root', 'Nvidia2022');
+    $conexion->conectar();
+    $consulta = "select ia.caracteristica_nombre, ia.caracteristica_valor from decotutti.productos right join decotutti.informacion_adicional ia on ia.producto_id = productos.id WHERE ia.producto_id = :idProducto";
+
+    $parametros = [':idProducto' => $idProducto];
+    $resultado = $conexion->ejecutarConsulta($consulta, $parametros);
+
+    $infoAdicional = [];
+    foreach ($resultado as $info_adicional) {
+
+        $infoAdicional[$info_adicional['caracteristica_nombre']] = $info_adicional['caracteristica_valor'];
+
+
+    }
+    $conexion->cerrarConexion();
+    return $infoAdicional;
+  }
+
+
+
+
   /**
    * Devuelve los productos por categoria
    * @param string $categoria Un string con el nombre de categoria a buscar
    *
    */
-  public function productos_x_categoria($categoria): array
-  {
-    $catalogo_x_seccion = $this->todos_los_productos();
-    $productos = [];
-    foreach ($catalogo_x_seccion as $seccion) {
-      if ($seccion->producto_categoria == $categoria) {
-        $productos[] = $seccion;
-      }
+  public static function obtenerPorCategoria($categoria) {
+    $conexion = new Conexion('localhost', 'decotutti', 'root', 'Nvidia2022');
+    $conexion->conectar();
+    $resultados = [];
+
+    $sql = "SELECT p.* FROM productos p 
+        JOIN productos_categorias pc ON p.id = pc.producto_id
+        JOIN categorias c ON c.id = pc.categoria_id
+        WHERE c.nombre = :categoria";
+
+    $stmt = $conexion->ejecutarConsulta($sql, [':categoria' => $categoria]);
+
+    $stmt->bindValue(':categoria', $categoria);
+    $stmt->execute();
+
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      $resultados[] = $row; // Aquí deberías transformar cada fila en un objeto Producto si es necesario
     }
-    return $productos;
+
+    return $resultados;
   }
+
+
+
   /**
    * Devuelve el catalogo de productos por subcategoria
    * @param string $subcategoria Un string con subcategoria a buscar
@@ -199,6 +238,5 @@ public function productos_destacados(): array
   {
     return $this->producto_info_adicional;
   }
-
 
 }

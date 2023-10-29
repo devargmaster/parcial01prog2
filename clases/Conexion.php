@@ -23,9 +23,12 @@ class Conexion {
     }
   }
 
-  public function ejecutarConsulta($consulta) {
-    return $this->pdo->query($consulta);
+  public function ejecutarConsulta($consulta, $parametros = []) {
+    $stmt = $this->pdo->prepare($consulta);
+    $stmt->execute($parametros);
+    return $stmt;
   }
+
 
   public function cerrarConexion() {
     $this->pdo = null;

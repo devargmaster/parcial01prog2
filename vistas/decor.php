@@ -8,11 +8,11 @@ if (isset($_GET['sec']) && isset($_GET['subsec'])) {
 } else {
   $sec = $_GET['sec'];
   $decor = new Producto();
-  $catalogo = $decor->productos_x_categoria("$sec");
+  $catalogo = $decor->obtenerPorCategoria("$sec");
 }
-//echo "<pre>";
-//print_r($decor->productos_x_categoria("$sec"));
-//echo "</pre>";
+echo "<pre>";
+print_r($decor->obtenerPorCategoria("$sec"));
+echo "</pre>";
 ?>
 
 

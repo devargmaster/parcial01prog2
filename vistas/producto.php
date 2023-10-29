@@ -8,9 +8,9 @@ if (empty($producto)) {
     No se encontraron productos para el id: $id
   </div>";
 }
-//  echo "<pre>";
-//  print_r($producto);
-//  echo "</pre>";
+  echo "<pre>";
+  print_r($producto);
+  echo "</pre>";
 ?>
 <div class="container mt-4 mb-4">
   <div class="row">
@@ -29,10 +29,16 @@ if (empty($producto)) {
         <div class="informacion_adicional_estilo">
 
           <h5><img src="img/detalle.png" alt="informacion adicional"> Informacion adicional</h5>
-          <?php foreach ($producto->getProductoInfoAdicional() as $caracteristica) { ?>
-            <p><strong><?= $caracteristica->caracteristica_nombre ?>
-                :</strong> <?= $caracteristica->caracteristica_valor ?></p>
-          <?php } ?>
+          <?php
+          $infoAdicional = $producto->getProductoInfoAdicional();
+          if(is_array($infoAdicional) && !empty($infoAdicional)){
+            foreach($infoAdicional as $key => $value){
+              echo "<strong>{$key}:</strong> {$value}<br>";
+            }
+          } else {
+            echo "No hay información adicional disponible.";
+          }
+          ?>
         </div>
         <button class="btn btn-primary carrito_boton_estilo">Agregar al Carrito</button>
       </div>
