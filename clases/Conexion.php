@@ -23,10 +23,10 @@ class Conexion {
     }
   }
 
-  public function ejecutarConsulta($consulta, $parametros = []) {
+  public function ejecutarConsulta($consulta, $parametros = array()) {
     $stmt = $this->pdo->prepare($consulta);
     $stmt->execute($parametros);
-    return $stmt;
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
 

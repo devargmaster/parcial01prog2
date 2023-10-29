@@ -121,11 +121,11 @@ class Producto
     $conexion = new Conexion('localhost', 'decotutti', 'root', 'Nvidia2022');
     $conexion->conectar();
     $consulta = "SELECT p.* 
-            FROM productos p 
-            JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id
-            JOIN categorias c ON pcs.categoria_id = c.id
-            WHERE c.descripcion = :categoriaDescripcion";
-    $parametros = [':categoriaDescripcion' => $categoriaDescripcion];
+    FROM productos p
+    JOIN productos_categorias pc ON p.id = pc.producto_id
+    JOIN categorias c ON pc.categoria_id = c.id
+    WHERE c.descripcion = ?";
+    $parametros = [$categoriaDescripcion];
     $resultado = $conexion->ejecutarConsulta($consulta, $parametros);
     $conexion->cerrarConexion();
     return $resultado;
@@ -134,11 +134,12 @@ class Producto
     $conexion = new Conexion('localhost', 'decotutti', 'root', 'Nvidia2022');
     $conexion->conectar();
     $consulta = "SELECT p.* 
-            FROM productos p 
-            JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id
-            JOIN subcategorias sc ON pcs.subcategoria_id = sc.id
-            WHERE sc.descripcion = :subcategoriaDescripcion";
-    $parametros = [':subcategoriaDescripcion' => $subcategoriaDescripcion];
+    FROM productos p
+    JOIN productos_categorias pc ON p.id = pc.producto_id
+    JOIN categorias c ON pc.categoria_id = c.id
+    WHERE c.descripcion = :categoriaDescripcion";
+    $categoriaDescripcion = $subcategoriaDescripcion;
+    $parametros = [':categoriaDescripcion' => $categoriaDescripcion];
     $resultado = $conexion->ejecutarConsulta($consulta, $parametros);
     $conexion->cerrarConexion();
     return $resultado;
