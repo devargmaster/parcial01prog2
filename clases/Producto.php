@@ -117,6 +117,33 @@ class Producto
 
     return $resultados;
   }
+  public function obtenerProductosPorCategoriaDescripcion($categoriaDescripcion) {
+    $conexion = new Conexion('localhost', 'decotutti', 'root', 'Nvidia2022');
+    $conexion->conectar();
+    $consulta = "SELECT p.* 
+            FROM productos p 
+            JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id
+            JOIN categorias c ON pcs.categoria_id = c.id
+            WHERE c.descripcion = :categoriaDescripcion";
+    $parametros = [':categoriaDescripcion' => $categoriaDescripcion];
+    $resultado = $conexion->ejecutarConsulta($consulta, $parametros);
+    $conexion->cerrarConexion();
+    return $resultado;
+  }
+  public function obtenerProductosPorSubCategoriaDescripcion($subcategoriaDescripcion) {
+    $conexion = new Conexion('localhost', 'decotutti', 'root', 'Nvidia2022');
+    $conexion->conectar();
+    $consulta = "SELECT p.* 
+            FROM productos p 
+            JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id
+            JOIN subcategorias sc ON pcs.subcategoria_id = sc.id
+            WHERE sc.descripcion = :subcategoriaDescripcion";
+    $parametros = [':subcategoriaDescripcion' => $subcategoriaDescripcion];
+    $resultado = $conexion->ejecutarConsulta($consulta, $parametros);
+    $conexion->cerrarConexion();
+    return $resultado;
+  }
+
 
 
 
