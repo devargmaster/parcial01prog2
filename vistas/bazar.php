@@ -9,24 +9,6 @@ if (isset($_GET['sec'])) {
   if (isset($_GET['subsec'])) {
     $subsec = $_GET['subsec'];
     $catalogo = $bazar->obtenerProductosPorSubCategoriaDescripcion("$subsec");
-
-    if (is_array($catalogo) && !empty($catalogo))
-    {
-      foreach ($catalogo as $producto)
-      {
-        $result = $producto->obtenerProductosPorSubCategoriaDescripcion("$subsec");
-//        echo '<pre style="background-color: #f5f5f5; border: 1px solid #ccc; padding: 10px; margin: 10px; overflow: auto; width: auto; height: auto; max-height: 300px;">';
-//        var_dump($result);  // Esto te mostrará el contenido y el tipo de la variable $result
-//        echo '</pre>';
-      }
-    }
-
-  } else {
-    $catalogo = $bazar->obtenerPorCategoria("$sec");
-    foreach ($catalogo as $producto)
-    {
-      echo $producto->getProducto_nombre();
-    }
   }
 } else {
   die("Error: La categoría no está definida.");
