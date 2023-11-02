@@ -14,19 +14,12 @@ if (strpos($currentPath, '/vistas/') !== false) {
 $seccion = new Categoria();
 $secciones_completas = $seccion->categorias_completas();
 
-if (isset($_GET['subsec']) && isset($_GET['sec'])) {
-  $subsec = $_GET['subsec'];
-  $sec = $_GET['sec'];
-  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
-}
-else {
-  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
-}
 if (isset($_GET['producto'])) {
-  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'catalogo';
+  $seccion_elegida_ = 'catalogo';
 } else {
-  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
+  $seccion_elegida_ = $_GET['sec'] ?? 'home';
 }
+
 
 //echo "<pre>";
 //print_r($secciones_completas);
