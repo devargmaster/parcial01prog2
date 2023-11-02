@@ -69,10 +69,11 @@ class Producto
   {
     $conexion = (new Conexion())->getConexion();
     $consulta = "SELECT p.*
-              FROM productos p
-              JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id
-              JOIN subcategorias s ON pcs.subcategoria_id = s.id
-              WHERE s.descripcion = :subcategoriaDescripcion";
+            FROM productos p
+            JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id
+            JOIN subcategorias s ON pcs.subcategoria_id = s.id
+            JOIN categorias c ON s.categoria_id = c.id
+            WHERE s.descripcion = :subcategoriaDescripcion";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->bindParam(':subcategoriaDescripcion', $subcategoriaDescripcion);
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
