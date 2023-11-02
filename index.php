@@ -1,8 +1,9 @@
 <?php
-require_once 'clases/Producto.php';
 require_once 'clases/Conexion.php';
-
-
+require_once 'clases/Producto.php';
+require_once 'clases/Categoria.php';
+require_once 'clases/Subcategoria.php';
+require_once 'clases/Informacion_adicional.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">

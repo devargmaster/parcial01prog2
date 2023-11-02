@@ -1,38 +1,48 @@
 <?php
 
 class Conexion {
-  private $host;
-  private $dbname;
-  private $usuario;
-  private $contrasena;
-  private $pdo;
+  private const DB_HOST = 'localhost';
+  private const DB_NAME = 'decotutti';
+  private  const DB_USER ='root';
+  private const DB_PASS ='Nvidia2022';
 
-  public function __construct($host, $dbname, $usuario, $contrasena) {
-    $this->host = $host;
-    $this->dbname = $dbname;
-    $this->usuario = $usuario;
-    $this->contrasena = $contrasena;
+  private const DB_DSN = 'mysql:host=' . self::DB_HOST . ';dbname=' . self::DB_NAME . ';charset=utf8mb4';
+
+  private static ?PDO $db = null;
+
+
+//  public function __construct() {
+//    try {
+//      $this->db = new PDO(self::DB_DSN, self::DB_USER, self::DB_PASS);
+//      $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//    } catch (PDOException $e) {
+//      die("Error de conexión: " . $e->getMessage());
+//    }
+//
+//  }
+
+  public static function getConexion(): PDO
+  {
+    if(self::$db === null){
+      self::conectar();
+    }
+    return self::$db;
   }
-
-  public function conectar() {
+  public static function conectar(): void
+  {
     try {
-      $this->pdo = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->usuario, $this->contrasena);
-      $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-      die("Error de conexión: " . $e->getMessage());
+      self::$db = new PDO(self::DB_DSN, self::DB_USER, self::DB_PASS);
+    } catch (Exception $e) {
+      die('Error al conectar con MySQL.');
     }
   }
 
-  public function ejecutarConsulta($consulta, $parametros = array()) {
-    $stmt = $this->pdo->prepare($consulta);
-    $stmt->execute($parametros);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  }
+public function  ejecutarConsultaObjeto($consulta, $parametros = array()){
+  $stmt = $this->getConexion()->prepare($consulta);
+  $stmt->execute($parametros);
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-
-  public function cerrarConexion() {
-    $this->pdo = null;
-  }
 }
 
 ?>

@@ -1,13 +1,11 @@
 <?php
-require_once 'clases/Producto.php';
-$productos = new Producto();
 
 if (isset($_GET['sec'])) {
   $sec = $_GET['sec'];
-  $catalogo = $productos->todos_los_productos();
+  $catalogo = ( new Producto())->todos_los_productos();
 } elseif (isset($_GET['producto'])) {
   $busqueda = $_GET['producto'];
-  $catalogo = $productos->productos_x_busqueda("$busqueda");
+  $catalogo = ( new Producto())->productos_x_busqueda("$busqueda");
   if (empty($catalogo)) {
     echo "<div class='alert alert-danger' role='alert'>
     No se encontraron productos para la busqueda: $busqueda
@@ -15,7 +13,7 @@ if (isset($_GET['sec'])) {
   }
 } else {
   $sec = $_GET['sec'];
-  $catalogo = $productos->productos_x_categoria("$sec");
+  $catalogo = ( new Producto())->getProducto_categoria("$sec");
   if (empty($catalogo)) {
     echo "<div class='alert alert-danger' role='alert'>
     No se encontraron productos para la busqueda: $sec
@@ -23,9 +21,9 @@ if (isset($_GET['sec'])) {
   }
 }
 
-echo "<pre>";
-print_r($catalogo);
-echo "</pre>";
+//echo "<pre>";
+//print_r($catalogo);
+//echo "</pre>";
 ?>
 
 <?PHP

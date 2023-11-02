@@ -22,12 +22,11 @@ if (isset($_GET['subsec']) && isset($_GET['sec'])) {
 else {
   $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
 }
-
-//if (isset($_GET['producto'])) {
-//  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'catalogo';
-//} else {
-//  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
-//}
+if (isset($_GET['producto'])) {
+  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'catalogo';
+} else {
+  $seccion_elegida_ = isset($_GET['sec']) ? $_GET['sec'] : 'home';
+}
 
 //echo "<pre>";
 //print_r($secciones_completas);
@@ -44,7 +43,7 @@ else {
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <?php foreach ($secciones_completas as $sec_obj) { ?>
         <?php if ($sec_obj->getHabilitada() == 1) {
-        $subcategorias = $sec_obj->obtenerSubcategorias();
+        $subcategorias = $sec_obj->subcategorias_completas();
         if (count($subcategorias) > 0) { ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"
@@ -56,6 +55,7 @@ else {
                    href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getDescripcion(); ?>&subsec=<?= $subcategoria->getDescripcion(); ?>">
                   <?= $subcategoria->getNombre(); ?>
                 </a>
+
               </li>
             <?php } ?>
           </ul>

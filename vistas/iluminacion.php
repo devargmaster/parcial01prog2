@@ -1,15 +1,21 @@
 <?php
 require_once 'clases/Producto.php';
-if (isset($_GET['sec']) && isset($_GET['subsec'])) {
+
+$iluminacion = new Producto();
+
+if (isset($_GET['sec'])) {
   $sec = $_GET['sec'];
-  $subsec = $_GET['subsec'];
-  $iluminacion = new Producto();
-  $catalogo = $iluminacion->productos_x_subcategoria("$subsec");
+  if (isset($_GET['subsec'])) {
+    $subsec = $_GET['subsec'];
+    $catalogo = $iluminacion->obtenerProductosPorSubCategoriaDescripcion("$subsec");
+  } else {
+    $catalogo = $iluminacion->obtenerPorCategoria("$sec");
+  }
 } else {
-  $sec = $_GET['sec'];
-  $iluminacion = new Producto();
-  $catalogo = $iluminacion->obtenerPorCategoria("$sec");
+  // Puedes manejar un error aquí si 'sec' no está definido, por ejemplo:
+  die("Error: La categoría no está definida.");
 }
+
 //echo "<pre>";
 //print_r($iluminacion->productos_x_categoria("$sec"));
 //echo "</pre>";

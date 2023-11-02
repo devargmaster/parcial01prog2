@@ -27,19 +27,21 @@ if (empty($producto)) {
         <p class="producto_precio_estilo_formulario"><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?>
           ARS</p>
         <div class="informacion_adicional_estilo">
+          <img src="img/detalle.png" alt="informacion adicional"> Informacion adicional
 
-          <h5><img src="img/detalle.png" alt="informacion adicional"> Informacion adicional</h5>
           <?php
           $infoAdicional = $producto->getProductoInfoAdicional();
-          if(is_array($infoAdicional) && !empty($infoAdicional)){
-            foreach($infoAdicional as $key => $value){
-              echo "<strong>{$key}:</strong> {$value}<br>";
-            }
+
+          if ($infoAdicional !== null) {
+            echo (!empty($infoAdicional->getMedidas()) ? "<p class='producto_descripcion_estilo'>Medidas:" . $infoAdicional->getMedidas() . "</p>" : "");
+            echo (!empty($infoAdicional->getMaterial()) ? "<p class='producto_descripcion_estilo'>Material:" . $infoAdicional->getMaterial() . "</p>" : "");
           } else {
-            echo "No hay información adicional disponible.";
+            echo "<p class='producto_descripcion_estilo'>Información no disponible</p>";
           }
           ?>
         </div>
+
+
         <button class="btn btn-primary carrito_boton_estilo">Agregar al Carrito</button>
       </div>
     </div>

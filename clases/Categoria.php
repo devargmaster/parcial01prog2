@@ -4,7 +4,6 @@ class Categoria
   private $id;
   private $nombre;
   private $habilitada;
-  private mixed $url;
   private  $descripcion;
 
 
@@ -15,42 +14,37 @@ class Categoria
 
   public function categorias_completas(): array
   {
-    $conexion = new Conexion('localhost', 'decotutti', 'root', 'Nvidia2022');
-    $conexion->conectar();
+    $conexion = new Conexion();
+    //$conexion->conectar();
     $consulta = "SELECT * FROM categorias";
-
-    $resultado = $conexion->ejecutarConsulta($consulta);
+    $PDOStatement = $conexion->getConexion()->prepare($consulta);
+    $PDOStatement->execute();
+    //$resultado = $conexion->getConexion($consulta);
     $categorias = [];
 
-    foreach ($resultado as $row) {
+    foreach ($PDOStatement as $row) {
       $c = new Categoria();
       $c->setNombre($row['nombre']);
       $c->setDescripcion($row['descripcion']);
       $c->setID($row['id']);
-      $c->setSec($row['url']);
       $c->setHabilitada($row['habilitada']);
       $categorias[] = $c;
     }
 
     return $categorias;
   }
-  public function obtenerSubcategorias(): array {
-    $conexion = new Conexion('localhost', 'decotutti', 'root', 'Nvidia2022');
-    $conexion->conectar();
-    $consulta = "SELECT * FROM subcategorias WHERE categoria_id = " . $this->id;
+  public function subcategorias_completas(): array {
+    $conexion = (new Conexion())->getConexion();
+    $consulta = "SELECT * FROM subcategorias WHERE categoria_id = :categoria_id";
+    $PDOStatement = $conexion->prepare($consulta);
+    $PDOStatement->bindParam(':categoria_id', $this->id, PDO::PARAM_INT); // Asume que tienes un atributo $id en Categoria.
+    $PDOStatement->setFetchMode(PDO::FETCH_CLASS, Subcategoria::class); // Usa la clase Subcategoria para obtener los resultados
+    $PDOStatement->execute();
 
-    $resultado = $conexion->ejecutarConsulta($consulta);
-    $subcategorias = [];
-
-    foreach ($resultado as $row) {
-      $s = new Subcategoria();
-      $s->setNombre($row['nombre']);
-      $s->setID($row['id']);
-      $subcategorias[] = $s;
-    }
-
+    $subcategorias = $PDOStatement->fetchAll();
     return $subcategorias;
   }
+
 
   public function getNombre()
   {
@@ -92,10 +86,6 @@ class Categoria
     $this->id = $id;
   }
 
-  private function setSec(mixed $url)
-  {
-    $this->url = $url;
-  }
 
   private function setDescripcion(mixed $descripcion)
   {

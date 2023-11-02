@@ -9,7 +9,17 @@ class Subcategoria {
   public function __construct() {}
 
 
-  // Métodos getters
+  public function subcategorias_completas(): array
+  {
+    $conexion = (new Conexion())->getConexion();
+    $consulta = "SELECT * FROM subcategorias";
+    $PDOStatement = $conexion->prepare($consulta);
+    $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+    $PDOStatement->execute();
+
+    $subcategorias = [];
+    return $subcategorias;
+  }
   public function getId() {
     return $this->id;
   }
