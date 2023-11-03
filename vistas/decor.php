@@ -1,5 +1,5 @@
 <?php
-require_once 'clases/Producto.php';
+
 
 $decor = new Producto();
 
@@ -12,13 +12,13 @@ if (isset($_GET['sec'])) {
     $catalogo = $decor->obtenerPorCategoria("$sec");
   }
 } else {
-  // Puedes manejar un error aquí si 'sec' no está definido, por ejemplo:
+
   die("Error: La categoría no está definida.");
 }
 
-echo "<pre>";
-print_r($decor->obtenerPorCategoria("$sec"));
-echo "</pre>";
+//echo "<pre>";
+//print_r($decor->obtenerPorCategoria("$sec"));
+//echo "</pre>";
 ?>
 
 

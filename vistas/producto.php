@@ -8,9 +8,9 @@ if (empty($producto)) {
     No se encontraron productos para el id: $id
   </div>";
 }
-  echo "<pre>";
-  print_r($producto);
-  echo "</pre>";
+//  echo "<pre>";
+//  print_r($producto);
+//  echo "</pre>";
 ?>
 <div class="container mt-4 mb-4">
   <div class="row">

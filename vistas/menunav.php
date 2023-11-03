@@ -1,7 +1,6 @@
 <h1>Decora Tutti</h1>
 <?php
-require_once dirname(__DIR__) . '/clases/Categoria.php';
-require_once dirname(__DIR__) . '/clases/Subcategoria.php';
+
 // aca obtengo la ruta actual del archivo, esto me sirvio mucho para meterlo en el hosting y que quede ordenado
 $currentPath = $_SERVER['PHP_SELF'];
 $basePath = '';

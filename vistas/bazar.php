@@ -1,6 +1,6 @@
 
 <?php
-require_once 'clases/Producto.php';
+
 
 $bazar = new Producto();
 
