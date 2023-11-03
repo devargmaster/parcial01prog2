@@ -1,0 +1,3 @@
+<?php
+
+ECHO "HOME ADMIN";

@@ -2,9 +2,9 @@
 
 <?PHP
 
-$archivo = 'vistas/' . $seccion_elegida_ . '.php';
+$archivo = 'vistas/adm_' . $seccion_elegida_ . '.php';
 if (file_exists($archivo)) {
-  require_once 'vistas/' . $seccion_elegida_ . '.php';
+  require_once 'vistas/adm_' . $seccion_elegida_ . '.php';
 } else {
   require_once 'vistas/404.php';
 }

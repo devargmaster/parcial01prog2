@@ -19,35 +19,48 @@ if (isset($_GET['producto'])) {
   $seccion_elegida_ = $_GET['sec'] ?? 'home';
 }
 
-
 //echo "<pre>";
 //print_r($secciones_completas);
 //echo "</pre>";
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <!-- Logo o nombre de la marca -->
-    <a class="navbar-brand" href="#">MiMarca</a>
-    <!-- Botón para dispositivos móviles -->
+    <a class="navbar-brand" href="#">DECORA TUTTI ADMIN</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- Enlaces de navegación -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="<?= $basePath ?>index.php?sec=home">Inicio</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Características</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Productos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+            <li><a class="dropdown-item" href="<?= $basePath ?>index.php?sec=productos">Productos ABM</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Categorías ABM</a></li>
+            <li><a class="dropdown-item" href="#">Subcategorías ABM</a></li>
+            <li><a class="dropdown-item" href="#">Marcas ABM</a></li>
+            <li><a class="dropdown-item" href="#">Ofertas ABM</a></li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Precios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Acerca de</a>
+        <!-- Usuarios -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUsuarios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Usuarios
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
+            <li><a class="dropdown-item" href="#">Alta</a></li>
+            <li><a class="dropdown-item" href="#">Baja</a></li>
+            <li><a class="dropdown-item" href="#">Modificación</a></li>
+          </ul>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+
