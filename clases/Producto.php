@@ -82,13 +82,12 @@ class Producto
 
   public function productos_x_busqueda($nombre_producto): array
   {
-    $catalogo = $this->todos_los_productos();
-    $productos = [];
-    foreach ($catalogo as $producto) {
-      if (str_contains(strtolower($producto->producto_nombre), strtolower($nombre_producto))) {
-        $productos[] = $producto;
-      }
-    }
+    $conexion = (new Conexion())->getConexion();
+    $consulta = "SELECT * FROM productos WHERE producto_nombre LIKE ?";
+    $PDOStatement = $conexion->prepare($consulta);
+    $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+    $PDOStatement->execute(["%$nombre_producto%"]);
+    $productos = $PDOStatement->fetchAll();
     return $productos;
   }
 
@@ -107,6 +106,16 @@ class Producto
     $producto = $PDOStatement->fetch();
     return $producto ?? null;
   }
+public function producto_x_rango_precio(int $precioMinimo=0, int $precioMaximo=0): array
+{
+  $conexion = (new Conexion())->getConexion();
+  $consulta = "SELECT * FROM productos WHERE producto_precio BETWEEN ? AND ?";
+  $PDOStatement = $conexion->prepare($consulta);
+  $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+  $PDOStatement->execute([$precioMinimo, $precioMaximo]);
+  $productos = $PDOStatement->fetchAll();
+  return $productos;
+}
 
   /**
    * Devuelve una lista de productos destacados
