@@ -1,9 +1,5 @@
 <?php
-require_once 'clases/Conexion.php';
-require_once 'clases/Producto.php';
-require_once 'clases/Categoria.php';
-require_once 'clases/Subcategoria.php';
-require_once 'clases/Informacion_adicional.php';
+require_once 'functions/autoload.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
