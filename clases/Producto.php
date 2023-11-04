@@ -27,7 +27,7 @@ class Producto
    */
   public function todos_los_productos(): array
   {
-    $conexion = (new Conexion())->getConexion();
+    $conexion = Conexion::getConexion();
     $consulta = "SELECT * FROM productos";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
@@ -43,7 +43,7 @@ class Producto
    */
   public static function obtenerPorCategoria($categoria): array
   {
-    $conexion = (new Conexion())->getConexion();
+    $conexion = Conexion::getConexion();
     $consulta = "SELECT p.* FROM productos p
         JOIN productos_categorias pc ON p.id = pc.producto_id
         JOIN categorias c ON c.id = pc.categoria_id
@@ -63,7 +63,7 @@ class Producto
    */
   public function obtenerProductosPorSubCategoriaDescripcion($subcategoriaDescripcion): ?array
   {
-    $conexion = (new Conexion())->getConexion();
+    $conexion = Conexion::getConexion();
     $consulta = "SELECT p.*
             FROM productos p
             JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id
@@ -82,7 +82,7 @@ class Producto
 
   public function productos_x_busqueda($nombre_producto): array
   {
-    $conexion = (new Conexion())->getConexion();
+    $conexion = Conexion::getConexion();
     $consulta = "SELECT * FROM productos WHERE producto_nombre LIKE ?";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
@@ -98,7 +98,7 @@ class Producto
    */
   public function producto_x_id(int $idProducto): ?Producto
   {
-    $conexion = (new Conexion())->getConexion();
+    $conexion = Conexion::getConexion();
     $catalogo = "SELECT * FROM productos WHERE id = ?";
     $PDOStatement = $conexion->prepare($catalogo);
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
@@ -108,12 +108,19 @@ class Producto
   }
 public function producto_x_rango_precio(int $precioMinimo=0, int $precioMaximo=0): array
 {
-  $conexion = (new Conexion())->getConexion();
-  $consulta = "SELECT * FROM productos WHERE producto_precio BETWEEN ? AND ?";
+  $conexion = Conexion::getConexion();
+  if ($precioMaximo) {
+    $consulta = "SELECT * FROM productos WHERE producto_precio BETWEEN :precioMinimo AND :precioMaximo";
+  }
+  else {
+    $consulta = "SELECT * FROM productos WHERE producto_precio >= :precioMinimo";
+  }
+
   $PDOStatement = $conexion->prepare($consulta);
   $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-  $PDOStatement->execute([$precioMinimo, $precioMaximo]);
+  $PDOStatement->execute(['precioMinimo' => $precioMinimo, 'precioMaximo' => $precioMaximo]);
   $productos = $PDOStatement->fetchAll();
+
   return $productos;
 }
 

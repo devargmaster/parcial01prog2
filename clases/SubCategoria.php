@@ -11,7 +11,7 @@ class Subcategoria {
 
   public function subcategorias_completas(): array
   {
-    $conexion = (new Conexion())->getConexion();
+    $conexion = Conexion::getConexion();
     $consulta = "SELECT * FROM subcategorias";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);

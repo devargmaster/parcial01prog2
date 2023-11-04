@@ -11,23 +11,11 @@ class Conexion {
   private static ?PDO $db = null;
 
 
-//  public function __construct() {
-//    try {
-//      $this->db = new PDO(self::DB_DSN, self::DB_USER, self::DB_PASS);
-//      $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//    } catch (PDOException $e) {
-//      die("Error de conexión: " . $e->getMessage());
-//    }
-//
-//  }
-
-  public static function getConexion(): PDO
-  {
-    if(self::$db === null){
-      self::conectar();
-    }
-    return self::$db;
-  }
+  /**
+   * Conecta con la base de datos
+   *
+   * @return void
+   */
   public static function conectar(): void
   {
     try {
@@ -37,12 +25,20 @@ class Conexion {
     }
   }
 
-public function  ejecutarConsultaObjeto($consulta, $parametros = array()){
-  $stmt = $this->getConexion()->prepare($consulta);
-  $stmt->execute($parametros);
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
 
+  /**
+   * Devuelve la conexión a la base de datos
+   *
+   * @return PDO
+   */
+
+  public static function getConexion(): PDO
+  {
+    if(self::$db === null){
+      self::conectar();
+    }
+    return self::$db;
+  }
 }
 
 ?>

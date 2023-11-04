@@ -14,8 +14,9 @@ class Categoria
 
   public function categorias_completas(): array
   {
+    $conexion = Conexion::getConexion();
     $consulta = "SELECT * FROM categorias";
-    $PDOStatement = (new Conexion())->getConexion()->prepare($consulta);
+    $PDOStatement =  $conexion->prepare($consulta);
     $PDOStatement->execute();
     $categorias = [];
 
@@ -31,7 +32,7 @@ class Categoria
     return $categorias;
   }
   public function subcategorias_completas(): array {
-    $conexion = (new Conexion())->getConexion();
+    $conexion = Conexion::getConexion();
     $consulta = "SELECT * FROM subcategorias WHERE categoria_id = :categoria_id";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->bindParam(':categoria_id', $this->id, PDO::PARAM_INT);
