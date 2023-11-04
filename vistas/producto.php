@@ -1,8 +1,8 @@
 <?php
 require_once 'clases/Producto.php';
 $id = $_GET['id'];
-$obj = new Producto();
-$producto = $obj->producto_x_id($id);
+
+$producto = (new Producto())->producto_x_id($id);
 if (empty($producto)) {
   echo "<div class='alert alert-danger' role='alert'>
     No se encontraron productos para el id: $id
