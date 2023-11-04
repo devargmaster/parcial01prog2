@@ -14,9 +14,8 @@ class Categoria
 
   public function categorias_completas(): array
   {
-    $conexion = new Conexion();
     $consulta = "SELECT * FROM categorias";
-    $PDOStatement = $conexion->getConexion()->prepare($consulta);
+    $PDOStatement = (new Conexion())->getConexion()->prepare($consulta);
     $PDOStatement->execute();
     $categorias = [];
 
@@ -52,11 +51,6 @@ class Categoria
   public function setNombre($nombre)
   {
     $this->nombre = $nombre;
-  }
-
-  public function getUrl()
-  {
-    return $this->url;
   }
 
   public  function getDescripcion()

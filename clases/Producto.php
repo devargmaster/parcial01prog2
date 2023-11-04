@@ -32,11 +32,7 @@ class Producto
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
     $PDOStatement->execute();
-    $productos = $PDOStatement->fetchAll();
-    foreach ($productos as $producto) {
-      $producto->producto_info_adicional = (new Informacion_adicional())->get_x_id($producto->id);
-    }
-    return $productos;
+    return $PDOStatement->fetchAll();
   }
 
 
@@ -103,13 +99,13 @@ class Producto
    */
   public function producto_x_id(int $idProducto): ?Producto
   {
-    $catalogo = $this->todos_los_productos();
-    foreach ($catalogo as $producto) {
-      if ($producto->id == $idProducto) {
-        return $producto;
-      }
-    }
-    return null;
+    $conexion = (new Conexion())->getConexion();
+    $catalogo = "SELECT * FROM productos WHERE id = ?";
+    $PDOStatement = $conexion->prepare($catalogo);
+    $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+    $PDOStatement->execute([$idProducto]);
+    $producto = $PDOStatement->fetch();
+    return $producto ?? null;
   }
 
   /**

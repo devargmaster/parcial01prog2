@@ -10,8 +10,7 @@ if (strpos($currentPath, '/vistas/') !== false) {
   $basePath = '../';
 }
 
-$seccion = new Categoria();
-$secciones_completas = $seccion->categorias_completas();
+$secciones_completas = (new Categoria())->categorias_completas();
 
 if (isset($_GET['producto'])) {
   $seccion_elegida_ = 'catalogo';

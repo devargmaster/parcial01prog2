@@ -28,7 +28,7 @@ $listaDeProductos = (new Producto())->todos_los_productos();
         <td><?= $producto->getProducto_nombre(); ?></td>
         <td><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS</td>
         <td>
-          <button class="btn btn-info btn-sm" onclick="new bootstrap.Modal(document.getElementById('modalVerProducto')).show();" data-id="<?= $producto->getID(); ?>" data-nombre="<?= $producto->getProducto_nombre(); ?>" data-precio="<?= $producto->getProducto_precio(); ?>" data-descripcion="<?= htmlspecialchars($producto->getProducto_descripcion()); ?>" data-imagen="<?= $producto->getProducto_imagen(); ?>">Ver</button>
+          <button class="btn btn-info btn-sm btn-ver" data-bs-toggle="modal" data-bs-producto-id="<?= $producto->getID(); ?>" data-bs-target="#modalVerProducto" ...>Ver</button>
 
           <!--          <a href="index.php?sec=producto&id=--><?php //= $producto->getID() ?><!--" class="btn btn-info btn-sm">Ver</a>-->
           <a href="editar.php?id=<?= $producto->getID() ?>" class="btn btn-primary btn-sm">Editar</a>
@@ -42,11 +42,19 @@ $listaDeProductos = (new Producto())->todos_los_productos();
 
 
 
-<!-- Modal para ver detalles del producto -->
-<div class="modal fade" id="modalVerProducto" tabindex="-1" role="dialog" aria-labelledby="modalVerProductoLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="modalVerProducto" tabindex="-1" aria-labelledby="modalVerProductoLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <!-- ... [Resto del código del modal] ... -->
+      <div class="modal-header">
+        <p class="modal-title" id="modalVerProductoLabel">Detalles del Producto</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>ID del Producto: <span id="productoId"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
     </div>
   </div>
 </div>
@@ -54,17 +62,19 @@ $listaDeProductos = (new Producto())->todos_los_productos();
 <script>
   document.getElementById('modalVerProducto').addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget;
-    var id = button.getAttribute('data-id');
-    var nombre = button.getAttribute('data-nombre');
-    var precio = button.getAttribute('data-precio');
-    var descripcion = button.getAttribute('data-descripcion');
-    var imagen = button.getAttribute('data-imagen');
+    var id = button.getAttribute('data-bs-producto-id');
+    var nombre = button.getAttribute('data-bs-producto-nombre');
+    var precio = button.getAttribute('data-bs-producto-precio');
+    var descripcion = button.getAttribute('data-bs-producto-descripcion');
+    var imagen = button.getAttribute('data-bs-producto-imagen');
 
     var modal = this;
     modal.querySelector('.modal-title').textContent = nombre;
-    modal.querySelector('.modal-body #producto_imagen').src = imagen;
+    modal.querySelector('.modal-body #productoId').textContent = id; // Asegúrate de que este ID exista en el HTML de la modal
+    // modal.querySelector('.modal-body #producto_imagen').src = imagen; // Comenta esta línea si no tienes un elemento img para la imagen en tu modal
     modal.querySelector('.modal-body #producto_precio').textContent = precio;
     modal.querySelector('.modal-body #producto_descripcion').textContent = descripcion;
   });
+
 
 </script>
