@@ -18,4 +18,28 @@ class Marca
     $PDOStatement->execute();
     return $PDOStatement->fetchAll();
   }
+
+  /**
+   * @return mixed
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getMarcaTitulo()
+  {
+    return $this->marca_titulo;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getMarcaDescripcion()
+  {
+    return $this->marca_descripcion;
+  }
 }

@@ -16,7 +16,7 @@ if (empty($producto)) {
   <div class="row">
 
     <div class="col-md-6">
-      <img class="producto_imagen_estilo" src="<?= $producto->getProducto_imagen() ?>"
+      <img class="producto_imagen_estilo" src="../img/productos/<?= $producto->getProducto_imagen() ?>"
            alt="<?= $producto->getProducto_nombre() ?>">
     </div>
 

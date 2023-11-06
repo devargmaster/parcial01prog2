@@ -106,7 +106,46 @@ class Producto
     $producto = $PDOStatement->fetch();
     return $producto ?? null;
   }
-public function producto_x_rango_precio(int $precioMinimo=0, int $precioMaximo=0): array
+
+  public function insertarProducto($producto_nombre, $producto_descripcion, $producto_precio, $producto_imagen, $producto_stock, $producto_destacado, $producto_estado, $producto_oferta_id, $producto_nuevo, $producto_fecha, $marca_id)
+  {
+    $conexion = Conexion::getConexion();
+    $consulta = "INSERT INTO productos (producto_nombre, 
+                       producto_descripcion, producto_precio, producto_imagen, 
+                       producto_stock, producto_destacado, 
+                        producto_estado, producto_oferta_id, producto_nuevo,
+                       producto_fecha, marca_id) VALUES (:producto_nombre, :producto_descripcion, :producto_precio, :producto_imagen, :producto_stock, :producto_destacado, :producto_estado, :producto_oferta_id, :producto_nuevo, :producto_fecha, :marca_id)";
+    $PDOStatement = $conexion->prepare($consulta);
+    $PDOStatement->execute(
+      [
+        'producto_nombre' => $producto_nombre,
+        'producto_descripcion' => $producto_descripcion,
+        'producto_precio' => $producto_precio,
+        'producto_imagen' => $producto_imagen,
+        'producto_stock' => $producto_stock,
+        'producto_destacado' => $producto_destacado,
+        'producto_estado' => $producto_estado,
+        'producto_oferta_id' => $producto_oferta_id,
+        'producto_nuevo' => $producto_nuevo,
+        'producto_fecha' => $producto_fecha,
+        'marca_id' => $marca_id
+      ]
+    );
+  }
+
+  /**
+   * Elimina esta instancia de la base de datos
+   */
+  public function delete()
+  {
+    $conexion = Conexion::getConexion();
+    $query = "DELETE FROM productos WHERE id = ?";
+
+    $PDOStatement = $conexion->prepare($query);
+    $PDOStatement->execute([$this->id]);
+  }
+
+  public function producto_x_rango_precio(int $precioMinimo=0, int $precioMaximo=0): array
 {
   $conexion = Conexion::getConexion();
   if ($precioMaximo) {

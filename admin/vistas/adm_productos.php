@@ -4,7 +4,7 @@ $listaDeProductos = (new Producto())->todos_los_productos();
 <div class="container mt-5">
 
   <div class="mb-4">
-    <button class="btn btn-primary" data-toggle="modal" data-target="#modalProducto">Nuevo Producto</button>
+    <a href="index.php?sec=alta_producto&ruta=vistas" class="btn btn-primary" data-toggle="modal" data-target="#modalProducto">Nuevo Producto</a>
   </div>
 
   <!-- Tabla de productos -->
@@ -23,7 +23,7 @@ $listaDeProductos = (new Producto())->todos_los_productos();
       <tr>
         <td><?= $producto->getID(); ?></td>
         <td>
-          <img src="../<?= $producto->getProducto_imagen() ?>" alt="<?= $producto->getProducto_nombre(); ?>" style="width: 50px; height: auto;">
+          <img src="../img/productos/<?= $producto->getProducto_imagen() ?>" alt="<?= $producto->getProducto_nombre(); ?>" style="width: 50px; height: auto;">
         </td>
         <td><?= $producto->getProducto_nombre(); ?></td>
         <td><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS</td>
@@ -32,7 +32,7 @@ $listaDeProductos = (new Producto())->todos_los_productos();
 
           <!--          <a href="index.php?sec=producto&id=--><?php //= $producto->getID() ?><!--" class="btn btn-info btn-sm">Ver</a>-->
           <a href="editar.php?id=<?= $producto->getID() ?>" class="btn btn-primary btn-sm">Editar</a>
-          <a href="borrar.php?id=<?= $producto->getID() ?>" class="btn btn-danger btn-sm">Eliminar</a>
+          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-producto-id="<?= $producto->getID(); ?>">Eliminar</button>
         </td>
       </tr>
     <?php } ?>
@@ -58,6 +58,25 @@ $listaDeProductos = (new Producto())->todos_los_productos();
     </div>
   </div>
 </div>
+<!-- Modal de Confirmación de Eliminación -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar este producto?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
   document.getElementById('modalVerProducto').addEventListener('show.bs.modal', function (event) {
@@ -76,5 +95,14 @@ $listaDeProductos = (new Producto())->todos_los_productos();
     modal.querySelector('.modal-body #producto_descripcion').textContent = descripcion;
   });
 
+  var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+  confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    var productoId = button.getAttribute('data-producto-id');
 
+    var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
+    confirmDeleteButton.onclick = function() {
+      window.location.href = '/admin/accion/acc_borra_producto.php?id=' + productoId;
+    };
+  });
 </script>

@@ -30,7 +30,7 @@ if (isset($_GET['sec'])) {
 foreach ($catalogo as $producto) { ?>
   <div class="col-12 col-md-4 ">
     <div class='card mb-3'>
-      <img src="<?= $producto->getProducto_imagen() ?>" class='card-img-top'
+      <img src="img/productos/<?= $producto->getProducto_imagen() ?>" class='card-img-top'
            alt='<?= $producto->getProducto_nombre(); ?>'>
       <div class="card-body">
 

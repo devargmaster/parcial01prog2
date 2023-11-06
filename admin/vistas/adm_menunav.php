@@ -31,14 +31,14 @@ if (isset($_GET['producto'])) {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<?= $basePath ?>index.php?sec=home">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="<?= $basePath ?>index.php?sec=home&ruta=vistas">Inicio</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Productos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
-            <li><a class="dropdown-item" href="<?= $basePath ?>index.php?sec=productos">Productos ABM</a></li>
+            <li><a class="dropdown-item" href="<?= $basePath ?>index.php?sec=productos&ruta=vistas">Productos ABM</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Categorías ABM</a></li>
             <li><a class="dropdown-item" href="#">Subcategorías ABM</a></li>
