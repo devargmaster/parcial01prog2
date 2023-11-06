@@ -31,17 +31,6 @@ class Categoria
 
     return $categorias;
   }
-  public function subcategorias_completas(): array {
-    $conexion = Conexion::getConexion();
-    $consulta = "SELECT * FROM subcategorias WHERE categoria_id = :categoria_id";
-    $PDOStatement = $conexion->prepare($consulta);
-    $PDOStatement->bindParam(':categoria_id', $this->id, PDO::PARAM_INT);
-    $PDOStatement->setFetchMode(PDO::FETCH_CLASS, Subcategoria::class);
-    $PDOStatement->execute();
-
-    $subcategorias = $PDOStatement->fetchAll();
-    return $subcategorias;
-  }
 
 
   public function getNombre()

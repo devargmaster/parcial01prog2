@@ -22,7 +22,7 @@ if (isset($_GET['sec'])) {
 foreach ($catalogo as $producto) { ?>
   <div class="col-12 col-md-4">
     <div class='card mb-3'>
-      <img src="<?= $producto->getProducto_imagen() ?>" class='card-img-top' alt='...'>
+      <img src="../img/productos/<?= $producto->getProducto_imagen() ?>" class='card-img-top' alt='...'>
       <div class="card-body">
         <h2 class="card-title mb-2"><a href="index.php?sec=producto&id=<?= $producto->getID(); ?>"
                                        class="producto_titulo_estilo"><?= $producto->getProducto_nombre(); ?></a></h2>

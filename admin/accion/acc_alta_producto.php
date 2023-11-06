@@ -25,12 +25,15 @@ if (!empty($datosArchivo['tmp_name'])) {
   $imagen = "img/imagen123.png";
 }
 try {
+  $conexion = Conexion::getConexion();
+  $conexion->beginTransaction();
 
-  (new Producto())->insertarProducto(
+  $producto = new Producto();
+  $producto_id = $producto->insertarProducto(
     $postData['producto_nombre'],
     $postData['producto_descripcion'],
     $postData['producto_precio'],
-    $postData['producto_imagen']=$imagen,
+    $imagen, // Asegúrate de que este campo se llame 'producto_imagen' en tu formulario
     $postData['producto_stock'],
     $postData['producto_destacado'],
     $postData['producto_estado'],
@@ -38,8 +41,28 @@ try {
     $postData['producto_fecha'],
     $postData['marca_id']
   );
- // header('Location: index.php?sec=adm_productos');
+
+  // Insertar en productos_categorias
+  $categoria_id = $postData['producto_categoria']; // Asegúrate de que este campo exista en tu formulario
+  $stmt = $conexion->prepare("INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (?, ?)");
+  $stmt->bindParam(1, $producto_id);
+  $stmt->bindParam(2, $categoria_id);
+  $stmt->execute();
+
+  // Insertar en productos_categorias_subcategorias
+  $subcategoria_id = $postData['producto_subcategoria']; // Asegúrate de que este campo exista en tu formulario
+  $stmt = $conexion->prepare("INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (?, ?)");
+  $stmt->bindParam(1, $producto_id);
+  $stmt->bindParam(2, $subcategoria_id);
+  $stmt->execute();
+
+  $conexion->commit();
+  // Redireccionar al usuario a la página de productos
+  header('Location: index.php?sec=adm_productos');
 } catch (Exception $ex) {
-  die ($ex->getMessage());
+  if (isset($conexion)) {
+    $conexion->rollBack();
+  }
+  die($ex->getMessage());
 }
 

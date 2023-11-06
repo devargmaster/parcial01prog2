@@ -19,20 +19,17 @@ class Subcategoria {
     $subcategorias = $PDOStatement->fetchAll();
     return $subcategorias;
   }
-  public function getCategoria() {
-    // Obten la conexión a la base de datos
+
+  public function obtenerSubcategoriasPorCategoria($categoria_id) {
     $conexion = Conexion::getConexion();
-    // Prepara la consulta SQL para obtener la categoría relacionada
-    $consulta = "SELECT * FROM categorias WHERE id = :categoria_id";
+    $consulta = "SELECT * FROM subcategorias WHERE categoria_id = :categoria_id";
     $PDOStatement = $conexion->prepare($consulta);
-    // Vincula el categoria_id para la consulta
-    $PDOStatement->bindParam(':categoria_id', $this->categoria_id, PDO::PARAM_INT);
+    $PDOStatement->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
     $PDOStatement->execute();
-    // Establece el modo de recuperación para que devuelva una instancia de Categoria
-    $PDOStatement->setFetchMode(PDO::FETCH_CLASS, Categoria::class);
-    // Obtiene la categoría y la devuelve
-    return $PDOStatement->fetch();
+    $subcategorias = $PDOStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+    return $subcategorias;
   }
+
   public function getId() {
     return $this->id;
   }

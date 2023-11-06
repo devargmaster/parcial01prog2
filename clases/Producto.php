@@ -107,14 +107,14 @@ class Producto
     return $producto ?? null;
   }
 
-  public function insertarProducto($producto_nombre, $producto_descripcion, $producto_precio, $producto_imagen, $producto_stock, $producto_destacado, $producto_estado, $producto_oferta_id, $producto_nuevo, $producto_fecha, $marca_id)
+  public function insertarProducto($producto_nombre, $producto_descripcion, $producto_precio, $producto_imagen, $producto_stock, $producto_destacado, $producto_estado,  $producto_nuevo, $producto_fecha, $marca_id)
   {
     $conexion = Conexion::getConexion();
     $consulta = "INSERT INTO productos (producto_nombre, 
-                       producto_descripcion, producto_precio, producto_imagen, 
-                       producto_stock, producto_destacado, 
-                        producto_estado, producto_oferta_id, producto_nuevo,
-                       producto_fecha, marca_id) VALUES (:producto_nombre, :producto_descripcion, :producto_precio, :producto_imagen, :producto_stock, :producto_destacado, :producto_estado, :producto_oferta_id, :producto_nuevo, :producto_fecha, :marca_id)";
+                     producto_descripcion, producto_precio, producto_imagen, 
+                     producto_stock, producto_destacado, 
+                      producto_estado,  producto_nuevo,
+                     producto_fecha, marca_id) VALUES (:producto_nombre, :producto_descripcion, :producto_precio, :producto_imagen, :producto_stock, :producto_destacado, :producto_estado,  :producto_nuevo, :producto_fecha, :marca_id)";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->execute(
       [
@@ -125,13 +125,15 @@ class Producto
         'producto_stock' => $producto_stock,
         'producto_destacado' => $producto_destacado,
         'producto_estado' => $producto_estado,
-        'producto_oferta_id' => $producto_oferta_id,
         'producto_nuevo' => $producto_nuevo,
         'producto_fecha' => $producto_fecha,
         'marca_id' => $marca_id
       ]
     );
+
+    return $conexion->lastInsertId();
   }
+
 
   /**
    * Elimina esta instancia de la base de datos
