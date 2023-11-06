@@ -34,7 +34,6 @@ try {
     $postData['producto_stock'],
     $postData['producto_destacado'],
     $postData['producto_estado'],
-    $postData['producto_oferta_id'],
     $postData['producto_nuevo'],
     $postData['producto_fecha'],
     $postData['marca_id']

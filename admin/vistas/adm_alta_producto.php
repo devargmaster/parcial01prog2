@@ -57,10 +57,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
         <option value="0">No Activo</option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="productoOfertaId">ID de Oferta</label>
-      <input type="number" class="form-control" id="productoOfertaId" name="producto_oferta_id">
-    </div>
+
     <div class="form-group">
       <label for="productoNuevo">Producto Nuevo</label>
       <select class="form-control" id="productoNuevo" name="producto_nuevo">

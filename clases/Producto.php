@@ -13,7 +13,7 @@ class Producto
   private $producto_categoria;
   private $producto_subcategoria;
   private $producto_estado;
-  private $producto_oferta_id;
+
   private $producto_nuevo;
   private $producto_fecha;
   private $marca_id;
@@ -251,13 +251,7 @@ class Producto
     return $this->producto_estado;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getProductoOfertaId()
-  {
-    return $this->producto_oferta_id;
-  }
+
 
   /**
    * @return mixed

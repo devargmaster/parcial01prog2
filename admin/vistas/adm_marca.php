@@ -58,12 +58,14 @@
     </div>
   </div>
 </div>
-function editarMarca(id) {
+<script>function editarMarca(id) {
 // Aquí iría el código para cargar los datos de la marca en el modal.
 // Esto normalmente implicaría una llamada AJAX para obtener los datos y luego llenar el formulario.
-}
+  }
 
-function eliminarMarca(id) {
+  function eliminarMarca(id) {
 // Aquí iría el código para enviar una solicitud de eliminación.
 // Esto podría ser una solicitud AJAX o una redirección a un script PHP que maneje la eliminación.
-}
+  }
+</script>
+
