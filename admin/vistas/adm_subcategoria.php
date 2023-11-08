@@ -1,8 +1,8 @@
 <?php
 $subcategorias = (new Subcategoria())->subcategorias_completas();
-echo "<pre>";
-print_r($subcategorias);
-echo "</pre>";
+//echo "<pre>";
+//print_r($subcategorias);
+//echo "</pre>";
 ?>
 <div class="container mt-5">
   <h2>Administrar Subcategorías</h2>

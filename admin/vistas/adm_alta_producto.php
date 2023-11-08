@@ -11,13 +11,39 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
       <input type="text" class="form-control" id="productoNombre" name="producto_nombre" required>
     </div>
     <div class="form-group">
-      <label for="productoPrecio">Precio del Producto</label>
-      <input type="number" step="0.01" class="form-control" id="productoPrecio" name="producto_precio" required>
-    </div>
-    <div class="form-group">
       <label for="productoDescripcion">Descripción del Producto</label>
       <textarea class="form-control" id="productoDescripcion" name="producto_descripcion" rows="3"></textarea>
     </div>
+<hr>
+    <button type="button" id="toggleInfoAdicional" class="btn btn-secondary">Agregar Información Adicional</button>
+
+    <div id="informacionAdicionalContainer" style="display:none;">
+      <h4>Información Adicional</h4>
+      <div class="form-group">
+        <label for="medidas">Medidas</label>
+        <input type="text" class="form-control" id="medidas" name="medidas" placeholder="Ingrese las medidas">
+      </div>
+      <div class="form-group">
+        <label for="peso">Peso</label>
+        <input type="text" class="form-control" id="peso" name="peso" placeholder="Ingrese el peso">
+      </div>
+      <div class="form-group">
+        <label for="material">Material</label>
+        <input type="text" class="form-control" id="material" name="material" placeholder="Ingrese el material">
+      </div>
+      <div class="form-group">
+        <label for="origen">Origen</label>
+        <input type="text" class="form-control" id="origen" name="origen" placeholder="Ingrese el origen">
+      </div>
+    </div>
+
+
+    <hr>
+    <div class="form-group">
+      <label for="productoPrecio">Precio del Producto</label>
+      <input type="number" step="0.01" class="form-control" id="productoPrecio" name="producto_precio" required>
+    </div>
+
     <div class="form-group">
       <label for="productoStock">Stock del Producto</label>
       <input type="number" class="form-control" id="productoStock" name="producto_stock" required>
@@ -75,7 +101,24 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
         <option value="1">Sí</option>
         <option value="0">No</option>
       </select>
-    </div>
+    </div> <br>
     <button type="submit" class="btn btn-primary">Agregar Producto</button>
   </form>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('informacionAdicionalContainer');
+    const toggleButton = document.getElementById('toggleInfoAdicional');
+
+    toggleButton.addEventListener('click', function() {
+      // Esto alterna la visibilidad del contenedor
+      if (container.style.display === 'none') {
+        container.style.display = 'block';
+        toggleButton.textContent = 'Ocultar Información Adicional';
+      } else {
+        container.style.display = 'none';
+        toggleButton.textContent = 'Agregar Información Adicional';
+      }
+    });
+  });
+</script>

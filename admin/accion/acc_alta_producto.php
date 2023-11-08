@@ -42,6 +42,23 @@ try {
     $postData['marca_id']
   );
 
+  // ... después de insertar el producto y obtener $producto_id ...
+
+  if (isset($_POST['medidas'])) {
+    $conexion = Conexion::getConexion();
+    $stmt = $conexion->prepare("INSERT INTO informacion_adicional (medidas, peso, material, origen, producto_id) VALUES (?, ?, ?, ?, ?)");
+
+    // Asigna directamente los valores de la información adicional
+    $medidas = $_POST['medidas'];
+    $peso = $_POST['peso'];
+    $material = $_POST['material'];
+    $origen = $_POST['origen'];
+
+    // Ejecuta la inserción con los valores individuales
+    $stmt->execute([$medidas, $peso, $material, $origen, $producto_id]);
+  }
+
+
   // Insertar en productos_categorias
   $categoria_id = $postData['producto_categoria']; // Asegúrate de que este campo exista en tu formulario
   $stmt = $conexion->prepare("INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (?, ?)");

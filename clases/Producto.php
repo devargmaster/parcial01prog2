@@ -133,6 +133,71 @@ class Producto
 
     return $conexion->lastInsertId();
   }
+  /**
+   * Actualiza esta instancia en la base de datos
+   * @param string $producto_nombre
+   * @param string $producto_descripcion
+   * @param float $producto_precio
+   * @param string $producto_imagen
+   * @param int $producto_stock
+   * @param int $producto_destacado
+   * @param int $producto_estado
+   * @param int $producto_nuevo
+   * @param string $producto_fecha
+   * @param int $marca_id
+   * @return bool
+   */
+
+
+  public function actualizar_producto($id, string $producto_nombre)
+  {
+    $conexion = Conexion::getConexion();
+    $consulta = "UPDATE productos SET 
+        producto_nombre = :producto_nombre
+    WHERE id = :id";
+
+    $PDOStatement = $conexion->prepare($consulta);
+
+    return $PDOStatement->execute([
+      'id' => $id,
+      'producto_nombre' => $producto_nombre
+    ]);
+  }
+
+
+
+//  public function actualizar_producto($id, string $producto_nombre)
+//  {//, $producto_descripcion, $producto_precio, $producto_imagen, $producto_stock, $producto_destacado, $producto_estado, $producto_nuevo, $producto_fecha, $marca_id
+//    $conexion = Conexion::getConexion();
+//    $consulta = "UPDATE productos SET
+//        producto_nombre = :producto_nombre
+////        producto_descripcion = :producto_descripcion,
+////        producto_precio = :producto_precio,
+////        producto_imagen = :producto_imagen,
+////        producto_stock = :producto_stock,
+////        producto_destacado = :producto_destacado,
+////        producto_estado = :producto_estado,
+////        producto_nuevo = :producto_nuevo,
+////        producto_fecha = :producto_fecha,
+////        marca_id = :marca_id
+//    WHERE id = :id";
+//
+//    $PDOStatement = $conexion->prepare($consulta);
+//
+//    return $PDOStatement->execute([
+//     'id' => $id,
+//      'producto_nombre' => $producto_nombre,
+////      'producto_descripcion' => $producto_descripcion,
+////      'producto_precio' => $producto_precio,
+////      'producto_imagen' => $producto_imagen,
+////      'producto_stock' => $producto_stock,
+////      'producto_destacado' => $producto_destacado,
+////      'producto_estado' => $producto_estado,
+////      'producto_nuevo' => $producto_nuevo,
+////      'producto_fecha' => $producto_fecha,
+////      'marca_id' => $marca_id
+//    ]);
+//  }
 
 
   /**

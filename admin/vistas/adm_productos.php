@@ -1,5 +1,12 @@
 <?php
 $listaDeProductos = (new Producto())->todos_los_productos();
+$currentPath = $_SERVER['PHP_SELF'];
+$basePath = '';
+
+// Aca lo hago retroceder un nivel para manejar la jerarquia del index respecto a las vistas
+if (strpos($currentPath, '/vistas/') !== false) {
+  $basePath = '../';
+}
 ?>
 <div class="container mt-5">
 
@@ -31,7 +38,7 @@ $listaDeProductos = (new Producto())->todos_los_productos();
           <button class="btn btn-info btn-sm btn-ver" data-bs-toggle="modal" data-bs-producto-id="<?= $producto->getID(); ?>" data-bs-target="#modalVerProducto" ...>Ver</button>
 
           <!--          <a href="index.php?sec=producto&id=--><?php //= $producto->getID() ?><!--" class="btn btn-info btn-sm">Ver</a>-->
-          <a href="editar.php?id=<?= $producto->getID() ?>" class="btn btn-primary btn-sm">Editar</a>
+          <a href="<?= $basePath ?>index.php?sec=editar_producto&ruta=vistas&id=<?= $producto->getID() ?>" class="btn btn-primary btn-sm">Editar</a>
           <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-producto-id="<?= $producto->getID(); ?>">Eliminar</button>
         </td>
       </tr>
