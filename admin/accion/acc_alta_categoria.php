@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: tu_pagina_de_categorias.php?mensaje=insertado_correctamente');
         exit;
     } else {
-        // Manejar el error aquí
         echo "Error al insertar la categoría.";
     }
 }

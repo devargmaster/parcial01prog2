@@ -35,6 +35,9 @@ if (empty($producto)) {
           if ($infoAdicional !== null) {
             echo (!empty($infoAdicional->getMedidas()) ? "<p class='producto_descripcion_estilo'>Medidas:" . $infoAdicional->getMedidas() . "</p>" : "");
             echo (!empty($infoAdicional->getMaterial()) ? "<p class='producto_descripcion_estilo'>Material:" . $infoAdicional->getMaterial() . "</p>" : "");
+            echo (!empty($infoAdicional->getPeso()) ? "<p class='producto_descripcion_estilo'>Peso:" . $infoAdicional->getPeso() . "</p>" : "");
+            echo (!empty($infoAdicional->getOrigen()) ? "<p class='producto_descripcion_estilo'>Origen:" . $infoAdicional->getOrigen() . "</p>" : "");
+
           } else {
             echo "<p class='producto_descripcion_estilo'>Información no disponible</p>";
           }
