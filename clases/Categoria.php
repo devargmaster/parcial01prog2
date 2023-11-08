@@ -32,7 +32,51 @@ class Categoria
     return $categorias;
   }
 
+    public function insertar() {
+        $conexion = Conexion::getConexion();
+        $consulta = "INSERT INTO categorias (nombre, descripcion, habilitada) VALUES (:nombre, :descripcion, :habilitada)";
 
+        $sentencia = $conexion->prepare($consulta);
+
+        $resultado = $sentencia->execute(
+            [
+                ':nombre' => $this->nombre,
+                ':descripcion' => $this->descripcion,
+                ':habilitada' => $this->habilitada
+            ]
+        );
+
+        if($resultado) {
+            $this->id = $conexion->lastInsertId();
+        }
+
+        return $resultado;
+    }
+    public function delete() {
+        $conexion = Conexion::getConexion();
+        $consulta = "DELETE FROM categorias WHERE id = :id";
+        $sentencia = $conexion->prepare($consulta);
+
+        return $sentencia->execute(
+            [
+                ':id' => $this->id
+            ]
+        );
+    }
+    public function categoriaxid(mixed $id)
+    {
+        $conexion = Conexion::getConexion();
+        $consulta = "SELECT * FROM categorias WHERE id = :id";
+        $sentencia = $conexion->prepare($consulta);
+        $sentencia->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $sentencia->execute(
+            [
+                ':id' => $id
+            ]
+        );
+        $categoria = $sentencia->fetch();
+        return $categoria;
+    }
   public function getNombre()
   {
     return $this->nombre;
@@ -63,16 +107,17 @@ class Categoria
     return $this->id;
   }
 
-  private function setID(mixed $id)
+  public function setID(mixed $id)
   {
     $this->id = $id;
   }
 
-
-  private function setDescripcion(mixed $descripcion)
+  public function setDescripcion(mixed $descripcion)
   {
     $this->descripcion = $descripcion;
   }
+
+
 }
 
 

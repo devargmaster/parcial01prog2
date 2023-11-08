@@ -29,7 +29,7 @@ $categorias = (new Categoria())->categorias_completas();
           <!-- Botón para editar una categoría -->
           <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalCategoria" onclick="editarCategoria(<?php echo htmlspecialchars($categoria->getID()); ?>)">Editar</button>
           <!-- Botón para eliminar una categoría -->
-          <button class="btn btn-sm btn-danger" onclick="eliminarCategoria(<?php echo htmlspecialchars($categoria->getID()); ?>)">Eliminar</button>
+            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-categoria-id="<?= $categoria->getID(); ?>">Eliminar</button>
         </td>
       </tr>
     <?php endforeach; ?>
@@ -45,7 +45,7 @@ $categorias = (new Categoria())->categorias_completas();
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="formCategoria">
+        <form id="formCategoria" action="index.php?sec=alta_categoria&ruta=acc" method="post">
           <input type="hidden" id="categoriaId" name="categoria_id">
           <div class="mb-3">
             <label for="nombreCategoria" class="form-label">Nombre</label>
@@ -65,3 +65,33 @@ $categorias = (new Categoria())->categorias_completas();
     </div>
   </div>
 </div>
+<!-- Modal de Confirmación de Eliminación -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar esta categoria?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+    confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var categoriaId = button.getAttribute('data-categoria-id');
+
+        var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
+        confirmDeleteButton.onclick = function() {
+            window.location.href = '/admin/accion/acc_borra_categoria.php?id=' + categoriaId;
+        };
+    });
+</script>
