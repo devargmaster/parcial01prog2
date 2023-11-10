@@ -50,7 +50,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
     </div>
     <div class="form-group">
       <label for="marcaId">Marca</label>
-      <select class="form-control" id="marcaId" name="marca_id">
+      <select class="form-select" id="marcaId" name="marca_id">
         <?php foreach ($marcas as $marca): ?>
           <option value="<?= $marca->getId() ?>"><?= $marca->getMarcaTitulo() ?></option>
         <?php endforeach; ?>
@@ -62,7 +62,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
     </div>
     <div class="form-group">
       <label for="productoCategoria">Categoría del Producto</label>
-      <select class="form-control" id="productoCategoria" name="producto_categoria">
+      <select class="form-select" id="productoCategoria" name="producto_categoria">
         <?php foreach ($categorias as $categoria): ?>
           <option value="<?= $categoria->getId() ?>"><?= $categoria->getNombre() ?></option>
         <?php endforeach; ?>
@@ -70,7 +70,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
     </div>
     <div class="form-group">
       <label for="productoSubcategoria">Subcategoría del Producto</label>
-      <select class="form-control" id="productoSubcategoria" name="producto_subcategoria">
+      <select class="form-select" id="productoSubcategoria" name="producto_subcategoria">
         <?php foreach ($subcategorias as $subcategoria): ?>
           <option value="<?= $subcategoria->getId() ?>"><?= $subcategoria->getNombre() ?></option>
         <?php endforeach; ?>
@@ -78,7 +78,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
     </div>
     <div class="form-group">
       <label for="productoEstado">Estado del Producto</label>
-      <select class="form-control" id="productoEstado" name="producto_estado">
+      <select class="form-select" id="productoEstado" name="producto_estado">
         <option value="1">Activo</option>
         <option value="0">No Activo</option>
       </select>
@@ -86,7 +86,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
 
     <div class="form-group">
       <label for="productoNuevo">Producto Nuevo</label>
-      <select class="form-control" id="productoNuevo" name="producto_nuevo">
+      <select class="form-select" id="productoNuevo" name="producto_nuevo">
         <option value="1">Sí</option>
         <option value="0">No</option>
       </select>
@@ -97,7 +97,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
     </div>
     <div class="form-group">
       <label for="productoDestacado">Producto Destacado</label>
-      <select class="form-control" id="productoDestacado" name="producto_destacado">
+      <select class="form-select" id="productoDestacado" name="producto_destacado">
         <option value="1">Sí</option>
         <option value="0">No</option>
       </select>

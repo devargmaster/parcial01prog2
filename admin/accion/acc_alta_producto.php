@@ -33,7 +33,7 @@ try {
     $postData['producto_nombre'],
     $postData['producto_descripcion'],
     $postData['producto_precio'],
-    $imagen, // Asegúrate de que este campo se llame 'producto_imagen' en tu formulario
+    $imagen,
     $postData['producto_stock'],
     $postData['producto_destacado'],
     $postData['producto_estado'],
@@ -42,40 +42,41 @@ try {
     $postData['marca_id']
   );
 
-  // ... después de insertar el producto y obtener $producto_id ...
 
   if (isset($_POST['medidas'])) {
     $conexion = Conexion::getConexion();
     $stmt = $conexion->prepare("INSERT INTO informacion_adicional (medidas, peso, material, origen, producto_id) VALUES (?, ?, ?, ?, ?)");
 
-    // Asigna directamente los valores de la información adicional
     $medidas = $_POST['medidas'];
     $peso = $_POST['peso'];
     $material = $_POST['material'];
     $origen = $_POST['origen'];
 
-    // Ejecuta la inserción con los valores individuales
     $stmt->execute([$medidas, $peso, $material, $origen, $producto_id]);
   }
 
 
-  // Insertar en productos_categorias
   $categoria_id = $postData['producto_categoria']; // Asegúrate de que este campo exista en tu formulario
   $stmt = $conexion->prepare("INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (?, ?)");
-  $stmt->bindParam(1, $producto_id);
-  $stmt->bindParam(2, $categoria_id);
-  $stmt->execute();
+  $stmt->execute(
+    [
+      $producto_id,
+      $categoria_id
+    ]
+  );
 
-  // Insertar en productos_categorias_subcategorias
   $subcategoria_id = $postData['producto_subcategoria']; // Asegúrate de que este campo exista en tu formulario
   $stmt = $conexion->prepare("INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (?, ?)");
-  $stmt->bindParam(1, $producto_id);
-  $stmt->bindParam(2, $subcategoria_id);
-  $stmt->execute();
+  $stmt->execute(
+    [
+      $producto_id,
+      $subcategoria_id
+    ]
+  );
 
   $conexion->commit();
-  // Redireccionar al usuario a la página de productos
-  header('Location: index.php?sec=adm_productos');
+
+  header('Location: index.php?sec=productos&ruta=vistas');
 } catch (Exception $ex) {
   if (isset($conexion)) {
     $conexion->rollBack();
