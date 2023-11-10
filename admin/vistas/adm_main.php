@@ -1,11 +1,19 @@
-
-
 <?PHP
-if ($_GET['ruta'] == 'acc')
-  $path = 'accion/acc_';
-else {
+if (isset($_GET['sec'])) {
+  $seccion_elegida_ = $_GET['sec'];
+} else {
+  $seccion_elegida_ = 'home';
+}
+if (isset($_GET['ruta'])) {
+  if ($_GET['ruta'] == 'acc')
+    $path = 'accion/acc_';
+  else {
+    $path = 'vistas/adm_';
+  }
+} else {
   $path = 'vistas/adm_';
 }
+
 $archivo = $path . $seccion_elegida_ . '.php';
 echo "<pre>";
 print_r($archivo);
