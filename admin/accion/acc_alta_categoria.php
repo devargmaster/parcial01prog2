@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $categoria->insertar();
 
     if ($resultado) {
-        header('Location: tu_pagina_de_categorias.php?mensaje=insertado_correctamente');
+        header('Location: ' . dirname($_SERVER['PHP_SELF']). '/index.php?sec=categoria&ruta=vistas');
         exit;
     } else {
         echo "Error al insertar la categoría.";

@@ -43,7 +43,7 @@
               <li><a class="dropdown-item" href="<?= $basePath ?>index.php?sec=categoria&ruta=vistas">Categorías ABM</a></li>
             <li><a class="dropdown-item" href="<?= $basePath ?>index.php?sec=subcategoria&ruta=vistas">Subcategorías ABM</a></li>
             <li><a class="dropdown-item" href="<?= $basePath ?>index.php?sec=marca&ruta=vistas">Marcas ABM</a></li>
-            <li><a class="dropdown-item" href="#">Ofertas ABM</a></li>
+            <li><a class="dropdown-item" href="<?= $basePath ?>index.php?sec=oferta&ruta=vistas">Ofertas ABM</a></li>
           </ul>
         </li>
         <!-- Usuarios -->

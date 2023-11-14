@@ -5,16 +5,13 @@ $id = $_GET['id'] ?? FALSE;
 $currentPath = $_SERVER['PHP_SELF'];
 $basePath = '';
 
-if (strpos($currentPath, '/acc/') !== false) {
+if (str_contains($currentPath, '/acc/')) {
     $basePath = '../';
 }
 try {
     $categoria = (new Categoria())->categoriaxid($id);
-    $categoria->delete();
-    echo $currentPath . '<br>';
-    echo $basePath . '<br>';
-    echo $basePath . 'index.php?sec=categoria&ruta=vistas';
-    header( 'Location: index.php?sec=categorias&ruta=vistas');
+    $categoria->eliminar();
+    header('Location: ' . dirname(dirname($_SERVER['PHP_SELF'])). '/index.php?sec=categoria&ruta=vistas');
 } catch (Exception $e) {
     die("No se pudo eliminar la categoria". $e->getMessage());
 }

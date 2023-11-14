@@ -3,7 +3,7 @@ $listaDeProductos = (new Producto())->todos_los_productos();
 $currentPath = $_SERVER['PHP_SELF'];
 $basePath = '';
 
-// Aca lo hago retroceder un nivel para manejar la jerarquia del index respecto a las vistas
+
 if (strpos($currentPath, '/vistas/') !== false) {
   $basePath = '../';
 }
@@ -14,7 +14,6 @@ if (strpos($currentPath, '/vistas/') !== false) {
     <a href="index.php?sec=alta_producto&ruta=vistas" class="btn btn-primary" data-toggle="modal" data-target="#modalProducto">Nuevo Producto</a>
   </div>
 
-  <!-- Tabla de productos -->
   <table class="table">
     <thead>
     <tr>

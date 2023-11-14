@@ -25,7 +25,7 @@
         <td><?php echo htmlspecialchars($marca->getMarcaDescripcion()); ?></td>
         <td>
           <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalMarca" onclick="editarMarca(<?php echo htmlspecialchars($marca->getId()); ?>)">Editar</button>
-          <button class="btn btn-sm btn-danger" onclick="eliminarMarca(<?php echo htmlspecialchars($marca->getId()); ?>)">Eliminar</button>
+            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-marca-id="<?= $marca->getId(); ?>">Eliminar</button>
         </td>
       </tr>
     <?php endforeach; ?>
@@ -58,14 +58,35 @@
     </div>
   </div>
 </div>
-<script>function editarMarca(id) {
-// Aquí iría el código para cargar los datos de la marca en el modal.
-// Esto normalmente implicaría una llamada AJAX para obtener los datos y luego llenar el formulario.
-  }
 
-  function eliminarMarca(id) {
-// Aquí iría el código para enviar una solicitud de eliminación.
-// Esto podría ser una solicitud AJAX o una redirección a un script PHP que maneje la eliminación.
-  }
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar esta marca?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+    confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var marcaId = button.getAttribute('data-marca-id');
+
+        var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
+        confirmDeleteButton.onclick = function() {
+            window.location.href = '/admin/accion/acc_borra_marca.php?id=' + marcaId;
+        };
+    });
 </script>
-

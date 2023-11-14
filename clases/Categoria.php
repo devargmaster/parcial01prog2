@@ -52,7 +52,7 @@ class Categoria
 
         return $resultado;
     }
-    public function delete() {
+    public function eliminar() {
         $conexion = Conexion::getConexion();
         $consulta = "DELETE FROM categorias WHERE id = :id";
         $sentencia = $conexion->prepare($consulta);

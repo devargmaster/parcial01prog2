@@ -23,18 +23,14 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
     <tbody>
     <?php foreach($subcategorias as $subcategoria): ?>
       <tr>
-        <td><?php echo $subcategoria->getID(); ?></td>
-        <td><?php echo $subcategoria->getNombre(); ?></td>
-        <td><?php echo $subcategoria->getDescripcion(); ?></td>
-        <td><?php
-          $categoria = $subcategoria->getCategoria();
-          echo $categoria ? $categoria->getNombre() : 'No Asignado';
-          ?></td>
+          <td><?php echo $subcategoria['id']; ?></td>
+          <td><?php echo $subcategoria['nombre']; ?></td>
+          <td><?php echo $subcategoria['descripcion']; ?></td>
+          <td><?php echo $subcategoria['categoria_nombre'] ?? 'No Asignado'; ?></td>
         <td>
-          <!-- Botón para editar una subcategoría -->
-          <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalSubcategoria" onclick="editarSubcategoria(<?php echo htmlspecialchars($subcategoria->getId()); ?>)">Editar</button>
-          <!-- Botón para eliminar una subcategoría -->
-          <button class="btn btn-sm btn-danger" onclick="eliminarSubcategoria(<?php echo htmlspecialchars($subcategoria->getId()); ?>)">Eliminar</button>
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalSubcategoria" data-subcategoria-id="<?= $subcategoria['id']; ?>">Editar</button>
+            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-subcategoria-id="<?= $subcategoria['id']; ?>">Eliminar</button>
+
         </td>
       </tr>
     <?php endforeach; ?>
@@ -44,7 +40,6 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
 
 <!-- Modal para añadir/editar subcategorías -->
 <?php
-
 $categorias = (new Categoria())->categorias_completas();
 ?>
 <div class="modal fade" id="modalSubcategoria" tabindex="-1" aria-labelledby="modalSubcategoriaLabel" aria-hidden="true">
@@ -79,3 +74,36 @@ $categorias = (new Categoria())->categorias_completas();
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar esta subcategoria?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+    confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var subcategoriaId = button.getAttribute('data-subcategoria-id');
+
+        var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
+        confirmDeleteButton.onclick = function() {
+            window.location.href = '/admin/accion/acc_borra_subcategoria.php?id=' + subcategoriaId;
+        };
+    });
+</script>

@@ -18,7 +18,8 @@ class Marca
     $PDOStatement->execute();
     return $PDOStatement->fetchAll();
   }
-    public function insertar() {
+    public function insertar(): bool
+    {
         $conexion = Conexion::getConexion();
         $consulta = "INSERT INTO marcas (marca_titulo, marca_descripcion) VALUES (:marca_titulo, :marca_descripcion)";
 
@@ -37,7 +38,8 @@ class Marca
 
         return $resultado;
     }
-      public function delete() {
+      public function eliminar(): bool
+      {
             $conexion = Conexion::getConexion();
             $consulta = "DELETE FROM marcas WHERE id = :id";
             $sentencia = $conexion->prepare($consulta);
