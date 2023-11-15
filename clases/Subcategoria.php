@@ -10,7 +10,7 @@ class Subcategoria {
    * @return array
    * Devuelve todas las subcategorías
    */
-  public function subcategorias_completas(): array
+  public function subcategorias_completas()
   {
     $conexion = Conexion::getConexion();
     $consulta = "SELECT subcategorias.*, categorias.nombre as categoria_nombre FROM subcategorias LEFT JOIN categorias ON subcategorias.categoria_id = categorias.id";
@@ -25,16 +25,60 @@ class Subcategoria {
    * Devuelve todas las subcategorías de una categoría
    */
 
-  public function subcategoriaxid($categoria_id): bool|array
-  {
+  public function subcategoriaxid($id): ?Subcategoria {
     $conexion = Conexion::getConexion();
-    $consulta = "SELECT * FROM subcategorias WHERE categoria_id = :categoria_id";
+    $consulta = "SELECT * FROM subcategorias WHERE id = :id";
     $PDOStatement = $conexion->prepare($consulta);
-    $PDOStatement->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
+    $PDOStatement->bindParam(':id', $id, PDO::PARAM_INT);
     $PDOStatement->execute();
-    return $PDOStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+    $result = $PDOStatement->fetchObject(self::class);
+    return $result ?: null;
   }
 
+
+  public function eliminar(): bool
+  {
+    $conexion = Conexion::getConexion();
+    $consulta = "DELETE FROM subcategorias WHERE id = :id";
+    $sentencia = $conexion->prepare($consulta);
+    return $sentencia->execute(
+      [
+        ':id' => $this->id
+      ]
+    );
+  }
+
+  public  function insertar(): bool
+  {
+    $conexion = Conexion::getConexion();
+    $consulta = "INSERT INTO subcategorias (nombre, descripcion, categoria_id) VALUES (:nombre, :descripcion, :categoria_id)";
+    $sentencia = $conexion->prepare($consulta);
+    $resultado = $sentencia->execute(
+      [
+        ':nombre' => $this->nombre,
+        ':descripcion' => $this->descripcion,
+        ':categoria_id' => $this->categoria_id
+      ]
+    );
+    if ($resultado) {
+      $this->id = $conexion->lastInsertId();
+    }
+    return $resultado;
+  }
+  public function actualizar(): bool
+  {
+    $conexion = Conexion::getConexion();
+    $consulta = "UPDATE subcategorias SET nombre = :nombre, descripcion = :descripcion, categoria_id = :categoria_id WHERE id = :id";
+    $sentencia = $conexion->prepare($consulta);
+    return $sentencia->execute(
+      [
+        ':nombre' => $this->nombre,
+        ':descripcion' => $this->descripcion,
+        ':categoria_id' => $this->categoria_id,
+        ':id' => $this->id
+      ]
+    );
+  }
 
   public function getId() {
     return $this->id;

@@ -28,7 +28,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
           <td><?php echo $subcategoria['descripcion']; ?></td>
           <td><?php echo $subcategoria['categoria_nombre'] ?? 'No Asignado'; ?></td>
         <td>
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalSubcategoria" data-subcategoria-id="<?= $subcategoria['id']; ?>">Editar</button>
+            <a href="index.php?sec=editar_subcategoria&ruta=adm&id=<?= $subcategoria['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-subcategoria-id="<?= $subcategoria['id']; ?>">Eliminar</button>
 
         </td>
@@ -38,41 +38,41 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
   </table>
 </div>
 
-<!-- Modal para añadir/editar subcategorías -->
+<!-- Me quedo con modales solo para el alta de pequeñas entidades, el resto lo manejo como en clase -->
 <?php
 $categorias = (new Categoria())->categorias_completas();
 ?>
 <div class="modal fade" id="modalSubcategoria" tabindex="-1" aria-labelledby="modalSubcategoriaLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalSubcategoriaLabel">Nueva Subcategoría</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formSubcategoria">
-          <input type="hidden" id="subcategoriaId" name="subcategoria_id">
-          <div class="mb-3">
-            <label for="nombreSubcategoria" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombreSubcategoria" name="nombre" required>
-          </div>
-          <div class="mb-3">
-            <label for="descripcionSubcategoria" class="form-label">Descripción</label>
-            <textarea class="form-control" id="descripcionSubcategoria" name="descripcion" rows="3"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="categoriaSubcategoria" class="form-label">Categoría</label>
-            <select class="form-select" id="categoriaSubcategoria" name="categoria_id" required>
-              <?php foreach($categorias as $categoria): ?>
-                <option value="<?php echo $categoria->getID(); ?>"><?php echo $categoria->getNombre(); ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Guardar</button>
-        </form>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalSubcategoriaLabel">Nueva Subcategoría</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formSubcategoria" action="index.php?sec=alta_subcategoria&ruta=acc" method="post">
+                    <input type="hidden" id="subcategoriaId" name="subcategoria_id">
+                    <div class="mb-3">
+                        <label for="nombreSubcategoria" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombreSubcategoria" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcionSubcategoria" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcionSubcategoria" name="descripcion" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoriaSubcategoria" class="form-label">Categoría</label>
+                        <select class="form-select" id="categoriaSubcategoria" name="categoria_id" required>
+                            <?php foreach($categorias as $categoria): ?>
+                                <option value="<?php echo $categoria->getID(); ?>"><?php echo $categoria->getNombre(); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
@@ -106,4 +106,5 @@ $categorias = (new Categoria())->categorias_completas();
             window.location.href = '/admin/accion/acc_borra_subcategoria.php?id=' + subcategoriaId;
         };
     });
+
 </script>

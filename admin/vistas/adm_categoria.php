@@ -65,6 +65,9 @@ $categorias = (new Categoria())->categorias_completas();
     </div>
   </div>
 </div>
+
+
+
 <!-- Modal de Confirmación de Eliminación -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">

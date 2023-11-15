@@ -52,16 +52,12 @@ class Categoria
 
         return $resultado;
     }
-    public function eliminar() {
+    public function eliminar(): void
+    {
         $conexion = Conexion::getConexion();
         $consulta = "DELETE FROM categorias WHERE id = :id";
         $sentencia = $conexion->prepare($consulta);
-
-        return $sentencia->execute(
-            [
-                ':id' => $this->id
-            ]
-        );
+        $sentencia->execute ([$this->id]);
     }
     public function categoriaxid(mixed $id)
     {
