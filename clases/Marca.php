@@ -61,8 +61,20 @@ class Marca
                     ':id' => $id
                 ]
             );
-            $marca = $sentencia->fetch();
-            return $marca;
+            return $sentencia->fetch();
+        }
+        public function editar(): bool
+        {
+            $conexion = Conexion::getConexion();
+            $consulta = "UPDATE marcas SET marca_titulo = :marca_titulo, marca_descripcion = :marca_descripcion WHERE id = :id";
+            $sentencia = $conexion->prepare($consulta);
+            return $sentencia->execute(
+                [
+                    ':marca_titulo' => $this->marca_titulo,
+                    ':marca_descripcion' => $this->marca_descripcion,
+                    ':id' => $this->id
+                ]
+            );
         }
     public function getId()
     {

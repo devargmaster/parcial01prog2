@@ -36,8 +36,6 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
         <input type="text" class="form-control" id="origen" name="origen" placeholder="Ingrese el origen">
       </div>
     </div>
-
-
     <hr>
     <div class="form-group">
       <label for="productoPrecio">Precio del Producto</label>

@@ -2,13 +2,14 @@
 $id = $_GET['id'] ?? FALSE;
 $subcategoria = (new Subcategoria())->subcategoriaxid($id);
 $categoria = (new Categoria())->categoriaxid($subcategoria->getCategoriaId());
+$categorias_completas = (new Categoria())->categorias_completas();
 echo "<pre>";
 var_dump($subcategoria);
 echo "</pre>";
 ?>
 
 <div class="">
-    <form class="" action="index.html" method="post">
+    <form class="" action="/admin/accion/acc_editar_subcategoria.php?id=<?= $subcategoria->getId(); ?>" method="post">
         <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $subcategoria->getNombre(); ?>">

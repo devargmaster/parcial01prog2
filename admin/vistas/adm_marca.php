@@ -24,7 +24,7 @@
         <td><?php echo htmlspecialchars($marca->getMarcaTitulo()); ?></td>
         <td><?php echo htmlspecialchars($marca->getMarcaDescripcion()); ?></td>
         <td>
-          <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalMarca" onclick="editarMarca(<?php echo htmlspecialchars($marca->getId()); ?>)">Editar</button>
+            <a href="index.php?sec=editar_marca&ruta=adm&id=<?= $marca->getId(); ?>" class="btn btn-primary btn-sm">Editar</a>
             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-marca-id="<?= $marca->getId(); ?>">Eliminar</button>
         </td>
       </tr>

@@ -10,7 +10,7 @@ class Subcategoria {
    * @return array
    * Devuelve todas las subcategorías
    */
-  public function subcategorias_completas()
+  public function subcategorias_completas(): array
   {
     $conexion = Conexion::getConexion();
     $consulta = "SELECT subcategorias.*, categorias.nombre as categoria_nombre FROM subcategorias LEFT JOIN categorias ON subcategorias.categoria_id = categorias.id";

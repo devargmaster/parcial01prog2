@@ -18,7 +18,7 @@ class Producto
   private $producto_fecha;
   private $marca_id;
 
-
+  private $producto_marca;
 
   /**
    * Devuelve el catalogo completo de productos
@@ -359,5 +359,13 @@ class Producto
   {
     return $this->producto_destacado;
   }
+
+    /**
+     * @return mixed
+     */
+    public function getProductoMarca(): mixed
+    {
+        return (new Marca())->marcaxid($this->id);
+    }
 
 }

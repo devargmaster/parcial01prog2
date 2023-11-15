@@ -26,8 +26,7 @@ $categorias = (new Categoria())->categorias_completas();
         <td><?php echo htmlspecialchars($categoria->getDescripcion()); ?></td>
         <td><?php echo $categoria->getHabilitada() ? 'Sí' : 'No'; ?></td>
         <td>
-          <!-- Botón para editar una categoría -->
-          <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalCategoria" onclick="editarCategoria(<?php echo htmlspecialchars($categoria->getID()); ?>)">Editar</button>
+            <a href="index.php?sec=editar_categoria&ruta=adm&id=<?= $categoria->getID(); ?>" class="btn btn-primary btn-sm">Editar</a>
           <!-- Botón para eliminar una categoría -->
             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-categoria-id="<?= $categoria->getID(); ?>">Eliminar</button>
         </td>
