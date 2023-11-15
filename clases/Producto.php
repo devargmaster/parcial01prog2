@@ -166,40 +166,6 @@ class Producto
 
 
 
-//  public function actualizar_producto($id, string $producto_nombre)
-//  {//, $producto_descripcion, $producto_precio, $producto_imagen, $producto_stock, $producto_destacado, $producto_estado, $producto_nuevo, $producto_fecha, $marca_id
-//    $conexion = Conexion::getConexion();
-//    $consulta = "UPDATE productos SET
-//        producto_nombre = :producto_nombre
-////        producto_descripcion = :producto_descripcion,
-////        producto_precio = :producto_precio,
-////        producto_imagen = :producto_imagen,
-////        producto_stock = :producto_stock,
-////        producto_destacado = :producto_destacado,
-////        producto_estado = :producto_estado,
-////        producto_nuevo = :producto_nuevo,
-////        producto_fecha = :producto_fecha,
-////        marca_id = :marca_id
-//    WHERE id = :id";
-//
-//    $PDOStatement = $conexion->prepare($consulta);
-//
-//    return $PDOStatement->execute([
-//     'id' => $id,
-//      'producto_nombre' => $producto_nombre,
-////      'producto_descripcion' => $producto_descripcion,
-////      'producto_precio' => $producto_precio,
-////      'producto_imagen' => $producto_imagen,
-////      'producto_stock' => $producto_stock,
-////      'producto_destacado' => $producto_destacado,
-////      'producto_estado' => $producto_estado,
-////      'producto_nuevo' => $producto_nuevo,
-////      'producto_fecha' => $producto_fecha,
-////      'marca_id' => $marca_id
-//    ]);
-//  }
-
-
   /**
    * Elimina esta instancia de la base de datos
    */
