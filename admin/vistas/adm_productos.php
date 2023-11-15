@@ -64,12 +64,13 @@ if (strpos($currentPath, '/vistas/') !== false) {
     </div>
   </div>
 </div>
+
 <!-- Modal de Confirmación de Eliminación -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+        <p class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -95,8 +96,7 @@ if (strpos($currentPath, '/vistas/') !== false) {
 
     var modal = this;
     modal.querySelector('.modal-title').textContent = nombre;
-    modal.querySelector('.modal-body #productoId').textContent = id; // Asegúrate de que este ID exista en el HTML de la modal
-    // modal.querySelector('.modal-body #producto_imagen').src = imagen; // Comenta esta línea si no tienes un elemento img para la imagen en tu modal
+    modal.querySelector('.modal-body #productoId').textContent = id;
     modal.querySelector('.modal-body #producto_precio').textContent = precio;
     modal.querySelector('.modal-body #producto_descripcion').textContent = descripcion;
   });

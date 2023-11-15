@@ -45,8 +45,12 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
         </select>
         </div>
         <div class="mb-3">
-        <label for="imagen" class="form-label">Imagen</label>
-        <input type="text" class="form-control" id="imagen" name="imagen" value="<?= $producto->getProducto_imagen(); ?>">
+            <label for="imagen" class="form-label">Imagen Actual</label>
+            <!-- Asegúrate de proporcionar la ruta correcta a la imagen -->
+            <img src="../img/productos/<?= $producto->getProducto_imagen(); ?>" alt="Imagen del producto" width="100" height="100">
+            <input type="file" class="form-control" id="imagen" name="imagen_nueva">
+            <input type="hidden" name="imagen_actual" value="<?= $producto->getProducto_imagen(); ?>">
+            <p>Cargar una nueva imagen reemplazará a la actual.</p>
         </div>
         <div class="mb-3">
         <label for="stock" class="form-label">Stock</label>
