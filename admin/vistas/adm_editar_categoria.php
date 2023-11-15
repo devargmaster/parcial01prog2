@@ -3,7 +3,7 @@ $id = $_GET['id'] ?? FALSE;
 $categoria = (new Categoria())->categoriaxid($id);
 ?>
 <div class="">
-    <form class="" action="index.html" method="post">
+    <form class="" action="/admin/accion/acc_editar_categoria.php?id=<?= $categoria->getId(); ?>" method="post">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $categoria->getNombre(); ?>">

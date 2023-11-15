@@ -59,6 +59,20 @@ class Categoria
         $sentencia = $conexion->prepare($consulta);
         $sentencia->execute ([$this->id]);
     }
+    public function editar(): void
+    {
+        $conexion = Conexion::getConexion();
+        $consulta = "UPDATE categorias SET nombre = :nombre, descripcion = :descripcion, habilitada = :habilitada WHERE id = :id";
+        $sentencia = $conexion->prepare($consulta);
+        $sentencia->execute(
+            [
+                ':nombre' => $this->nombre,
+                ':descripcion' => $this->descripcion,
+                ':habilitada' => $this->habilitada,
+                ':id' => $this->id
+            ]
+        );
+    }
     public function categoriaxid(mixed $id)
     {
         $conexion = Conexion::getConexion();
