@@ -171,10 +171,9 @@ class Producto
 
         $productos_categorias = (new Productos_Categorias())->producto_x_categoria($id);
         if ($productos_categorias) {
-            $productos_categorias->editar();
+            (new Productos_Categorias())->editar($id, $categoria_id);
         } else {
-            $productos_categorias_insertar = (new Productos_Categorias())->insertar($id, $categoria_id);
-
+            (new Productos_Categorias())->insertar($id, $categoria_id);
         }
 
     }

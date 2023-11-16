@@ -1,16 +1,18 @@
 <?php
 
-class Productos_Categorias
+class Productos_Categorias_Subcategorias
 {
     private $id;
     private $producto_id;
     private $categoria_id;
+    private $subcategoria_id;
 
     public function __construct()
     {
         $this->id = null;
         $this->producto_id = null;
         $this->categoria_id = null;
+        $this->subcategoria_id = null;
     }
 
     public function producto_x_categoria($categoria_id)
@@ -22,15 +24,16 @@ class Productos_Categorias
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function insertar($producto_id, $categoria_id)
+    public function insertar($producto_id, $categoria_id, $subcategoria_id)
     {
         $conexion = Conexion::getConexion();
-        $query = "INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (:producto_id, :categoria_id)";
+        $query = "INSERT INTO productos_categorias (producto_id, categoria_id, subcategoria_id) VALUES (:producto_id, :categoria_id, :subcategoria_id)";
         $stmt = $conexion->prepare($query);
         $stmt->execute(
             [
                 ':producto_id' => $producto_id,
-                ':categoria_id' => $categoria_id
+                ':categoria_id' => $categoria_id,
+                ':subcategoria_id' => $subcategoria_id
             ]
         );
         $this->id = $conexion->lastInsertId();
@@ -48,15 +51,16 @@ class Productos_Categorias
         );
     }
 
-    public function editar($producto_id, $categoria_id)
+    public function editar($producto_id, $categoria_id, $subcategoria_id)
     {
         $conexion = Conexion::getConexion();
-        $query = "UPDATE productos_categorias SET producto_id = :producto_id, categoria_id = :categoria_id WHERE producto_id = :id";
+        $query = "UPDATE productos_categorias SET producto_id = :producto_id, categoria_id = :categoria_id, subcategoria_id = :subcategoria_id WHERE producto_id = :id";
         $stmt = $conexion->prepare($query);
         $stmt->execute(
             [
                 ':producto_id' => $this->producto_id,
                 ':categoria_id' => $this->categoria_id,
+                ':subcategoria_id' => $this->subcategoria_id,
                 ':id' => $this->id
             ]
         );
