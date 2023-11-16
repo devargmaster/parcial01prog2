@@ -2,12 +2,14 @@
 require_once 'clases/Producto.php';
 $id = $_GET['id'];
 
-$producto = (new Producto())->producto_x_id($id);
-if (empty($producto)) {
+try {
+    $producto = (new Producto())->producto_x_id($id);
+} catch (Exception $e) {
   echo "<div class='alert alert-danger' role='alert'>
     No se encontraron productos para el id: $id
   </div>";
 }
+
 //  echo "<pre>";
 //  print_r($producto);
 //  echo "</pre>";

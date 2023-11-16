@@ -44,13 +44,14 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
             <?php endforeach; ?>
         </select>
         </div>
-        <div class="mb-3">
-            <label for="imagen" class="form-label">Imagen Actual</label>
-            <!-- Asegúrate de proporcionar la ruta correcta a la imagen -->
-            <img src="../img/productos/<?= $producto->getProducto_imagen(); ?>" alt="Imagen del producto" width="100" height="100">
-            <input type="file" class="form-control" id="imagen" name="imagen_nueva">
-            <input type="hidden" name="imagen_actual" value="<?= $producto->getProducto_imagen(); ?>">
-            <p>Cargar una nueva imagen reemplazará a la actual.</p>
+        <div class="col-md-2 mb-3">
+            <label for="imagen" class="form-label">Imágen actual</label>
+            <img src="../img/productos/<?= $producto->getProducto_imagen() ?>" alt="Imágen Illustrativa de <?= $producto->getProducto_nombre() ?>" class="img-fluid rounded shadow-sm d-block">
+            <input class="form-control" type="hidden" id="imagen_og" name="imagen_og" value="<?= $producto->getProducto_imagen() ?>">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="imagen" class="form-label">Reemplazar Imagen</label>
+            <input class="form-control" type="file" id="imagen" name="imagen">
         </div>
         <div class="mb-3">
         <label for="stock" class="form-label">Stock</label>

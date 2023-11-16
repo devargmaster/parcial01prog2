@@ -105,7 +105,10 @@ class Producto
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
     $PDOStatement->execute([$idProducto]);
     $producto = $PDOStatement->fetch();
-    return $producto ?? null;
+      if ($producto === false) {
+          throw new Exception("Producto con ID $idProducto no encontrado.");
+      }
+      return $producto;
   }
 
   public function insertarProducto($producto_nombre, $producto_descripcion, $producto_precio, $producto_imagen, $producto_stock, $producto_destacado, $producto_estado,  $producto_nuevo, $producto_fecha, $marca_id)
@@ -149,10 +152,10 @@ class Producto
    */
 
 
-    public function actualizar_producto($id,$nombre, $descripcion, $precio, $stock,  int $marca_id)
+    public function actualizar_producto($id,$nombre, $descripcion, $precio, $stock,  int $marca_id, $imagen= null)
     {
         $conexion = Conexion::getConexion();
-        $consulta = "UPDATE productos SET producto_nombre = :producto_nombre, producto_descripcion = :producto_descripcion, producto_precio = :producto_precio,producto_stock = :producto_stock, marca_id = :marca_id WHERE id = :id";
+        $consulta = "UPDATE productos SET producto_nombre = :producto_nombre, producto_descripcion = :producto_descripcion, producto_precio = :producto_precio,producto_stock = :producto_stock, marca_id = :marca_id ,producto_imagen=:producto_imagen  WHERE id = :id";
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->execute(
             [
@@ -161,6 +164,7 @@ class Producto
                 'producto_precio' => $precio,
                 'producto_stock' => $stock,
                 'marca_id' => $marca_id,
+                'producto_imagen' => $imagen,
                 'id' => $id
             ]
         );

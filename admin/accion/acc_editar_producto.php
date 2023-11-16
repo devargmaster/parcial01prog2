@@ -1,24 +1,48 @@
 <?php
 require_once '../../functions/autoload.php';
 $postData = $_POST;
-$producto = new Producto();
-$imagen = new Imagen();
-
 $productoId = $_GET['id'] ?? FALSE;
-$nombre = $postData['nombre'] ?? '';
-$descripcion = $postData['descripcion'] ?? '';
-$precio = $postData['precio'] ?? '';
-$categoria = $postData['categoria_id'] ?? '';
-$subcategoria = $postData['subcategoria_id'] ?? '';
-$marca = isset($postData['marca_id']) ? (int)$postData['marca_id'] : null;
-$stock = $postData['stock'] ?? '';
-$destacado = $postData['destacado'] ?? '';
-$estado = $postData['estado'] ?? '';
-$nuevo = $postData['nuevo'] ?? '';
+$fileData = $_FILES['imagen'];
 
 echo "<pre>";
 print_r($_POST);
 echo "</pre>";
 
-$producto->producto_x_id($productoId);
-$producto->actualizar_producto( $productoId,$nombre, $descripcion, $precio, $stock,$marca);
+
+try {
+    $producto = (new Producto())->producto_x_id($productoId);
+
+    if (!empty($fileData['tmp_name'])) {
+
+        $imagen = (new Imagen())->subirImagen(__DIR__ . "/../../img/productos", $fileData);
+
+        if (!empty($postData['imagen_og'])) {
+            (new Imagen())->borrarImagen(__DIR__ . "/../../img/productos/" . $postData['imagen_og']);
+        }
+
+    } else {
+        $imagen = $postData['imagen_og'];
+    }
+
+    echo "<pre>";
+    print_r($producto);
+    echo "</pre>";
+
+    $id = $producto->getID();
+    $marca_id = intval($postData['marca_id']);
+
+
+    $producto->actualizar_producto(
+        $id,
+        $postData['nombre'],
+        $postData['descripcion'],
+        floatval($postData['precio']),
+        intval($postData['stock']),
+        $marca_id,
+        $imagen
+    );
+    //header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
+}
+catch (Exception $e) {
+    echo $e->getMessage();
+}
