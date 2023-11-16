@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/clases/Categoria.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/clases/Producto.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/clases/Productos_Categorias.php" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/clases/Productos_Categorias_Subcategorias.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/clases/Subcategoria.php" dialect="MySQL" />
   </component>
 </project>

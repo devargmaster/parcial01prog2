@@ -18,7 +18,7 @@ class Productos_Categorias_Subcategorias
     public function producto_x_categoria($categoria_id)
     {
         $conexion = Conexion::getConexion();
-        $query = "SELECT * FROM productos_categorias WHERE categoria_id = $categoria_id";
+        $query = "SELECT * FROM productos_categorias_subcategorias WHERE categoria_id = $categoria_id";
         $stmt = $conexion->prepare($query);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -27,7 +27,7 @@ class Productos_Categorias_Subcategorias
     public function insertar($producto_id, $categoria_id, $subcategoria_id)
     {
         $conexion = Conexion::getConexion();
-        $query = "INSERT INTO productos_categorias (producto_id, categoria_id, subcategoria_id) VALUES (:producto_id, :categoria_id, :subcategoria_id)";
+        $query = "INSERT INTO productos_categorias_subcategorias (producto_id, categoria_id, subcategoria_id) VALUES (:producto_id, :categoria_id, :subcategoria_id)";
         $stmt = $conexion->prepare($query);
         $stmt->execute(
             [
@@ -42,7 +42,7 @@ class Productos_Categorias_Subcategorias
     public function eliminar()
     {
         $conexion = Conexion::getConexion();
-        $query = "DELETE FROM productos_categorias WHERE producto_id = :id";
+        $query = "DELETE FROM productos_categorias_subcategorias WHERE producto_id = :id";
         $stmt = $conexion->prepare($query);
         $stmt->execute(
             [
@@ -54,7 +54,7 @@ class Productos_Categorias_Subcategorias
     public function editar($producto_id, $categoria_id, $subcategoria_id)
     {
         $conexion = Conexion::getConexion();
-        $query = "UPDATE productos_categorias SET producto_id = :producto_id, categoria_id = :categoria_id, subcategoria_id = :subcategoria_id WHERE producto_id = :id";
+        $query = "UPDATE productos_categorias_subcategorias SET producto_id = :producto_id, categoria_id = :categoria_id, subcategoria_id = :subcategoria_id WHERE producto_id = :id";
         $stmt = $conexion->prepare($query);
         $stmt->execute(
             [
