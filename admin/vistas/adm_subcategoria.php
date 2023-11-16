@@ -64,7 +64,7 @@ $categorias = (new Categoria())->categorias_completas();
                         <label for="categoriaSubcategoria" class="form-label">Categoría</label>
                         <select class="form-select" id="categoriaSubcategoria" name="categoria_id" required>
                             <?php foreach($categorias as $categoria): ?>
-                                <option value="<?php echo $categoria->getID(); ?>"><?php echo $categoria->getNombre(); ?></option>
+                                <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
