@@ -41,7 +41,8 @@ try {
         $marca_id,
         $imagen
     );
-    //header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
+    header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
+    die();
 }
 catch (Exception $e) {
     echo $e->getMessage();

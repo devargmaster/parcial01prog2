@@ -34,9 +34,6 @@ if (strpos($currentPath, '/vistas/') !== false) {
         <td><?= $producto->getProducto_nombre(); ?></td>
         <td><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS</td>
         <td>
-          <button class="btn btn-info btn-sm btn-ver" data-bs-toggle="modal" data-bs-producto-id="<?= $producto->getID(); ?>" data-bs-target="#modalVerProducto" ...>Ver</button>
-
-          <!--          <a href="index.php?sec=producto&id=--><?php //= $producto->getID() ?><!--" class="btn btn-info btn-sm">Ver</a>-->
           <a href="<?= $basePath ?>index.php?sec=editar_producto&ruta=vistas&id=<?= $producto->getID() ?>" class="btn btn-primary btn-sm">Editar</a>
           <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-producto-id="<?= $producto->getID(); ?>">Eliminar</button>
         </td>
@@ -47,25 +44,6 @@ if (strpos($currentPath, '/vistas/') !== false) {
 </div>
 
 
-
-<div class="modal fade" id="modalVerProducto" tabindex="-1" aria-labelledby="modalVerProductoLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <p class="modal-title" id="modalVerProductoLabel">Detalles del Producto</p>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>ID del Producto: <span id="productoId"></span></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de Confirmación de Eliminación -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -88,17 +66,30 @@ if (strpos($currentPath, '/vistas/') !== false) {
 <script>
   document.getElementById('modalVerProducto').addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget;
-    var id = button.getAttribute('data-bs-producto-id');
-    var nombre = button.getAttribute('data-bs-producto-nombre');
-    var precio = button.getAttribute('data-bs-producto-precio');
-    var descripcion = button.getAttribute('data-bs-producto-descripcion');
-    var imagen = button.getAttribute('data-bs-producto-imagen');
+      var id = button.getAttribute('data-bs-producto-id');
+      var nombre = button.getAttribute('data-bs-producto-nombre');
+      var precio = button.getAttribute('data-bs-producto-precio');
+      var descripcion = button.getAttribute('data-bs-producto-descripcion');
+      var categoria = button.getAttribute('data-bs-producto-categoria');
+      var subcategoria = button.getAttribute('data-bs-producto-subcategoria');
+      var marca = button.getAttribute('data-bs-producto-marca');
+      var stock = button.getAttribute('data-bs-producto-stock');
+      var estado = button.getAttribute('data-bs-producto-estado');
+      var destacado = button.getAttribute('data-bs-producto-destacado');
+      var imagenSrc = button.getAttribute('data-bs-producto-imagen-src');
 
     var modal = this;
-    modal.querySelector('.modal-title').textContent = nombre;
-    modal.querySelector('.modal-body #productoId').textContent = id;
-    modal.querySelector('.modal-body #producto_precio').textContent = precio;
-    modal.querySelector('.modal-body #producto_descripcion').textContent = descripcion;
+      modal.querySelector('#productoId').textContent = id;
+      modal.querySelector('#productoNombre').textContent = nombre;
+      modal.querySelector('#productoPrecio').textContent = precio;
+      modal.querySelector('#productoDescripcion').textContent = descripcion;
+      modal.querySelector('#productoCategoria').textContent = categoria;
+      modal.querySelector('#productoSubcategoria').textContent = subcategoria;
+      modal.querySelector('#productoMarca').textContent = marca;
+      modal.querySelector('#productoStock').textContent = stock;
+      modal.querySelector('#productoEstado').textContent = estado === '1' ? 'Activo' : 'Inactivo';
+      modal.querySelector('#productoDestacado').textContent = destacado === '1' ? 'Sí' : 'No';
+      modal.querySelector('#productoImagen').src = imagenSrc;
   });
 
   var confirmDeleteModal = document.getElementById('confirmDeleteModal');
