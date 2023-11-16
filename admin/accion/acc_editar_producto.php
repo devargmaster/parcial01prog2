@@ -39,7 +39,8 @@ try {
         floatval($postData['precio']),
         intval($postData['stock']),
         $marca_id,
-        $imagen
+        $imagen,
+        intval($postData['categoria_id']),
     );
     header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
     die();

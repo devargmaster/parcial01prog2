@@ -21,14 +21,14 @@ $categorias = (new Categoria())->categorias_completas();
     <tbody>
     <?php foreach($categorias as $categoria): ?>
       <tr>
-        <td><?php echo htmlspecialchars($categoria->getID()); ?></td>
-        <td><?php echo htmlspecialchars($categoria->getNombre()); ?></td>
-        <td><?php echo htmlspecialchars($categoria->getDescripcion()); ?></td>
-        <td><?php echo $categoria->getHabilitada() ? 'Sí' : 'No'; ?></td>
+        <td><?=$categoria['id']; ?></td>
+        <td><?=$categoria['nombre']; ?></td>
+        <td><?=$categoria['descripcion']; ?></td>
+        <td><?=$categoria['habilitada'] ? 'Sí' : 'No'; ?></td>
         <td>
-            <a href="index.php?sec=editar_categoria&ruta=adm&id=<?= $categoria->getID(); ?>" class="btn btn-primary btn-sm">Editar</a>
+            <a href="index.php?sec=editar_categoria&ruta=adm&id=<?= $categoria['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
           <!-- Botón para eliminar una categoría -->
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-categoria-id="<?= $categoria->getID(); ?>">Eliminar</button>
+            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-categoria-id="<?= $categoria['id']; ?>">Eliminar</button>
         </td>
       </tr>
     <?php endforeach; ?>

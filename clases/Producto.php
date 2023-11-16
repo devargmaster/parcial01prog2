@@ -72,9 +72,8 @@ class Producto
             JOIN categorias c ON s.categoria_id = c.id
             WHERE s.descripcion = :subcategoriaDescripcion";
     $PDOStatement = $conexion->prepare($consulta);
-    $PDOStatement->bindParam(':subcategoriaDescripcion', $subcategoriaDescripcion);
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-    $PDOStatement->execute();
+    $PDOStatement->execute(['subcategoriaDescripcion' => $subcategoriaDescripcion]);
     $productos = $PDOStatement->fetchAll();
     return $productos ?? null;
   }
@@ -144,15 +143,16 @@ class Producto
    * @param float $producto_precio
    * @param string $producto_imagen
    * @param int $producto_stock
-   * @param int $producto_destacado
+   * @param int $marca_id
    * @param int $producto_estado
+   * @param $categoria_id
    * @param int $producto_nuevo
    * @param string $producto_fecha
-   * @param int $marca_id
+   * @param int $producto_destacado
    */
 
 
-    public function actualizar_producto($id,$nombre, $descripcion, $precio, $stock,  int $marca_id, $imagen= null)
+    public function actualizar_producto($id, $nombre, $descripcion, $precio, $stock, int $marca_id, $imagen= null, $categoria_id)
     {
         $conexion = Conexion::getConexion();
         $consulta = "UPDATE productos SET producto_nombre = :producto_nombre, producto_descripcion = :producto_descripcion, producto_precio = :producto_precio,producto_stock = :producto_stock, marca_id = :marca_id ,producto_imagen=:producto_imagen  WHERE id = :id";
@@ -168,6 +168,12 @@ class Producto
                 'id' => $id
             ]
         );
+        $consultaCategoria = "UPDATE productos_categorias SET categoria_id = :categoria_id WHERE producto_id = :producto_id";
+        $PDOStatement = $conexion->prepare($consultaCategoria);
+        $PDOStatement->execute([
+            'categoria_id' => $categoria_id,
+            'producto_id' => $id
+        ]);
     }
 
 

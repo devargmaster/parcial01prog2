@@ -10,12 +10,13 @@ if (strpos($currentPath, '/vistas/') !== false) {
 
 $secciones_completas = (new Categoria())->categorias_completas();
 $subcategorias_completas = (new Subcategoria())->subcategorias_completas();
-// mi adaptacion para que sea un array de subcategorias por categoria fue agruparlas por categoria_id
 $subcategorias_por_categoria = [];
 foreach ($subcategorias_completas as $subcategoria) {
     $subcategorias_por_categoria[$subcategoria['categoria_id']][] = $subcategoria;
 }
-
+//echo "<pre>";
+//print_r($secciones_completas);
+//echo "</pre>";
 if (isset($_GET['producto'])) {
     $seccion_elegida_ = 'catalogo';
 } else {
@@ -32,16 +33,16 @@ if (isset($_GET['producto'])) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <?php foreach ($secciones_completas as $sec_obj) { ?>
-                    <?php if ($sec_obj->getHabilitada() == 1) {
-                        if (isset($subcategorias_por_categoria[$sec_obj->getID()])) { ?>
+                    <?php if ($sec_obj['habilitada'] == 1) {
+                        if (isset($subcategorias_por_categoria[$sec_obj['id']])) { ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                                   href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getDescripcion(); ?>"><?= $sec_obj->getNombre(); ?></a>
+                                   href="<?= $basePath ?>index.php?sec=<?= $sec_obj['descripcion']; ?>"><?= $sec_obj['nombre']; ?></a>
                                 <ul class="dropdown-menu">
-                                    <?php foreach ($subcategorias_por_categoria[$sec_obj->getID()] as $subcategoria) { ?>
+                                    <?php foreach ($subcategorias_por_categoria[$sec_obj['id']] as $subcategoria) { ?>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getDescripcion(); ?>&subsec=<?= $subcategoria['descripcion']; ?>">
+                                               href="<?= $basePath ?>index.php?sec=<?= $sec_obj['descripcion']; ?>&subsec=<?= $subcategoria['descripcion']; ?>">
                                                 <?= $subcategoria['nombre']; ?>
                                             </a>
                                         </li>
@@ -50,7 +51,7 @@ if (isset($_GET['producto'])) {
                             </li>
                         <?php } else { ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getDescripcion(); ?>"><?= $sec_obj->getNombre(); ?></a>
+                                <a class="nav-link" href="<?= $basePath ?>index.php?sec=<?= $sec_obj['descripcion']; ?>"><?= $sec_obj['nombre']; ?></a>
                             </li>
                         <?php } ?>
                     <?php } ?>

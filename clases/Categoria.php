@@ -5,7 +5,8 @@ class Categoria
   private $nombre;
   private $habilitada;
   private  $descripcion;
-
+    private $producto_id;
+    private $categoria_id;
 
   public function __construct()
   {
@@ -17,19 +18,9 @@ class Categoria
     $conexion = Conexion::getConexion();
     $consulta = "SELECT * FROM categorias";
     $PDOStatement =  $conexion->prepare($consulta);
+    $PDOStatement->fetchAll(PDO::FETCH_CLASS, self::class);
     $PDOStatement->execute();
-    $categorias = [];
-
-    foreach ($PDOStatement as $row) {
-      $c = new Categoria();
-      $c->setNombre($row['nombre']);
-      $c->setDescripcion($row['descripcion']);
-      $c->setID($row['id']);
-      $c->setHabilitada($row['habilitada']);
-      $categorias[] = $c;
-    }
-
-    return $categorias;
+    return $PDOStatement->fetchAll();
   }
 
     public function insertar() {
@@ -52,13 +43,20 @@ class Categoria
 
         return $resultado;
     }
-    public function eliminar(): void
+
+public function eliminar(): void
     {
         $conexion = Conexion::getConexion();
         $consulta = "DELETE FROM categorias WHERE id = :id";
         $sentencia = $conexion->prepare($consulta);
-        $sentencia->execute ([$this->id]);
+        $sentencia->execute(
+            [
+                ':id' => $this->id
+            ]
+        );
     }
+
+
     public function editar(): void
     {
         $conexion = Conexion::getConexion();
@@ -84,8 +82,21 @@ class Categoria
                 ':id' => $id
             ]
         );
-        $categoria = $sentencia->fetch();
-        return $categoria;
+        return $sentencia->fetch();
+    }
+
+    public function categoriaxproducto(mixed $id)
+    {
+        $conexion = Conexion::getConexion();
+        $consulta = "SELECT * FROM productos_categorias WHERE producto_id = :id";
+        $sentencia = $conexion->prepare($consulta);
+        $sentencia->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $sentencia->execute(
+            [
+                ':id' => $id
+            ]
+        );
+        return $sentencia->fetch();
     }
   public function getNombre()
   {
@@ -126,6 +137,38 @@ class Categoria
   {
     $this->descripcion = $descripcion;
   }
+
+    /**
+     * @return mixed
+     */
+    public function getProductoId()
+    {
+        return $this->producto_id;
+    }
+
+    /**
+     * @param mixed $producto_id
+     */
+    public function setProductoId($producto_id): void
+    {
+        $this->producto_id = $producto_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoriaId()
+    {
+        return $this->categoria_id;
+    }
+
+    /**
+     * @param mixed $categoria_id
+     */
+    public function setCategoriaId($categoria_id): void
+    {
+        $this->categoria_id = $categoria_id;
+    }
 
 
 }

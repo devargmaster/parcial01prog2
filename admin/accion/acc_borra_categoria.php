@@ -10,6 +10,9 @@ if (str_contains($currentPath, '/acc/')) {
 }
 try {
     $categoria = (new Categoria())->categoriaxid($id);
+    echo "<pre>";
+    var_dump($categoria);
+    echo "</pre>";
     $categoria->eliminar();
     header('Location: ' . dirname(dirname($_SERVER['PHP_SELF'])). '/index.php?sec=categoria&ruta=vistas');
 } catch (Exception $e) {

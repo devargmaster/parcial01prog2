@@ -14,8 +14,8 @@
         <p>Categorías</p>
         <ul class="list-unstyled">
           <?php foreach ($secciones_completas as $sec_obj) { ?>
-            <?php if ($sec_obj->getHabilitada() == 1) { ?>
-              <li><a href="<?= $basePath ?>index.php?sec=<?= $sec_obj->getDescripcion(); ?>"><?= $sec_obj->getNombre(); ?></a>
+            <?php if ($sec_obj['habilitada'] == 1) { ?>
+              <li><a href="<?= $basePath ?>index.php?sec=<?= $sec_obj['descripcion']; ?>"><?= $sec_obj['nombre']; ?></a>
               </li>
             <?php } ?>
           <?php } ?>

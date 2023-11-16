@@ -3,6 +3,7 @@ require_once '../../functions/autoload.php';
 
 $postData = $_POST;
 $id = $_GET['id'] ?? FALSE;
+
 try {
     $categoria = (new Categoria())->categoriaxid($id);
     $categoria->setNombre($postData['nombre']);
