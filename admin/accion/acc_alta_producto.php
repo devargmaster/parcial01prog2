@@ -1,12 +1,12 @@
 <?php
 $postData = $_POST;
 $datosArchivo = $_FILES['imagen'];
-echo "<pre>";
-print_r($datosArchivo);
-echo "</pre>";
-echo "<pre>";
-print_r($datosArchivo);
-echo "</pre>";
+//echo "<pre>";
+//print_r($datosArchivo);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($datosArchivo);
+//echo "</pre>";
 if (!empty($datosArchivo['tmp_name'])) {
 
   $og_name = explode(".", $datosArchivo['name']);
@@ -56,7 +56,7 @@ try {
   }
 
 
-  $categoria_id = $postData['producto_categoria']; // Asegúrate de que este campo exista en tu formulario
+  $categoria_id = $postData['producto_categoria'];
   $stmt = $conexion->prepare("INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (?, ?)");
   $stmt->execute(
     [
@@ -65,7 +65,7 @@ try {
     ]
   );
 
-  $subcategoria_id = $postData['producto_subcategoria']; // Asegúrate de que este campo exista en tu formulario
+  $subcategoria_id = $postData['producto_subcategoria'];
   $stmt = $conexion->prepare("INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (?, ?)");
   $stmt->execute(
     [

@@ -63,16 +63,16 @@ class Marca
             );
             return $sentencia->fetch();
         }
-        public function editar(): bool
+        public function editar($nombre, $descripcion)
         {
             $conexion = Conexion::getConexion();
             $consulta = "UPDATE marcas SET marca_titulo = :marca_titulo, marca_descripcion = :marca_descripcion WHERE id = :id";
             $sentencia = $conexion->prepare($consulta);
             return $sentencia->execute(
                 [
-                    ':marca_titulo' => $this->marca_titulo,
-                    ':marca_descripcion' => $this->marca_descripcion,
-                    ':id' => $this->id
+                    ':id' => $this->id,
+                    ':marca_titulo' => $nombre,
+                    ':marca_descripcion' => $descripcion
                 ]
             );
         }

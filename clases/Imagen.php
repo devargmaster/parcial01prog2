@@ -5,7 +5,6 @@ class Imagen
   public function subirImagen($directorio, $datosArchivo): string
   {
 
-    //le damos un nuevo nombre
     $og_name = (explode(".", $datosArchivo['name']));
     $extension = end($og_name);
     $filename = time() . ".$extension";
@@ -17,6 +16,12 @@ class Imagen
     } else {
       return $filename;
     }
+  }
+
+  public function actualizarImagen($directorio, $datosArchivo, $imagenActual): string
+  {
+    $this->borrarImagen($directorio . $imagenActual);
+    return $this->subirImagen($directorio, $datosArchivo);
   }
 
   public function borrarImagen($archivo): bool

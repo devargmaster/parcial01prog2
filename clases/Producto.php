@@ -8,6 +8,7 @@ class Producto
   private $producto_precio;
   private $producto_imagen;
   private $producto_stock;
+
   private $producto_destacado;
   private $producto_info_adicional;
   private $producto_categoria;
@@ -145,28 +146,29 @@ class Producto
    * @param int $producto_nuevo
    * @param string $producto_fecha
    * @param int $marca_id
-   * @return bool
    */
 
 
-  public function actualizar_producto($id, string $producto_nombre)
-  {
-    $conexion = Conexion::getConexion();
-    $consulta = "UPDATE productos SET 
-        producto_nombre = :producto_nombre
-    WHERE id = :id";
+    public function actualizar_producto($id,$nombre, $descripcion, $precio, $stock,  int $marca_id)
+    {
+        $conexion = Conexion::getConexion();
+        $consulta = "UPDATE productos SET producto_nombre = :producto_nombre, producto_descripcion = :producto_descripcion, producto_precio = :producto_precio,producto_stock = :producto_stock, marca_id = :marca_id WHERE id = :id";
+        $PDOStatement = $conexion->prepare($consulta);
+        $PDOStatement->execute(
+            [
+                'producto_nombre' => $nombre,
+                'producto_descripcion' => $descripcion,
+                'producto_precio' => $precio,
+                'producto_stock' => $stock,
+                'marca_id' => $marca_id,
+                'id' => $id
+            ]
+        );
+    }
 
-    $PDOStatement = $conexion->prepare($consulta);
-
-    return $PDOStatement->execute([
-      'id' => $id,
-      'producto_nombre' => $producto_nombre
-    ]);
-  }
 
 
-
-  /**
+    /**
    * Elimina esta instancia de la base de datos
    */
   public function delete()
@@ -266,7 +268,7 @@ class Producto
 
   public function getProducto_imagen(): string
   {
-    return $this->producto_imagen;
+      return $this->producto_imagen ?? '';
   }
 
   public function getProductoInfoAdicional(): ?Informacion_adicional
@@ -332,6 +334,118 @@ class Producto
     public function getProductoMarca(): mixed
     {
         return (new Marca())->marcaxid($this->id);
+    }
+
+    /**
+     * @param mixed $producto_nombre
+     */
+    public function setProductoNombre($producto_nombre): void
+    {
+        $this->producto_nombre = $producto_nombre;
+    }
+
+    /**
+     * @param mixed $producto_descripcion
+     */
+    public function setProductoDescripcion($producto_descripcion): void
+    {
+        $this->producto_descripcion = $producto_descripcion;
+    }
+
+    /**
+     * @param mixed $producto_precio
+     */
+    public function setProductoPrecio($producto_precio): void
+    {
+        $this->producto_precio = $producto_precio;
+    }
+
+    /**
+     * @param mixed $producto_imagen
+     */
+    public function setProductoImagen($producto_imagen): void
+    {
+        $this->producto_imagen = $producto_imagen;
+    }
+
+    /**
+     * @param mixed $producto_stock
+     */
+    public function setProductoStock($producto_stock): void
+    {
+        $this->producto_stock = $producto_stock;
+    }
+
+    /**
+     * @param mixed $producto_destacado
+     */
+    public function setProductoDestacado($producto_destacado): void
+    {
+        $this->producto_destacado = $producto_destacado;
+    }
+
+    /**
+     * @param mixed $producto_info_adicional
+     */
+    public function setProductoInfoAdicional($producto_info_adicional): void
+    {
+        $this->producto_info_adicional = $producto_info_adicional;
+    }
+
+    /**
+     * @param mixed $producto_categoria
+     */
+    public function setProductoCategoria($producto_categoria): void
+    {
+        $this->producto_categoria = $producto_categoria;
+    }
+
+    /**
+     * @param mixed $producto_subcategoria
+     */
+    public function setProductoSubcategoria($producto_subcategoria): void
+    {
+        $this->producto_subcategoria = $producto_subcategoria;
+    }
+
+    /**
+     * @param mixed $producto_estado
+     */
+    public function setProductoEstado($producto_estado): void
+    {
+        $this->producto_estado = $producto_estado;
+    }
+
+    /**
+     * @param mixed $producto_nuevo
+     */
+    public function setProductoNuevo($producto_nuevo): void
+    {
+        $this->producto_nuevo = $producto_nuevo;
+    }
+
+    /**
+     * @param mixed $producto_fecha
+     */
+    public function setProductoFecha($producto_fecha): void
+    {
+        $this->producto_fecha = $producto_fecha;
+    }
+
+    /**
+     * @param mixed $marca_id
+     */
+    public function setMarcaId($marca_id): void
+    {
+        $this->marca_id = $marca_id;
+    }
+
+    /**
+     * @param mixed $producto_marca
+     */
+    public function setProductoMarca($producto_marca): void
+    {
+        $this->producto_marca = $producto_marca;
     }
 
 }
