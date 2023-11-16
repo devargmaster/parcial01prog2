@@ -152,7 +152,7 @@ class Producto
    */
 
 
-    public function actualizar_producto($id, $nombre, $descripcion, $precio, $stock, int $marca_id, $imagen= null, $categoria_id)
+    public function actualizar_producto($id, $nombre, $descripcion, $precio, $stock, int $marca_id,  $categoria_id,$imagen= null): void
     {
         $conexion = Conexion::getConexion();
         $consulta = "UPDATE productos SET producto_nombre = :producto_nombre, producto_descripcion = :producto_descripcion, producto_precio = :producto_precio,producto_stock = :producto_stock, marca_id = :marca_id ,producto_imagen=:producto_imagen  WHERE id = :id";
@@ -168,12 +168,15 @@ class Producto
                 'id' => $id
             ]
         );
-        $consultaCategoria = "UPDATE productos_categorias SET categoria_id = :categoria_id WHERE producto_id = :producto_id";
-        $PDOStatement = $conexion->prepare($consultaCategoria);
-        $PDOStatement->execute([
-            'categoria_id' => $categoria_id,
-            'producto_id' => $id
-        ]);
+
+        $productos_categorias = (new Productos_Categorias())->producto_x_categoria($id);
+        if ($productos_categorias) {
+            $productos_categorias->editar();
+        } else {
+            $productos_categorias_insertar = (new Productos_Categorias())->insertar($id, $categoria_id);
+
+        }
+
     }
 
 

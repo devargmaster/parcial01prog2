@@ -4,10 +4,11 @@ $producto = (new Producto())->producto_x_id($productoId);
 $marcas = (new Marca())->todas_las_marcas();
 $categorias = (new Categoria())->categorias_completas();
 $subcategorias = (new Subcategoria())->subcategorias_completas();
+
 $categoriaxid = (new Categoria())->categoriaxproducto($producto->getId());
-echo "<pre>";
-print_r($producto);
-echo "</pre>";
+
+
+
 ?>
 <div class="">
     <form  action="/admin/accion/acc_editar_producto.php?id=<?= $producto->getId(); ?>" method="post" enctype="multipart/form-data">
@@ -25,10 +26,12 @@ echo "</pre>";
         </div>
 
         <div class="mb-3">
-        <label for="categoria_id" class="form-label">Categoría</label>
+            <label for="categoria_id" class="form-label">Categoría</label>
             <select class="form-select" id="categoria_id" name="categoria_id">
                 <?php foreach ($categorias as $categoria): ?>
-                    <option value="<?= $categoria['id']; ?>" <?= $categoriaxid->getCategoriaId() == $categoria['id'] ? 'selected' : ''; ?>><?= $categoria['nombre']; ?></option>
+                    <option value="<?= $categoria['id']; ?>" <?= $categoriaxid && $categoriaxid->getCategoriaId() == $categoria['id'] ? 'selected' : ''; ?>>
+                        <?= $categoria['nombre']; ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
         </div>
