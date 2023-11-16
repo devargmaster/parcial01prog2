@@ -64,34 +64,6 @@ if (strpos($currentPath, '/vistas/') !== false) {
 
 
 <script>
-  document.getElementById('modalVerProducto').addEventListener('show.bs.modal', function (event) {
-    var button = event.relatedTarget;
-      var id = button.getAttribute('data-bs-producto-id');
-      var nombre = button.getAttribute('data-bs-producto-nombre');
-      var precio = button.getAttribute('data-bs-producto-precio');
-      var descripcion = button.getAttribute('data-bs-producto-descripcion');
-      var categoria = button.getAttribute('data-bs-producto-categoria');
-      var subcategoria = button.getAttribute('data-bs-producto-subcategoria');
-      var marca = button.getAttribute('data-bs-producto-marca');
-      var stock = button.getAttribute('data-bs-producto-stock');
-      var estado = button.getAttribute('data-bs-producto-estado');
-      var destacado = button.getAttribute('data-bs-producto-destacado');
-      var imagenSrc = button.getAttribute('data-bs-producto-imagen-src');
-
-    var modal = this;
-      modal.querySelector('#productoId').textContent = id;
-      modal.querySelector('#productoNombre').textContent = nombre;
-      modal.querySelector('#productoPrecio').textContent = precio;
-      modal.querySelector('#productoDescripcion').textContent = descripcion;
-      modal.querySelector('#productoCategoria').textContent = categoria;
-      modal.querySelector('#productoSubcategoria').textContent = subcategoria;
-      modal.querySelector('#productoMarca').textContent = marca;
-      modal.querySelector('#productoStock').textContent = stock;
-      modal.querySelector('#productoEstado').textContent = estado === '1' ? 'Activo' : 'Inactivo';
-      modal.querySelector('#productoDestacado').textContent = destacado === '1' ? 'Sí' : 'No';
-      modal.querySelector('#productoImagen').src = imagenSrc;
-  });
-
   var confirmDeleteModal = document.getElementById('confirmDeleteModal');
   confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget;
