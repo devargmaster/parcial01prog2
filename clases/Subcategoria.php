@@ -80,6 +80,20 @@ class Subcategoria {
     );
   }
 
+  public function subcategoriaxproducto($productoid)
+  {
+    $conexion = Conexion::getConexion();
+    $query = "SELECT * FROM productos_categorias_subcategorias WHERE producto_id = ?";
+    $stmt = $conexion->prepare($query);
+    $stmt->execute(
+      [
+        $productoid
+      ]
+    );
+    $resultado = $stmt->fetch();
+    return $resultado !== false ? $resultado : null;
+  }
+
   public function getId() {
     return $this->id;
   }

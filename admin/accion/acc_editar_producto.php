@@ -4,9 +4,9 @@ $postData = $_POST;
 $productoId = $_GET['id'] ?? FALSE;
 $fileData = $_FILES['imagen'];
 
-echo "<pre>";
-print_r($postData);
-echo "</pre>";
+//echo "<pre>";
+//print_r($postData);
+//echo "</pre>";
 
 
 try {
@@ -24,9 +24,9 @@ try {
         $imagen = $postData['imagen_og'];
     }
 
-    echo "<pre>";
-    print_r($producto);
-    echo "</pre>";
+//    echo "<pre>";
+//    print_r($producto);
+//    echo "</pre>";
 
     $id = $producto->getID();
     $marca_id = intval($postData['marca_id']);
@@ -43,8 +43,8 @@ try {
         intval($postData['subcategoria_id']),
         $imagen,
     );
-   // header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
-    //die();
+    header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
+    die();
 }
 catch (Exception $e) {
     echo "MENSAJE ERROR: " . $e->getMessage();

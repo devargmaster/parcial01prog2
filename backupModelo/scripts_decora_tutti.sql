@@ -56,7 +56,6 @@ create table productos
     producto_estado      tinyint(1) default 0           null comment 'se define un estado para no mostrar inmediatamente un producto recien cargado (activo - [noactivo])',
     constraint productos_marcas_id_fk
         foreign key (marca_id) references marcas (id)
-            on update cascade
 );
 
 create table ofertas
@@ -77,10 +76,10 @@ create table productos_carrito
     carrito_id  int null,
     constraint productos_carrito_carrito_id_fk
         foreign key (carrito_id) references carrito (id)
-            on update cascade,
+            on delete cascade,
     constraint productos_carrito_productos_id_fk
         foreign key (producto_id) references productos (id)
-            on update cascade
+            on delete cascade
 )
     comment 'permite ingresar multiples productos a un carrito de usuario';
 
@@ -88,12 +87,14 @@ create table productos_categorias
 (
     producto_id  int null,
     categoria_id int null,
+    id           int auto_increment
+        primary key,
     constraint productos_categorias_categorias_id_fk
         foreign key (categoria_id) references categorias (id)
-            on update cascade on delete cascade,
+            on delete cascade,
     constraint productos_categorias_productos_id_fk
         foreign key (producto_id) references productos (id)
-            on update cascade on delete cascade
+            on delete cascade
 )
     comment 'genera la relacion de varios productos con varias categorias';
 
@@ -110,7 +111,7 @@ create table subcategorias
         primary key,
     nombre       varchar(250) charset utf8mb4 null,
     descripcion  varchar(500) charset utf8mb4 null,
-    categoria_id int                          null,
+    categoria_id int                          not null,
     constraint subcategorias_categorias_id_fk
         foreign key (categoria_id) references categorias (id)
             on update cascade
@@ -121,6 +122,8 @@ create table productos_categorias_subcategorias
 (
     producto_id     int null,
     subcategoria_id int null,
+    id              int auto_increment
+        primary key,
     constraint productos_categorias_subcategorias_productos_id_fk
         foreign key (producto_id) references productos (id)
             on update cascade on delete cascade,

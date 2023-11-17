@@ -4,12 +4,18 @@ $producto = (new Producto())->producto_x_id($productoId);
 $marcas = (new Marca())->todas_las_marcas();
 $categorias = (new Categoria())->categorias_completas();
 $subcategorias = (new Subcategoria())->subcategorias_completas();
-$categoriaxid = (new Categoria())->categoriaxproducto($producto->getId());
+$idcategoriaxproductoid = (new Categoria())->categoriaxproducto($producto->getId());
+$idsubcategoriaxproductoid = (new Subcategoria())->subcategoriaxproducto($producto->getId());
 
-if (is_object($categoriaxid)) {
-    $categoriaId = $categoriaxid->getCategoriaId();
+if (is_object($idcategoriaxproductoid)) {
+    $categoriaId = $idcategoriaxproductoid->getCategoriaId();
 } else {
     $categoriaId = null;
+}
+if (is_object($idsubcategoriaxproductoid)) {
+    $subcategoriaId = $idsubcategoriaxproductoid->getSubcategoriaId();
+} else {
+    $subcategoriaId = null;
 }
 
 ?>
@@ -33,7 +39,7 @@ if (is_object($categoriaxid)) {
             <select class="form-select" id="categoria_id" name="categoria_id">
                 <option value="" <?php echo is_null($categoriaId) ? 'selected' : ''; ?>>Seleccione una categoría</option>
                 <?php foreach ($categorias as $categoria): ?>
-                    <option value="<?= $categoria['id']; ?>" <?= $categoriaxid && $categoriaxid->getCategoriaId() == $categoria['id'] ? 'selected' : ''; ?>>
+                    <option value="<?= $categoria['id']; ?>" <?= $idcategoriaxproductoid && $idcategoriaxproductoid->getCategoriaId() == $categoria['id'] ? 'selected' : ''; ?>>
                         <?= $categoria['nombre']; ?>
                     </option>
                 <?php endforeach; ?>
@@ -42,6 +48,7 @@ if (is_object($categoriaxid)) {
         <div class="mb-3">
         <label for="subcategoria_id" class="form-label">Subcategoría</label>
         <select class="form-select" id="subcategoria_id" name="subcategoria_id">
+            <option value="" <?php echo is_null($subcategoriaId) ? 'selected' : ''; ?>>Seleccione una subcategoría</option>
             <?php foreach ($subcategorias as $subcategoria): ?>
                 <option value="<?= $subcategoria['id']; ?>" <?= $subcategoria['id'] == $producto->getProducto_subcategoria() ? 'selected' : ''; ?>><?= $subcategoria['nombre']; ?></option>
             <?php endforeach; ?>

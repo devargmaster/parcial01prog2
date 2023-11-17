@@ -179,7 +179,7 @@ class Producto
        $productos_categorias_subcategorias = (new Productos_Categorias_Subcategorias())->subcategoria_x_productoid($id);
         if ($productos_categorias_subcategorias) {
             (new Productos_Categorias_Subcategorias())->editar($id, $subcategoria_id);
-        } else {
+        } elseif($subcategoria_id) {
             (new Productos_Categorias_Subcategorias())->insertar($id, $subcategoria_id);
         }
 
