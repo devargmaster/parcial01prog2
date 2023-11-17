@@ -47,12 +47,14 @@ if (is_object($idsubcategoriaxproductoid)) {
         </div>
         <div class="mb-3">
         <label for="subcategoria_id" class="form-label">Subcategoría</label>
-        <select class="form-select" id="subcategoria_id" name="subcategoria_id">
-            <option value="" <?php echo is_null($subcategoriaId) ? 'selected' : ''; ?>>Seleccione una subcategoría</option>
-            <?php foreach ($subcategorias as $subcategoria): ?>
-                <option value="<?= $subcategoria['id']; ?>" <?= $subcategoria['id'] == $producto->getProducto_subcategoria() ? 'selected' : ''; ?>><?= $subcategoria['nombre']; ?></option>
-            <?php endforeach; ?>
-        </select>
+            <select class="form-select" id="subcategoria_id" name="subcategoria_id">
+                <option value="" <?php echo is_null($subcategoriaId) ? 'selected' : ''; ?>>Seleccione una subcategoría</option>
+                <?php foreach ($subcategorias as $subcategoria): ?>
+                    <option value="<?= $subcategoria['id']; ?>" <?= $subcategoriaId == $subcategoria['id'] ? 'selected' : ''; ?>>
+                        <?= $subcategoria['nombre']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
         <label for="marca_id" class="form-label">Marca</label>
@@ -75,6 +77,29 @@ if (is_object($idsubcategoriaxproductoid)) {
         <label for="stock" class="form-label">Stock</label>
         <input type="text" class="form-control" id="stock" name="stock" value="<?= $producto->getProductoStock(); ?>">
         </div>
+        <div class="mb-3">
+            <label class="form-label">Estado</label>
+            <div>
+                <input type="radio" id="activo" name="estado" value="1" <?= $producto->getProductoEstado() == 1 ? 'checked' : ''; ?>>
+                <label for="activo">Activo</label>
+            </div>
+            <div>
+                <input type="radio" id="inactivo" name="estado" value="0" <?= $producto->getProductoEstado() == 0 ? 'checked' : ''; ?>>
+                <label for="inactivo">Inactivo</label>
+            </div>
+        </div>
+        <div class="mb-3">
+        <label class="form-label">Destacado</label>
+        <div>
+            <input type="radio" id="destacado" name="destacado" value="1" <?= $producto->getProductoDestacado() == 1 ? 'checked' : ''; ?>>
+            <label for="destacado">Destacado</label>
+        </div>
+        <div>
+            <input type="radio" id="no_destacado" name="destacado" value="0" <?= $producto->getProductoDestacado() == 0 ? 'checked' : ''; ?>>
+            <label for="no_destacado">No destacado</label>
+        </div>
+        </div>
+
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
 </div>

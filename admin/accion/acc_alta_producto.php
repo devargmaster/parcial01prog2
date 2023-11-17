@@ -43,18 +43,15 @@ try {
   );
 
 
-  if (isset($_POST['medidas'])) {
-    $conexion = Conexion::getConexion();
-    $stmt = $conexion->prepare("INSERT INTO informacion_adicional (medidas, peso, material, origen, producto_id) VALUES (?, ?, ?, ?, ?)");
-
-    $medidas = $_POST['medidas'];
-    $peso = $_POST['peso'];
-    $material = $_POST['material'];
-    $origen = $_POST['origen'];
-
-    $stmt->execute([$medidas, $peso, $material, $origen, $producto_id]);
-  }
-
+    if (isset($_POST['medidas']) || isset($_POST['peso']) || isset($_POST['material']) || isset($_POST['origen'])) {
+        (new Informacion_adicional())->insertarInformacionAdicional(
+            $_POST['medidas'],
+            $_POST['peso'],
+            $_POST['material'],
+            $_POST['origen'],
+            $producto_id
+        );
+    }
 
     if (!empty($postData['producto_categoria'])) {
         $categoria_id = $postData['producto_categoria'];

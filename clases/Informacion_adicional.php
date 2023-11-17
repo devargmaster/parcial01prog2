@@ -20,9 +20,24 @@ class Informacion_adicional
     $infoAdicional = null;
     foreach ($PDOStatement as $row) {
       $infoAdicional = $row;
-      break; // Rompe el bucle ya que solo esperas un resultado.
+      break;
     }
     return $infoAdicional;
+  }
+  public function insertarInformacionAdicional(
+    string $medidas,
+    string $peso,
+    string $material,
+    string $origen,
+    int $producto_id
+  ) : int
+  {
+    $conexion = (new Conexion())->getConexion();
+    $consulta = "INSERT INTO informacion_adicional (medidas, peso, material, origen, producto_id) VALUES (?, ?, ?, ?, ?)";
+    $PDOStatement = $conexion->prepare($consulta);
+    $PDOStatement->execute([$medidas, $peso, $material, $origen, $producto_id]);
+    return $conexion->lastInsertId();
+
   }
 
   // Getters

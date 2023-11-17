@@ -22,21 +22,34 @@ class Producto
   private $producto_marca;
 
   /**
-   * Devuelve el catalogo completo de productos
+   * Devuelve el catalogo completo de productos frontend
    *
    *
    */
   public function todos_los_productos(): array
   {
     $conexion = Conexion::getConexion();
-    $consulta = "SELECT * FROM productos";
+    $consulta = "SELECT * FROM productos where producto_estado = 1";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
     $PDOStatement->execute();
     return $PDOStatement->fetchAll();
   }
 
-
+    /**
+     * Devuelve el catalogo completo de productos backend
+     *
+     *
+     */
+    public function todos_los_productos_back(): array
+    {
+        $conexion = Conexion::getConexion();
+        $consulta = "SELECT * FROM productos";
+        $PDOStatement = $conexion->prepare($consulta);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
+        return $PDOStatement->fetchAll();
+    }
   /**
    * Devuelve los productos por categoria
    * @param string $categoria Un string con el nombre de categoria a buscar
@@ -152,10 +165,10 @@ class Producto
    */
 
 
-    public function actualizar_producto($id, $nombre, $descripcion, $precio, $stock, int $marca_id,  $categoria_id,$subcategoria_id,$imagen= null): void
+    public function actualizar_producto($id, $nombre, $descripcion, $precio, $stock, int $marca_id, $categoria_id, $subcategoria_id, int $producto_estado, int $producto_destacado , $imagen= null): void
     {
         $conexion = Conexion::getConexion();
-        $consulta = "UPDATE productos SET producto_nombre = :producto_nombre, producto_descripcion = :producto_descripcion, producto_precio = :producto_precio,producto_stock = :producto_stock, marca_id = :marca_id ,producto_imagen=:producto_imagen  WHERE id = :id";
+        $consulta = "UPDATE productos SET producto_nombre = :producto_nombre, producto_descripcion = :producto_descripcion, producto_precio = :producto_precio,producto_stock = :producto_stock, marca_id = :marca_id , producto_estado= :producto_estado ,producto_destacado= :producto_destacado ,producto_imagen=:producto_imagen  WHERE id = :id";
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->execute(
             [
@@ -164,6 +177,8 @@ class Producto
                 'producto_precio' => $precio,
                 'producto_stock' => $stock,
                 'marca_id' => $marca_id,
+                'producto_estado' => $producto_estado,
+                'producto_destacado' => $producto_destacado,
                 'producto_imagen' => $imagen,
                 'id' => $id
             ]

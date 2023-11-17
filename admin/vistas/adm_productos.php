@@ -1,5 +1,5 @@
 <?php
-$listaDeProductos = (new Producto())->todos_los_productos();
+$listaDeProductos = (new Producto())->todos_los_productos_back();
 $currentPath = $_SERVER['PHP_SELF'];
 $basePath = '';
 

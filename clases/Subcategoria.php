@@ -4,6 +4,8 @@ class Subcategoria {
   private $nombre;
   private $descripcion;
   private $categoria_id;
+  private $producto_id;
+  private $subcategoria_id;
   public function __construct() {}
 
   /**
@@ -80,20 +82,21 @@ class Subcategoria {
     );
   }
 
-  public function subcategoriaxproducto($productoid)
-  {
-    $conexion = Conexion::getConexion();
-    $query = "SELECT * FROM productos_categorias_subcategorias WHERE producto_id = ?";
-    $stmt = $conexion->prepare($query);
-    $stmt->execute(
-      [
-        $productoid
-      ]
-    );
-    $resultado = $stmt->fetch();
-    return $resultado !== false ? $resultado : null;
-  }
 
+public function subcategoriaxproducto(mixed $id)
+{
+  $conexion = Conexion::getConexion();
+  $consulta = "SELECT * FROM productos_categorias_subcategorias WHERE producto_id = :id";
+  $sentencia = $conexion->prepare($consulta);
+  $sentencia->setFetchMode(PDO::FETCH_CLASS, self::class);
+  $sentencia->execute(
+      [
+          ':id' => $id
+      ]
+  );
+  $resultado = $sentencia->fetch();
+  return $resultado !== false ? $resultado : null;
+}
   public function getId() {
     return $this->id;
   }
@@ -124,6 +127,38 @@ class Subcategoria {
 
   public function setCategoriaId($categoria_id) {
     $this->categoria_id = $categoria_id;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getProductoId()
+  {
+    return $this->producto_id;
+  }
+
+  /**
+   * @param mixed $producto_id
+   */
+  public function setProductoId($producto_id): void
+  {
+    $this->producto_id = $producto_id;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getSubcategoriaId()
+  {
+    return $this->subcategoria_id;
+  }
+
+  /**
+   * @param mixed $subcategoria_id
+   */
+  public function setSubcategoriaId($subcategoria_id): void
+  {
+    $this->subcategoria_id = $subcategoria_id;
   }
 
 }

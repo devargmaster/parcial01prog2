@@ -41,6 +41,8 @@ try {
         $marca_id,
         intval($postData['categoria_id']),
         intval($postData['subcategoria_id']),
+        intval($postData['estado']),
+        intval($postData['destacado']),
         $imagen,
     );
     header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
