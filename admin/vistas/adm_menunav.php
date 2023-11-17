@@ -1,6 +1,13 @@
   <h1>Decora Tutti</h1>
   <?php
+  $auth = new Autenticacion();
 
+  // Verificar si el usuario está autenticado
+  if (!$auth->verify()) {
+  // Si no está autenticado, redirigir a la página de inicio de sesión
+  header('Location: login.php');
+  exit;
+  }
   // aca obtengo la ruta actual del archivo, esto me sirvio mucho para meterlo en el hosting y que quede ordenado
   $currentPath = $_SERVER['PHP_SELF'];
   $basePath = '';
@@ -55,11 +62,11 @@
             <li><a class="dropdown-item" href="#">Alta</a></li>
             <li><a class="dropdown-item" href="#">Baja</a></li>
             <li><a class="dropdown-item" href="#">Modificación</a></li>
+
+              <li><a class="dropdown-item" href="#">Desloguearse</a></li>
           </ul>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
-

@@ -1,11 +1,6 @@
 <?php
 require_once '../functions/autoload.php';
-session_start();
-if (!isset($_SESSION['loggedIn']) || $_SESSION['usuario']['rol_id'] != 1) {
-    header('Location: vistas/login.php');
-    exit();
-}
-$userData = $_SESSION['loggedIn'] ?? FALSE;
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

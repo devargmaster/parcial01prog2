@@ -9,7 +9,7 @@ class Usuario
     private $apellido;
     private $email;
     private $usuario;
-    private $rol_id;
+    private $rol;
 
     private $estado;
 
@@ -56,7 +56,7 @@ class Usuario
                 ':email' => $this->email,
                 ':password' => $this->clave,
                 ':habilitado' => $this->habilitado,
-                ':rol_id' => $this->rol_id
+                ':rol_id' => $this->rol
             ]
         );
 
@@ -168,17 +168,17 @@ class Usuario
     /**
      * @return mixed
      */
-    public function getRolId()
+    public function getRol()
     {
-        return $this->rol_id;
+        return $this->rol;
     }
 
     /**
-     * @param mixed $rol_id
+     * @param mixed $rol
      */
-    public function setRolId($rol_id): void
+    public function setRol($rol): void
     {
-        $this->rol_id = $rol_id;
+        $this->rol = $rol;
     }
 
     /**
