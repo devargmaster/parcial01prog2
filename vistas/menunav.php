@@ -14,9 +14,7 @@ $subcategorias_por_categoria = [];
 foreach ($subcategorias_completas as $subcategoria) {
     $subcategorias_por_categoria[$subcategoria['categoria_id']][] = $subcategoria;
 }
-//echo "<pre>";
-//print_r($secciones_completas);
-//echo "</pre>";
+
 if (isset($_GET['producto'])) {
     $seccion_elegida_ = 'catalogo';
 } else {
