@@ -15,12 +15,16 @@ class Productos_Categorias_Subcategorias
         $this->subcategoria_id = null;
     }
 
-    public function producto_x_categoria($categoria_id)
+    public function subcategoria_x_productoid($productoid)
     {
         $conexion = Conexion::getConexion();
-        $query = "SELECT * FROM productos_categorias_subcategorias WHERE categoria_id = $categoria_id";
+        $query = "SELECT * FROM productos_categorias_subcategorias WHERE producto_id = ?";
         $stmt = $conexion->prepare($query);
-        $stmt->execute();
+        $stmt->execute(
+            [
+                $productoid
+            ]
+        );
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -51,19 +55,18 @@ class Productos_Categorias_Subcategorias
         );
     }
 
-    public function editar($producto_id, $categoria_id, $subcategoria_id)
+    public function editar($producto_id,  $subcategoria_id)
     {
         $conexion = Conexion::getConexion();
-        $query = "UPDATE productos_categorias_subcategorias SET producto_id = :producto_id, categoria_id = :categoria_id, subcategoria_id = :subcategoria_id WHERE producto_id = :id";
+        $query = "UPDATE productos_categorias_subcategorias SET subcategoria_id = :subcategoria_id WHERE producto_id = :id_producto";
         $stmt = $conexion->prepare($query);
         $stmt->execute(
             [
-                ':producto_id' => $this->producto_id,
-                ':categoria_id' => $this->categoria_id,
-                ':subcategoria_id' => $this->subcategoria_id,
-                ':id' => $this->id
+                ':subcategoria_id' => $subcategoria_id,
+                ':id_producto' => $producto_id
             ]
         );
     }
+
 
 }

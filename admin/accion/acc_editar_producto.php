@@ -5,7 +5,7 @@ $productoId = $_GET['id'] ?? FALSE;
 $fileData = $_FILES['imagen'];
 
 echo "<pre>";
-print_r($_POST);
+print_r($postData);
 echo "</pre>";
 
 
@@ -40,11 +40,12 @@ try {
         intval($postData['stock']),
         $marca_id,
         intval($postData['categoria_id']),
+        intval($postData['subcategoria_id']),
         $imagen,
     );
    // header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
-   // die();
+    //die();
 }
 catch (Exception $e) {
-    echo $e->getMessage();
+    echo "MENSAJE ERROR: " . $e->getMessage();
 }
