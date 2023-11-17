@@ -4,10 +4,13 @@ $producto = (new Producto())->producto_x_id($productoId);
 $marcas = (new Marca())->todas_las_marcas();
 $categorias = (new Categoria())->categorias_completas();
 $subcategorias = (new Subcategoria())->subcategorias_completas();
-
 $categoriaxid = (new Categoria())->categoriaxproducto($producto->getId());
 
-
+if (is_object($categoriaxid)) {
+    $categoriaId = $categoriaxid->getCategoriaId();
+} else {
+    $categoriaId = null;
+}
 
 ?>
 <div class="">
@@ -28,6 +31,7 @@ $categoriaxid = (new Categoria())->categoriaxproducto($producto->getId());
         <div class="mb-3">
             <label for="categoria_id" class="form-label">Categoría</label>
             <select class="form-select" id="categoria_id" name="categoria_id">
+                <option value="" <?php echo is_null($categoriaId) ? 'selected' : ''; ?>>Seleccione una categoría</option>
                 <?php foreach ($categorias as $categoria): ?>
                     <option value="<?= $categoria['id']; ?>" <?= $categoriaxid && $categoriaxid->getCategoriaId() == $categoria['id'] ? 'selected' : ''; ?>>
                         <?= $categoria['nombre']; ?>

@@ -56,23 +56,17 @@ try {
   }
 
 
-  $categoria_id = $postData['producto_categoria'];
-  $stmt = $conexion->prepare("INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (?, ?)");
-  $stmt->execute(
-    [
-      $producto_id,
-      $categoria_id
-    ]
-  );
+    if (!empty($postData['producto_categoria'])) {
+        $categoria_id = $postData['producto_categoria'];
+        $stmt = $conexion->prepare("INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (?, ?)");
+        $stmt->execute([$producto_id, $categoria_id]);
+    }
 
-  $subcategoria_id = $postData['producto_subcategoria'];
-  $stmt = $conexion->prepare("INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (?, ?)");
-  $stmt->execute(
-    [
-      $producto_id,
-      $subcategoria_id
-    ]
-  );
+    if (!empty($postData['producto_subcategoria'])) {
+        $subcategoria_id = $postData['producto_subcategoria'];
+        $stmt = $conexion->prepare("INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (?, ?)");
+        $stmt->execute([$producto_id, $subcategoria_id]);
+    }
 
   $conexion->commit();
 

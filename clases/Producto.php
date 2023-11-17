@@ -170,19 +170,17 @@ class Producto
         );
 
         $productos_categorias = (new Productos_Categorias())->producto_x_categoria($id);
-
        if ($productos_categorias) {
            (new Productos_Categorias())->editar($id, $categoria_id);
-//        } else {
-//            (new Productos_Categorias())->eliminar();
-//            (new Productos_Categorias())->insertar($id, $categoria_id);
+        } else {
+            (new Productos_Categorias())->insertar($id, $categoria_id);
         }
-//
+
        $productos_categorias_subcategorias = (new Productos_Categorias_Subcategorias())->subcategoria_x_productoid($id);
         if ($productos_categorias_subcategorias) {
             (new Productos_Categorias_Subcategorias())->editar($id, $subcategoria_id);
-//        } else {
-//            (new Productos_Categorias_Subcategorias())->insertar($id, $categoria_id, $subcategoria_id);
+        } else {
+            (new Productos_Categorias_Subcategorias())->insertar($id, $subcategoria_id);
         }
 
     }

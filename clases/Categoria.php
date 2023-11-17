@@ -96,7 +96,8 @@ public function eliminar(): void
                 ':id' => $id
             ]
         );
-        return $sentencia->fetch();
+        $resultado = $sentencia->fetch();
+        return $resultado !== false ? $resultado : null;
     }
   public function getNombre()
   {

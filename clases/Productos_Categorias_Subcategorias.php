@@ -28,15 +28,14 @@ class Productos_Categorias_Subcategorias
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function insertar($producto_id, $categoria_id, $subcategoria_id)
+    public function insertar($producto_id,  $subcategoria_id)
     {
         $conexion = Conexion::getConexion();
-        $query = "INSERT INTO productos_categorias_subcategorias (producto_id, categoria_id, subcategoria_id) VALUES (:producto_id, :categoria_id, :subcategoria_id)";
+        $query = "INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (:producto_id,  :subcategoria_id)";
         $stmt = $conexion->prepare($query);
         $stmt->execute(
             [
                 ':producto_id' => $producto_id,
-                ':categoria_id' => $categoria_id,
                 ':subcategoria_id' => $subcategoria_id
             ]
         );

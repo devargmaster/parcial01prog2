@@ -61,6 +61,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
     <div class="form-group">
       <label for="productoCategoria">Categoría del Producto</label>
       <select class="form-select" id="productoCategoria" name="producto_categoria">
+          <option value="">Seleccione una categoría</option>
         <?php foreach ($categorias as $categoria): ?>
           <option value="<?= $categoria['id'] ?>"><?= $categoria['nombre'] ?></option>
         <?php endforeach; ?>
@@ -69,6 +70,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
       <div class="form-group">
           <label for="productoSubcategoria">Subcategoría del Producto</label>
           <select class="form-select" id="productoSubcategoria" name="producto_subcategoria">
+              <option value="">Seleccione una subcategoría</option>
               <?php foreach ($subcategorias as $subcategoria): ?>
                   <option value="<?= $subcategoria['id'] ?>"><?= $subcategoria['nombre'] ?></option>
               <?php endforeach; ?>
