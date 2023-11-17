@@ -83,32 +83,17 @@ class Autenticacion
         return $PDOStatement->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function insertar($username, $pass, $rol_id, $estado)
-    {
-        $conexion = Conexion::getConexion();
-        $query = "INSERT INTO usuarios (usuario, clave, rol_id, estado) VALUES (:username, :pass, :rol_id, :estado)";
-        $PDOStatement = $conexion->prepare($query);
-        $PDOStatement->execute(
-            [
-                ':username' => $username,
-                ':pass' => $pass,
-                ':rol_id' => $rol_id,
-                ':activo' => $estado
-            ]
-        );
-        $this->id = $conexion->lastInsertId();
-    }
 
-    public function eliminar()
+
+    public function verify(): bool
     {
-        $conexion = Conexion::getConexion();
-        $query = "DELETE FROM usuarios WHERE id = :id";
-        $PDOStatement = $conexion->prepare($query);
-        $PDOStatement->execute(
-            [
-                ':id' => $this->id
-            ]
-        );
+
+        if (isset($_SESSION['loggedIn'])) {
+            return TRUE;
+        } else {
+            header('location: index.php?sec=login');
+        }
+        return FALSE;
     }
     /**
      * @return null
