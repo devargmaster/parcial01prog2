@@ -1,5 +1,10 @@
 <?php
 require_once '../functions/autoload.php';
+session_start();
+if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol_id'] != 1) {
+    header('Location: vistas/login.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

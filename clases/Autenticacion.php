@@ -8,6 +8,8 @@ class Autenticacion
     private $rol_id;
     private $estado;
 
+
+
     public function __construct()
     {
         $this->id = null;
@@ -22,29 +24,44 @@ class Autenticacion
      *
      * @param $username  -el nombre de usuario
      * @param $clave -la contraseña
-     * @return bool devuelve true si el usuario existe, false si no existe
+     * @return bool|null devuelve true si el usuario existe, false si no existe
      */
-    public function log_in($username, $clave): bool
+    public function log_in($username, $clave): ?bool
     {
-        $conexion = Conexion::getConexion();
-        $query = "SELECT * FROM usuarios WHERE usuario = ?";
-        $PDOStatement = $conexion->prepare($query);
-        $PDOStatement->execute(
-            [
-                $username
-            ]
-        );
-        $usuario = $PDOStatement->fetch(PDO::FETCH_ASSOC);
 
-        if ($usuario) {
-            if (password_verify($clave, $usuario['pass'])) {
-                $_SESSION['usuario'] = $usuario;
-                return true;
+        echo "<p>VAMOS A INTENTAR AUTENTICAR UN USUARIO</p>";
+        echo "<p>El nombre de usuario provisto es: $clave</p>";
+        echo "<p>El password provisto es: $clave</p>";
+
+        $datosUsuario = (new Usuario())->usuario_x_username($username);
+
+
+        echo "<pre>";
+        print_r($datosUsuario);
+        echo "</pre>";
+
+        if ($datosUsuario) {
+
+            echo "<p>El usuario ingresado SI se encontró en nuestra base de datos.</p>";
+
+            if (password_verify($clave, $datosUsuario->getClave())) {
+                echo "<p>EL PASSWORD ES CORRECTO! LOGUEAR!</p>";
+
+
+                $datosLogin['username'] = $datosUsuario->getUsuario();
+                $datosLogin['nombre_completo'] = $datosUsuario->getNombre();
+                $datosLogin['id'] = $datosUsuario->getId();
+                $datosLogin['rol'] = $datosUsuario->getRolId();
+                $_SESSION['loggedIn'] = $datosLogin;
+
+                return TRUE;
             } else {
-                return false;
+                echo "<p>EL PASSWORD NO ES CORRECTO! INTRUSO! >=0</p>";
+                return FALSE;
             }
         } else {
-            return false;
+            echo "<p>El usuario ingresado no se encontró en nuestra base de datos.</p>";
+            return null;
         }
     }
 
@@ -92,5 +109,20 @@ class Autenticacion
                 ':id' => $this->id
             ]
         );
+    }
+    /**
+     * @return null
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * @param null $estado
+     */
+    public function setEstado($estado): void
+    {
+        $this->estado = $estado;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+session_start();
   spl_autoload_register('autoloadClasses');
   function autoloadClasses($nombreClase)
   {
