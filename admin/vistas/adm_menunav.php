@@ -1,5 +1,6 @@
   <h1>Decora Tutti</h1>
   <?php
+
   $auth = new Autenticacion();
 
   if (!$auth->verify()) {
@@ -11,7 +12,7 @@
   $basePath = '';
 
   // Aca lo hago retroceder un nivel para manejar la jerarquia del index respecto a las vistas
-  if (strpos($currentPath, '/vistas/') !== false) {
+  if (str_contains($currentPath, '/vistas/')) {
     $basePath = '../';
   }
 
@@ -51,7 +52,6 @@
             <li><a class="dropdown-item" href="<?= $basePath ?>index.php?sec=oferta&ruta=vistas">Ofertas ABM</a></li>
           </ul>
         </li>
-        <!-- Usuarios -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUsuarios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Usuarios
@@ -60,7 +60,6 @@
             <li><a class="dropdown-item" href="#">Alta</a></li>
             <li><a class="dropdown-item" href="#">Baja</a></li>
             <li><a class="dropdown-item" href="#">Modificación</a></li>
-
               <li><a class="dropdown-item" href="../admin/accion/auth_logout.php">Desloguearse</a></li>
           </ul>
         </li>

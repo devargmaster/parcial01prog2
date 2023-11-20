@@ -7,7 +7,7 @@ foreach ($carrito as $productoId => $productoData) {
     $idProducto = $productoData['id'];
     $cantidad = $productoData['cantidad'];
 }
-if (!$auth->verify()) {
+if ($auth->verify()) {
 $items = (new Carrito())->get_carrito();
 ?>
 
@@ -88,5 +88,5 @@ $items = (new Carrito())->get_carrito();
 
 </div>
 <?php } else {
- echo "<h1 class='text-center fs-2 my-5'> Debe iniciar sesión para ver el carrito de compras</h1>";
+    header("Location: " . dirname($_SERVER['PHP_SELF']) . '/index.php?sec=login&ruta=vistas');
 } ?>

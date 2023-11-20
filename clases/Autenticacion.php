@@ -60,10 +60,11 @@ class Autenticacion
 
     public function log_out(): void
     {
+        if (!headers_sent()) {
+            session_destroy();
 
-        if (isset($_SESSION['loggedIn'])) {
-            unset($_SESSION['loggedIn']);
         }
+
     }
 
     public function usuario_x_id($id)
@@ -81,26 +82,9 @@ class Autenticacion
 
 
 
-    public function verify($admin = TRUE): bool
+    public function verify(): bool
     {
-
-        if (isset($_SESSION['loggedIn'])) {
-
-            if($admin){
-
-                if ($_SESSION['loggedIn']['rol'] == "admin" OR $_SESSION['loggedIn']['rol'] == "superadmin"){
-                    return TRUE;
-                }else{
-                  //  (new Alerta())->add_alerta('warning', "El usuario no tiene permisos para ingresar a este area");
-                    header('location: index.php?sec=login');
-                }
-
-            }else{
-                return TRUE;
-            }
-        } else {
-            header('location: index.php?sec=login');
-        }
+        return isset($_SESSION['loggedIn']);
     }
 
     /**

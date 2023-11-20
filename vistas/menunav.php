@@ -1,6 +1,6 @@
 <h1>Decora Tutti</h1>
 <?php
-
+ob_start();
 $currentPath = $_SERVER['PHP_SELF'];
 $basePath = '';
 
@@ -41,7 +41,7 @@ if (isset($_GET['producto'])) {
                                         <li>
                                             <a class="dropdown-item"
                                                href="<?= $basePath ?>index.php?sec=<?= $sec_obj['descripcion']; ?>&subsec=<?= $subcategoria['descripcion']; ?>">
-                                                <?= $subcategoria['nombre']; ?>
+                                                <?= $subcategoria['nombre'];?>
                                             </a>
                                         </li>
                                     <?php } ?>
