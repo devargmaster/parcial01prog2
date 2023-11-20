@@ -30,30 +30,20 @@ class Autenticacion
      */
     public function log_in($username, $clave): ?bool
     {
-
         $datosUsuario = (new Usuario())->usuario_x_username($username);
-
         if ($datosUsuario) {
-
-            echo "<p>El usuario ingresado SI se encontró en nuestra base de datos.</p>";
-
             if (password_verify($clave, $datosUsuario->getClave())) {
-                echo "<p>EL PASSWORD ES CORRECTO! LOGUEAR!</p>";
-
-
+                echo "rol". $datosUsuario->getRol();
                 $datosLogin['username'] = $datosUsuario->getUsuario();
                 $datosLogin['nombre_completo'] = $datosUsuario->getNombre();
                 $datosLogin['id'] = $datosUsuario->getId();
                 $datosLogin['rol'] = $datosUsuario->getRol();
                 $_SESSION['loggedIn'] = $datosLogin;
-
                 return TRUE;
             } else {
-                echo "<p>EL PASSWORD NO ES CORRECTO! INTRUSO! >=0</p>";
                 return FALSE;
             }
         } else {
-            echo "<p>El usuario ingresado no se encontró en nuestra base de datos.</p>";
             return null;
         }
     }

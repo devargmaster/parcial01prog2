@@ -1,7 +1,5 @@
-<?php
-require_once '../functions/autoload.php';
+<?php require_once '../functions/autoload.php'; ?>
 
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

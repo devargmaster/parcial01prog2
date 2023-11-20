@@ -1,11 +1,17 @@
   <h1>Decora Tutti</h1>
   <?php
-
+  ob_start();
   $auth = new Autenticacion();
 
-  if (!$auth->verify()) {
-  header('Location: ../admin/vistas/login.php');
-  exit;
+  if ($auth->verify()) {
+      $rolUsuario = $_SESSION['loggedIn']['rol'];
+      if ($rolUsuario == 'administrador') {
+          header("Location: " . dirname($_SERVER['PHP_SELF']) . '/index.php');
+      } else {
+          header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=home');
+      }
+  } else {
+      header('Location: ../vistas/login.php');
   }
   // aca obtengo la ruta actual del archivo, esto me sirvio mucho para meterlo en el hosting y que quede ordenado
   $currentPath = $_SERVER['PHP_SELF'];

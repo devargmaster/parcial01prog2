@@ -1,12 +1,7 @@
 <?php
 
-$carrito = $_SESSION['carrito'] ?? array();
-
 $auth = new Autenticacion();
-foreach ($carrito as $productoId => $productoData) {
-    $idProducto = $productoData['id'];
-    $cantidad = $productoData['cantidad'];
-}
+
 if ($auth->verify()) {
 $items = (new Carrito())->get_carrito();
 ?>
@@ -71,7 +66,7 @@ $items = (new Carrito())->get_carrito();
                 <input type="submit" value="Actualizar Cantidades" class="btn btn-warning">
                 <a href="index.php?sec=catalogo" role="button" class=" btn btn-danger">Seguir comprando</a>
                 <a href="../accion/clear_items_acc.php" role="button" class="btn btn-danger">Vaciar Carrito</a>
-                <a href="index.php?sec=finalizar_pago" role="button" class="btn btn-primary">Finalizar Compra</a>
+                <a href="index.php?sec=procesar_pedido" role="button" class="btn btn-primary">Finalizar Compra</a>
             </div>
 
         </form>
