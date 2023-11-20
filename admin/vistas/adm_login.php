@@ -17,7 +17,7 @@
 
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
-<a href="registro.php">Registrarse</a>
+<a href="adm_registro.php">Registrarse</a>
 
     </div>
 

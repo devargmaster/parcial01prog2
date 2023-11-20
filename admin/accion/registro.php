@@ -10,4 +10,4 @@ echo "</pre>";
 $usuario = (new Usuario())->insertar();
 
 
-//header('Location: ../vistas/login.php');
+//header('Location: ../vistas/adm_login.php');

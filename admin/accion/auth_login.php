@@ -17,5 +17,5 @@ if ($login) {
         header( 'Location: ../../index.php?sec=home');
     }
 } else {
-    header('Location: ../vistas/login.php');
+    header('Location: ../vistas/adm_login.php');
 }
