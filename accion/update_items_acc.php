@@ -1,6 +1,5 @@
 <?PHP
-require_once "../../functions/autoload.php";
-
+require_once "../functions/autoload.php";
 $postData = $_POST;
 
 // echo "<pre>";

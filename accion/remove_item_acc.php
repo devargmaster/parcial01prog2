@@ -5,5 +5,5 @@ $id = $_GET['id'] ?? FALSE;
 
 if($id){
     (new Carrito())->remove_item($id);
-    header('location: ../../index.php?sec=carrito');
+    header("Location: " . dirname($_SERVER['PHP_SELF'],2) . '/index.php?sec=carrito&ruta=vistas');
 }

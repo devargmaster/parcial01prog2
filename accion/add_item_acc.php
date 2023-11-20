@@ -1,6 +1,5 @@
 <?PHP
 require_once "../functions/autoload.php";
-
 $id = $_GET['id'] ?? FALSE;
 $q = $_GET['q'] ?? 1;
 

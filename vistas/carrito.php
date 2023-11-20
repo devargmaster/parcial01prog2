@@ -66,13 +66,7 @@ $items = (new Carrito())->get_carrito();
                     <td></td>
                 </tr>
                 </tbody>
-
-
-
             </table>
-
-
-
             <div class="d-flex justify-content-end gap-2">
                 <input type="submit" value="Actualizar Cantidades" class="btn btn-warning">
                 <a href="index.php?sec=catalogo" role="button" class=" btn btn-danger">Seguir comprando</a>
