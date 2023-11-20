@@ -2,10 +2,8 @@
   <?php
   $auth = new Autenticacion();
 
-  // Verificar si el usuario está autenticado
   if (!$auth->verify()) {
-  // Si no está autenticado, redirigir a la página de inicio de sesión
-  header('Location: login.php');
+  header('Location: ../admin/vistas/login.php');
   exit;
   }
   // aca obtengo la ruta actual del archivo, esto me sirvio mucho para meterlo en el hosting y que quede ordenado
@@ -63,7 +61,7 @@
             <li><a class="dropdown-item" href="#">Baja</a></li>
             <li><a class="dropdown-item" href="#">Modificación</a></li>
 
-              <li><a class="dropdown-item" href="#">Desloguearse</a></li>
+              <li><a class="dropdown-item" href="../admin/accion/auth_logout.php">Desloguearse</a></li>
           </ul>
         </li>
       </ul>

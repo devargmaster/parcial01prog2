@@ -87,14 +87,14 @@ public function subcategoriaxproducto(mixed $id)
 {
   $conexion = Conexion::getConexion();
   $consulta = "SELECT * FROM productos_categorias_subcategorias WHERE producto_id = :id";
-  $sentencia = $conexion->prepare($consulta);
-  $sentencia->setFetchMode(PDO::FETCH_CLASS, self::class);
-  $sentencia->execute(
+  $PDOStatement = $conexion->prepare($consulta);
+  $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+  $PDOStatement->execute(
       [
           ':id' => $id
       ]
   );
-  $resultado = $sentencia->fetch();
+  $resultado = $PDOStatement->fetch();
   return $resultado !== false ? $resultado : null;
 }
   public function getId() {

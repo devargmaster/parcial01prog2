@@ -9,6 +9,15 @@ try {
     No se encontraron productos para el id: $id
   </div>";
 }
+$cantidad = 1; // Cantidad inicial
+
+// Si se recibe una actualización de cantidad desde el formulario
+if (isset($_POST['actualizar_cantidad'])) {
+    $cantidad = $_POST['cantidad'];
+}
+
+// Calcular subtotal
+$subtotal = $producto->getProducto_precio() * $cantidad;
 
 //  echo "<pre>";
 //  print_r($producto);
@@ -29,7 +38,7 @@ try {
         <p class="producto_precio_estilo_formulario"><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?>
           ARS</p>
         <div class="informacion_adicional_estilo">
-          <img src="img/detalle.png" alt="informacion adicional"> Informacion adicional
+          <img src="../img/detalle.png" alt="informacion adicional"> Informacion adicional
 
           <?php
           $infoAdicional = $producto->getProductoInfoAdicional();
@@ -45,10 +54,20 @@ try {
           }
           ?>
         </div>
-
-
-        <button class="btn btn-primary carrito_boton_estilo">Agregar al Carrito</button>
       </div>
+
+
+        <form action="/accion/add_item_acc.php" method="GET" class="row">
+            <div class="col-6 d-flex align-items-center">
+                <label for="q" class="fw-bold me-2">Cantidad: </label>
+                <input type="number" class="form-control" value="1" name="q" id="q">
+            </div>
+            <div class="col-6">
+                <input type="submit" value="AGREGAR A CARRITO" class="btn btn-danger w-100 fw-bold">
+                <input type="hidden" value="<?= $id ?>" name="id" id="id">
+
+            </div>
+        </form>
     </div>
   </div>
 </div>

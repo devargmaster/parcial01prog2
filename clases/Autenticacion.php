@@ -1,5 +1,7 @@
 <?php
 
+use JetBrains\PhpStorm\NoReturn;
+
 class Autenticacion
 {
     private $id;
@@ -29,16 +31,7 @@ class Autenticacion
     public function log_in($username, $clave): ?bool
     {
 
-        echo "<p>VAMOS A INTENTAR AUTENTICAR UN USUARIO</p>";
-        echo "<p>El nombre de usuario provisto es: $clave</p>";
-        echo "<p>El password provisto es: $clave</p>";
-
         $datosUsuario = (new Usuario())->usuario_x_username($username);
-
-
-        echo "<pre>";
-        print_r($datosUsuario);
-        echo "</pre>";
 
         if ($datosUsuario) {
 
@@ -65,9 +58,12 @@ class Autenticacion
         }
     }
 
-    public function log_out()
+    public function log_out(): void
     {
-        session_destroy();
+
+        if (isset($_SESSION['loggedIn'])) {
+            unset($_SESSION['loggedIn']);
+        }
     }
 
     public function usuario_x_id($id)
@@ -85,16 +81,28 @@ class Autenticacion
 
 
 
-    public function verify(): bool
+    public function verify($admin = TRUE): bool
     {
 
         if (isset($_SESSION['loggedIn'])) {
-            return TRUE;
+
+            if($admin){
+
+                if ($_SESSION['loggedIn']['rol'] == "admin" OR $_SESSION['loggedIn']['rol'] == "superadmin"){
+                    return TRUE;
+                }else{
+                  //  (new Alerta())->add_alerta('warning', "El usuario no tiene permisos para ingresar a este area");
+                    header('location: index.php?sec=login');
+                }
+
+            }else{
+                return TRUE;
+            }
         } else {
             header('location: index.php?sec=login');
         }
-        return FALSE;
     }
+
     /**
      * @return null
      */

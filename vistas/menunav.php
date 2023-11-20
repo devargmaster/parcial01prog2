@@ -4,7 +4,7 @@
 $currentPath = $_SERVER['PHP_SELF'];
 $basePath = '';
 
-if (strpos($currentPath, '/vistas/') !== false) {
+if (str_contains($currentPath, '/vistas/')) {
     $basePath = '../';
 }
 

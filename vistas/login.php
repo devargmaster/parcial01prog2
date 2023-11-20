@@ -20,6 +20,4 @@
 <a href="registro.php">Registrarse</a>
 
     </div>
-
-
 </div>
