@@ -10,5 +10,5 @@ $host = $_SERVER['HTTP_HOST'];
 
 if($id){
     (new Carrito())->add_item($id, $q);
-    header( 'Location: ../index.php?sec=home');
+    header("Location: " . dirname($_SERVER['PHP_SELF'],2) . '/index.php?sec=carrito&ruta=vistas');
 }
