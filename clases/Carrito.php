@@ -9,14 +9,15 @@ class Carrito
      */
     public function add_item(int $productoID, int $cantidad)
     {
-        $itemData = (new Producto())->todos_los_productos($productoID);
+        $producto = new Producto();
+        $itemData = $producto->producto_x_id($productoID);
 
         if ($itemData) {
             $_SESSION['carrito'][$productoID] = [
                 'id' => $productoID,
-                'producto' => $itemData[0]->getProducto_nombre(),
-                'precio' => $itemData[0]->getProducto_precio(),
-                'imagen' => $itemData[0]->getProducto_imagen(),
+                'producto' => $itemData->getProducto_nombre(),
+                'precio' => $itemData->getProducto_precio(),
+                'imagen' => $itemData->getProducto_imagen(),
                 'cantidad' => $cantidad
             ];
         }
