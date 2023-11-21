@@ -19,6 +19,9 @@ class Producto
   private $producto_fecha;
   private $marca_id;
 
+  private $fecha_upd;
+  private $usuario_upd;
+
   private $producto_marca;
 
   /**

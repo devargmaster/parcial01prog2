@@ -3,14 +3,11 @@
 class Usuario
 {
     private $id;
-
-
     private $nombre;
     private $apellido;
     private $email;
     private $usuario;
     private $rol;
-
     private $estado;
 
     public function __construct()
@@ -45,7 +42,7 @@ class Usuario
 
     public function insertar() {
         $conexion = Conexion::getConexion();
-        $consulta = "INSERT INTO usuarios (nombre, apellido, email, clave, estado, rol_id) VALUES (:nombre, :apellido, :email, :clave, :estado, :rol_id)";
+        $consulta = "INSERT INTO usuarios (nombre, apellido, email, clave, estado, rol) VALUES (:nombre, :apellido, :email, :clave, :estado, :rol)";
 
         $sentencia = $conexion->prepare($consulta);
 
@@ -56,7 +53,7 @@ class Usuario
                 ':email' => $this->email,
                 ':password' => $this->clave,
                 ':habilitado' => $this->habilitado,
-                ':rol_id' => $this->rol
+                ':rol' => $this->rol
             ]
         );
 

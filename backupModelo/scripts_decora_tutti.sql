@@ -1,10 +1,14 @@
 create table carrito
 (
-    id         int auto_increment
+    id          int auto_increment
         primary key,
-    fecha      datetime null comment 'defino la fecha y hora  que el cliente compro',
-    usuario_id int      null comment 'un carrito para cada cliente',
-    estado     int      null comment 'sin procesar - en proceso - finalizado (finalizado me permite generar otro registro para el mismo usuario y queda el historico)'
+    fecha       datetime null comment 'defino la fecha y hora  que el cliente compro',
+    usuario_id  int      null comment 'un carrito para cada cliente',
+    estado      int      null comment 'sin procesar - en proceso - finalizado (finalizado me permite generar otro registro para el mismo usuario y queda el historico)',
+    producto_id int      null,
+    cantidad    int      null,
+    precio      double   null,
+    total       double   null
 );
 
 create index carrito_usuario_id_index
@@ -19,18 +23,6 @@ create table categorias
     habilitada  int default 0                null
 )
     comment 'tabla que contiene la categoria de productos';
-
-create table informacion_adicional
-(
-    id          int auto_increment
-        primary key,
-    medidas     varchar(200) charset utf8mb4 null,
-    peso        varchar(250) charset utf8mb4 null,
-    material    varchar(250)                 null,
-    origen      varchar(250)                 null,
-    producto_id int                          not null
-)
-    comment 'tabla con la distinta informacion de materiales y medidas';
 
 create table marcas
 (
@@ -54,9 +46,26 @@ create table productos
     producto_fecha       date       default (curdate()) null,
     marca_id             int                            null,
     producto_estado      tinyint(1) default 0           null comment 'se define un estado para no mostrar inmediatamente un producto recien cargado (activo - [noactivo])',
+    fecha_upd            datetime                       null,
+    usuario_upd          int                            null,
     constraint productos_marcas_id_fk
         foreign key (marca_id) references marcas (id)
 );
+
+create table informacion_adicional
+(
+    id          int auto_increment
+        primary key,
+    medidas     varchar(200) charset utf8mb4 null,
+    peso        varchar(250) charset utf8mb4 null,
+    material    varchar(250)                 null,
+    origen      varchar(250)                 null,
+    producto_id int                          not null,
+    constraint informacion_adicional_productos_id_fk
+        foreign key (producto_id) references productos (id)
+            on update cascade on delete cascade
+)
+    comment 'tabla con la distinta informacion de materiales y medidas';
 
 create table ofertas
 (
@@ -98,13 +107,6 @@ create table productos_categorias
 )
     comment 'genera la relacion de varios productos con varias categorias';
 
-create table roles
-(
-    id              int auto_increment
-        primary key,
-    rol_descripcion varchar(250) charset utf8mb4 null
-);
-
 create table subcategorias
 (
     id           int auto_increment
@@ -141,7 +143,8 @@ create table usuarios
     email    varchar(300) charset utf8mb4 null,
     usuario  varchar(250) charset utf8mb4 null,
     clave    varchar(250) charset utf8mb4 null,
-    rol_id   int                          null
+    rol      varchar(150)                 null comment '0 es administador, 1 es cliente',
+    estado   tinyint(1) default 1         null
 )
     comment 'contiene la base de clientes registrados';
 

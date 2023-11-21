@@ -17,5 +17,7 @@ if ($login) {
         header( "Location: ". dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=home');
     }
 } else {
-    header('Location: ../vistas/adm_login.php');
+    (new Alerta())->add_alerta('warning', "campos sin completar");
+    (new Alerta())->get_alertas();
+    header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=login');
 }

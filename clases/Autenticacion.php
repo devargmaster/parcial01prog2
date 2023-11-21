@@ -72,9 +72,22 @@ class Autenticacion
 
 
 
-    public function verify(): bool
+    public function verify($admin = FALSE): bool
     {
-        return isset($_SESSION['loggedIn']);
+
+        if (isset($_SESSION['loggedIn'])) {
+            if($admin){
+                if ($_SESSION['loggedIn']['rol'] == "administrador"){
+                    return TRUE;
+                }else{
+                    (new Alerta())->add_alerta('warning', "El usuario no tiene permisos para ingresar a este area");
+                    header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=login');
+                }
+            }else{
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
 
     /**

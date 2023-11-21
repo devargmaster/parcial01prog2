@@ -14,6 +14,9 @@ elseif (isset($_GET['sec'])) {
   if ($_GET['sec']=='usuario' && $_GET['subsec']=='logout'){
     require_once 'accion/logout.php';
   }
+  if ($_GET['sec']=='usuario' && $_GET['subsec']=='login'){
+    require_once 'vistas/login.php';
+  }
   elseif ($_GET['sec'] == 'catalogo') {
     require_once 'vistas/catalogo.php';
   } elseif (file_exists($archivo)) {
