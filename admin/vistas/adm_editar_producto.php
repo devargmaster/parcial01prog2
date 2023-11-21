@@ -45,24 +45,29 @@ if (is_object($idsubcategoriaxproductoid)) {
                 <?php endforeach; ?>
             </select>
         </div>
-        <div class="mb-3">
-        <label for="subcategoria_id" class="form-label">Subcategoría</label>
-            <select class="form-select" id="subcategoria_id" name="subcategoria_id">
-                <option value="" <?php echo is_null($subcategoriaId) ? 'selected' : ''; ?>>Seleccione una subcategoría</option>
-                <?php foreach ($subcategorias as $subcategoria): ?>
-                    <option value="<?= $subcategoria['id']; ?>" <?= $subcategoriaId == $subcategoria['id'] ? 'selected' : ''; ?>>
-                        <?= $subcategoria['nombre']; ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+        <div class="form-group">
+            <label for="productoSubcategoria">Subcategoría del Producto</label><br>
+            <?php foreach ($subcategorias as $subcategoria): ?>
+                <label>
+                    <?php
+                    // Verifica si la subcategoría actual está en el array de subcategorías actuales
+                    $checked = in_array($subcategoria['id'], $idsubcategoriaxproductoid) ? 'checked' : '';
+                    ?>
+                    <input type="checkbox" name="subcategorias[]" value="<?= $subcategoria['id'] ?>" <?= $checked ?>>
+                    <?= $subcategoria['nombre'] ?>
+                </label><br>
+            <?php endforeach; ?>
         </div>
         <div class="mb-3">
         <label for="marca_id" class="form-label">Marca</label>
-        <select class="form-select" id="marca_id" name="marca_id">
-            <?php foreach ($marcas as $marca): ?>
-                <option value="<?= $marca->getId(); ?>" <?= $marca->getId() == $producto->getProductoMarca() ? 'selected' : ''; ?>><?= $marca->getMarcaTitulo(); ?></option>
-            <?php endforeach; ?>
-        </select>
+            <select class="form-select" id="marca_id" name="marca_id">
+                <?php foreach ($marcas as $marca): ?>
+                    <option value="<?= $marca->getId(); ?>" >
+                        <?= $marca->getMarcaTitulo(); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
         </div>
         <div class="col-md-2 mb-3">
             <label for="imagen" class="form-label">Imágen actual</label>

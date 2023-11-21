@@ -126,14 +126,13 @@ class Producto
       return $producto;
   }
 
-  public function insertarProducto($producto_nombre, $producto_descripcion, $producto_precio, $producto_imagen, $producto_stock, $producto_destacado, $producto_estado,  $producto_nuevo, $producto_fecha, $marca_id)
+  public function insertarProducto($producto_nombre, $producto_descripcion, $producto_precio, $producto_imagen, $producto_stock, $producto_destacado, $producto_estado,  $producto_nuevo,  $marca_id)
   {
     $conexion = Conexion::getConexion();
     $consulta = "INSERT INTO productos (producto_nombre, 
                      producto_descripcion, producto_precio, producto_imagen, 
                      producto_stock, producto_destacado, 
-                      producto_estado,  producto_nuevo,
-                     producto_fecha, marca_id) VALUES (:producto_nombre, :producto_descripcion, :producto_precio, :producto_imagen, :producto_stock, :producto_destacado, :producto_estado,  :producto_nuevo, :producto_fecha, :marca_id)";
+                      producto_estado,  producto_nuevo, marca_id) VALUES (:producto_nombre, :producto_descripcion, :producto_precio, :producto_imagen, :producto_stock, :producto_destacado, :producto_estado,  :producto_nuevo,  :marca_id)";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->execute(
       [
@@ -145,7 +144,6 @@ class Producto
         'producto_destacado' => $producto_destacado,
         'producto_estado' => $producto_estado,
         'producto_nuevo' => $producto_nuevo,
-        'producto_fecha' => $producto_fecha,
         'marca_id' => $marca_id
       ]
     );
@@ -168,7 +166,7 @@ class Producto
    */
 
 
-    public function actualizar_producto($id, $nombre, $descripcion, $precio, $stock, int $marca_id, $categoria_id, $subcategoria_id, int $producto_estado, int $producto_destacado , $imagen= null): void
+    public function actualizar_producto($id, $nombre, $descripcion, $precio, $stock, int $marca_id, $categoria_id, int $producto_estado, int $producto_destacado , $imagen= null): void
     {
         $conexion = Conexion::getConexion();
         $consulta = "UPDATE productos SET producto_nombre = :producto_nombre, producto_descripcion = :producto_descripcion, producto_precio = :producto_precio,producto_stock = :producto_stock, marca_id = :marca_id , producto_estado= :producto_estado ,producto_destacado= :producto_destacado ,producto_imagen=:producto_imagen  WHERE id = :id";
@@ -192,13 +190,6 @@ class Producto
            (new Productos_Categorias())->editar($id, $categoria_id);
         } else {
             (new Productos_Categorias())->insertar($id, $categoria_id);
-        }
-
-       $productos_categorias_subcategorias = (new Productos_Categorias_Subcategorias())->subcategoria_x_productoid($id);
-        if ($productos_categorias_subcategorias) {
-            (new Productos_Categorias_Subcategorias())->editar($id, $subcategoria_id);
-        } elseif($subcategoria_id) {
-            (new Productos_Categorias_Subcategorias())->insertar($id, $subcategoria_id);
         }
 
     }
@@ -235,6 +226,14 @@ class Producto
   return $productos;
 }
 
+
+    public function actualizarSubcategoriasDelProducto($productoId, $subcategoriasSeleccionadas): void
+    {
+        if (!empty($subcategoriasSeleccionadas)) {
+            (new Productos_Categorias_Subcategorias())->actualizarSubcategoriasDelProducto($productoId, $subcategoriasSeleccionadas);
+        }
+    }
+
   /**
    * Devuelve una lista de productos destacados
    *
@@ -253,10 +252,10 @@ class Producto
     return $productosDestacados;
   }
 
-  /**
-   * Devuelve la descripcion acotada a la cantidad de palabras que se le pase por parametro
-   * @param int $cantidad cantidad de palabras a mostrar
-   * @return resultado[] para cada producto devuelve el texto limitado a 20 palabras.
+ /**
+   * Devuelve una lista de productos destacados
+   *
+   * @return productos[] array de productos que cumplen con la condicion de tener la marca de destacado.
    */
   public function descripcion_limite(int $cantidad = 20): string
   {

@@ -1,6 +1,12 @@
 <?php
 $postData = $_POST;
 $datosArchivo = $_FILES['imagen'];
+$subcategoriasSeleccionadas = $_POST['subcategorias'] ?? [];
+
+echo "<pre>";
+print_r($subcategoriasSeleccionadas);
+echo "</pre>";
+
 //echo "<pre>";
 //print_r($datosArchivo);
 //echo "</pre>";
@@ -38,7 +44,6 @@ try {
     $postData['producto_destacado'],
     $postData['producto_estado'],
     $postData['producto_nuevo'],
-    $postData['producto_fecha'],
     $postData['marca_id']
   );
 
@@ -59,15 +64,13 @@ try {
         $stmt->execute([$producto_id, $categoria_id]);
     }
 
-    if (!empty($postData['producto_subcategoria'])) {
-        $subcategoria_id = $postData['producto_subcategoria'];
-        $stmt = $conexion->prepare("INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (?, ?)");
-        $stmt->execute([$producto_id, $subcategoria_id]);
+    if (!empty($postData['subcategorias'])) {
+        (new Productos_Categorias_Subcategorias())->asignarProductoASubcategorias($producto_id, $subcategoriasSeleccionadas);
     }
 
   $conexion->commit();
 
-  header('Location: index.php?sec=productos&ruta=vistas');
+  //header('Location: index.php?sec=productos&ruta=vistas');
 } catch (Exception $ex) {
   if (isset($conexion)) {
     $conexion->rollBack();

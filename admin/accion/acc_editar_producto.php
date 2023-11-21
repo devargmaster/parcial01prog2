@@ -3,7 +3,7 @@ require_once '../../functions/autoload.php';
 $postData = $_POST;
 $productoId = $_GET['id'] ?? FALSE;
 $fileData = $_FILES['imagen'];
-
+$subcategoriasSeleccionadas = $_POST['subcategorias'] ?? [];
 //echo "<pre>";
 //print_r($postData);
 //echo "</pre>";
@@ -40,11 +40,11 @@ try {
         intval($postData['stock']),
         $marca_id,
         intval($postData['categoria_id']),
-        intval($postData['subcategoria_id']),
         intval($postData['estado']),
         intval($postData['destacado']),
         $imagen,
     );
+    $producto->actualizarSubcategoriasDelProducto($id, $subcategoriasSeleccionadas);
     header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
     die();
 }

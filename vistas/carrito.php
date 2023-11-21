@@ -27,7 +27,7 @@ $items = (new Carrito())->get_carrito();
                 <tbody>
                 <?PHP foreach ($items as $key => $item) { ?>
                     <tr>
-                        <td><img src="/img/productos/<?= $item['imagen'] ?>" alt="Imágen Illustrativa de <?= $item['producto'] ?>" class="img-fluid rounded shadow-sm"></td>
+                        <td><img src="img/productos/<?= $item['imagen'] ?>" alt="Imágen Illustrativa de <?= $item['producto'] ?>" class="img-fluid rounded shadow-sm"></td>
 
                         <td class="align-middle">
                             <h2 class="h5"><?= $item['producto'] ?></h2>

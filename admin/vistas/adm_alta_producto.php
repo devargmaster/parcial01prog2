@@ -2,6 +2,9 @@
 $marcas = (new Marca())->todas_las_marcas();
 $categorias = (new Categoria())->categorias_completas();
 $subcategorias = (new Subcategoria())->subcategorias_completas();
+echo "<pre>";
+print_r($subcategorias);
+echo "</pre>";
 ?>
 <div class="container mt-5">
   <h2>Agregar Nuevo Producto</h2>
@@ -68,13 +71,13 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
       </select>
     </div>
       <div class="form-group">
-          <label for="productoSubcategoria">Subcategoría del Producto</label>
-          <select class="form-select" id="productoSubcategoria" name="producto_subcategoria">
-              <option value="">Seleccione una subcategoría</option>
-              <?php foreach ($subcategorias as $subcategoria): ?>
-                  <option value="<?= $subcategoria['id'] ?>"><?= $subcategoria['nombre'] ?></option>
-              <?php endforeach; ?>
-          </select>
+          <label for="productoSubcategoria">Subcategoría del Producto</label><br>
+          <?php foreach ($subcategorias as $subcategoria): ?>
+              <label>
+                  <input type="checkbox" name="subcategorias[]" value="<?= $subcategoria['id'] ?>">
+                  <?= $subcategoria['nombre'] ?>
+              </label><br>
+          <?php endforeach; ?>
       </div>
     <div class="form-group">
       <label for="productoEstado">Estado del Producto</label>
@@ -91,10 +94,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
         <option value="0">No</option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="productoFecha">Fecha de Alta del Producto</label>
-      <input type="date" class="form-control" id="productoFecha" name="producto_fecha">
-    </div>
+
     <div class="form-group">
       <label for="productoDestacado">Producto Destacado</label>
       <select class="form-select" id="productoDestacado" name="producto_destacado">

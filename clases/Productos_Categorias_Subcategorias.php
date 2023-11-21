@@ -14,58 +14,48 @@ class Productos_Categorias_Subcategorias
         $this->categoria_id = null;
         $this->subcategoria_id = null;
     }
+    
 
-    public function subcategoria_x_productoid($productoid)
+    /**
+     * Asigna un producto a una o más subcategorías.
+     *
+     * @param int $productoId ID del producto.
+     * @param array $subcategorias IDs de las subcategorías seleccionadas.
+     */
+    public function asignarProductoASubcategorias($productoId, $subcategorias): void
     {
         $conexion = Conexion::getConexion();
-        $query = "SELECT * FROM productos_categorias_subcategorias WHERE producto_id = ?";
-        $stmt = $conexion->prepare($query);
-        $stmt->execute(
-            [
-                $productoid
-            ]
-        );
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        foreach ($subcategorias as $subcategoriaId) {
+            $query = "INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (?, ?)";
+              $stmt = $conexion->prepare($query);
+                $stmt->execute([$productoId, $subcategoriaId]);
+        }
     }
 
-    public function insertar($producto_id,  $subcategoria_id)
+
+    /**
+     * Actualiza las subcategorías de un producto.
+     *
+     * @param int $productoId ID del producto.
+     * @param array $subcategorias IDs de las subcategorías seleccionadas.
+     */
+    public function actualizarSubcategoriasDelProducto($productoId, $subcategorias): void
+    {
+        $this->eliminarSubcategoriasProducto($productoId);
+        $this->asignarProductoASubcategorias($productoId, $subcategorias);
+    }
+
+    /**
+     * Elimina todas las subcategorías asociadas a un producto.
+     *
+     * @param int $productoId ID del producto.
+     */
+    private function eliminarSubcategoriasProducto($productoId): void
     {
         $conexion = Conexion::getConexion();
-        $query = "INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (:producto_id,  :subcategoria_id)";
+        $query = "DELETE FROM productos_categorias_subcategorias WHERE producto_id = ?";
         $stmt = $conexion->prepare($query);
-        $stmt->execute(
-            [
-                ':producto_id' => $producto_id,
-                ':subcategoria_id' => $subcategoria_id
-            ]
-        );
-        $this->id = $conexion->lastInsertId();
+        $stmt->execute([$productoId]);
     }
-
-    public function eliminar()
-    {
-        $conexion = Conexion::getConexion();
-        $query = "DELETE FROM productos_categorias_subcategorias WHERE producto_id = :id";
-        $stmt = $conexion->prepare($query);
-        $stmt->execute(
-            [
-                ':id' => $this->id
-            ]
-        );
-    }
-
-    public function editar($producto_id,  $subcategoria_id)
-    {
-        $conexion = Conexion::getConexion();
-        $query = "UPDATE productos_categorias_subcategorias SET subcategoria_id = :subcategoria_id WHERE producto_id = :id_producto";
-        $stmt = $conexion->prepare($query);
-        $stmt->execute(
-            [
-                ':subcategoria_id' => $subcategoria_id,
-                ':id_producto' => $producto_id
-            ]
-        );
-    }
-
 
 }

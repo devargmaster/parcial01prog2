@@ -83,20 +83,17 @@ class Subcategoria {
   }
 
 
-public function subcategoriaxproducto(mixed $id)
-{
-  $conexion = Conexion::getConexion();
-  $consulta = "SELECT * FROM productos_categorias_subcategorias WHERE producto_id = :id";
-  $PDOStatement = $conexion->prepare($consulta);
-  $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-  $PDOStatement->execute(
-      [
-          ':id' => $id
-      ]
-  );
-  $resultado = $PDOStatement->fetch();
-  return $resultado !== false ? $resultado : null;
-}
+  public function subcategoriaxproducto($id)
+  {
+    $conexion = Conexion::getConexion();
+    $consulta = "SELECT subcategoria_id FROM productos_categorias_subcategorias WHERE producto_id = :id";
+    $PDOStatement = $conexion->prepare($consulta);
+    $PDOStatement->execute([':id' => $id]);
+    $subcategorias = $PDOStatement->fetchAll(PDO::FETCH_COLUMN, 0);
+
+    return $subcategorias;
+  }
+
   public function getId() {
     return $this->id;
   }
