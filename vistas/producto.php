@@ -27,7 +27,7 @@ $subtotal = $producto->getProducto_precio() * $cantidad;
   <div class="row">
 
     <div class="col-md-6">
-      <img class="producto_imagen_estilo" src="../img/productos/<?= $producto->getProducto_imagen() ?>"
+      <img class="producto_imagen_estilo" src="img/productos/<?= $producto->getProducto_imagen() ?>"
            alt="<?= $producto->getProducto_nombre() ?>">
     </div>
 
@@ -38,7 +38,7 @@ $subtotal = $producto->getProducto_precio() * $cantidad;
         <p class="producto_precio_estilo_formulario"><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?>
           ARS</p>
         <div class="informacion_adicional_estilo">
-          <img src="../img/detalle.png" alt="informacion adicional"> Informacion adicional
+          <img src="img/detalle.png" alt="informacion adicional"> Informacion adicional
 
           <?php
           $infoAdicional = $producto->getProductoInfoAdicional();
@@ -57,7 +57,7 @@ $subtotal = $producto->getProducto_precio() * $cantidad;
       </div>
 
 
-        <form action="/accion/add_item_acc.php" method="GET" class="row">
+        <form action="accion/add_item_acc.php" method="GET" class="row">
             <div class="col-6 d-flex align-items-center">
                 <label for="q" class="fw-bold me-2">Cantidad: </label>
                 <input type="number" class="form-control" value="1" name="q" id="q">

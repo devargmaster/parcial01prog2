@@ -10,7 +10,7 @@ $items = (new Carrito())->get_carrito();
 <div class="container my-4">
 
     <?PHP if (count($items)) { ?>
-        <form action="../accion/update_items_acc.php" method="POST">
+        <form action="accion/update_items_acc.php" method="POST">
 
             <table class="table">
 
@@ -44,7 +44,7 @@ $items = (new Carrito())->get_carrito();
                             <p class="h5 py-3"> $<?= number_format($item['cantidad'] * $item['precio'], 2, ",", ".") ?></p>
                         </td>
                         <td class="text-end align-middle">
-                            <a href="../accion/remove_item_acc.php?id=<?= $key ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                            <a href="accion/remove_item_acc.php?id=<?= $key ?>" class="btn btn-sm btn-danger">Eliminar</a>
                         </td>
                     </tr>
                 <?PHP } ?>
@@ -65,7 +65,7 @@ $items = (new Carrito())->get_carrito();
             <div class="d-flex justify-content-end gap-2">
                 <input type="submit" value="Actualizar Cantidades" class="btn btn-warning">
                 <a href="index.php?sec=catalogo" role="button" class=" btn btn-danger">Seguir comprando</a>
-                <a href="../accion/clear_items_acc.php" role="button" class="btn btn-danger">Vaciar Carrito</a>
+                <a href="accion/clear_items_acc.php" role="button" class="btn btn-danger">Vaciar Carrito</a>
                 <a href="index.php?sec=procesar_pedido" role="button" class="btn btn-primary">Finalizar Compra</a>
             </div>
 

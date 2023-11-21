@@ -14,7 +14,7 @@ $catalogo = $productos_destacados->productos_destacados();
       foreach ($catalogo as $producto) { ?>
         <div class="col-md-4">
           <div class="card">
-            <img src="../img/productos/<?= $producto->getProducto_imagen() ?>" class='card-img-top'
+            <img src="img/productos/<?= $producto->getProducto_imagen() ?>" class='card-img-top'
                  alt='<?= $producto->getProducto_nombre(); ?>'>
             <div class="card-body">
               <h2 class="card-title mb-2"><a href="index.php?sec=producto&id=<?= $producto->getID(); ?>"

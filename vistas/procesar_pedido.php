@@ -15,7 +15,7 @@ if (count($items) == 0) {
         <tbody>
         <?php foreach ($items as $item) { ?>
             <tr>
-                <td><img src="/img/productos/<?= $item['imagen'] ?>" alt="Imagen de <?= $item['producto'] ?>" class="img-fluid rounded shadow-sm" style="width: 100px; height: auto;"></td>
+                <td><img src="img/productos/<?= $item['imagen'] ?>" alt="Imagen de <?= $item['producto'] ?>" class="img-fluid rounded shadow-sm" style="width: 100px; height: auto;"></td>
                 <td><?= $item['producto'] ?></td>
                 <td><?= $item['cantidad'] ?></td>
                 <td>$<?= number_format($item['precio'], 2, ",", ".") ?></td>

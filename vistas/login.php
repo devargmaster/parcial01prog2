@@ -14,7 +14,7 @@
             }
             ?>
         </div>
-        <form class="row g-3" action="../accion/auth_login.php" method="POST">
+        <form class="row g-3" action="accion/auth_login.php" method="POST">
             <div class="col-12 mb-3">
                 <label for="username" class="form-label">Nombre de Usuario</label>
                 <input type="text" class="form-control" id="username" name="username">
