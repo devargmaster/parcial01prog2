@@ -71,7 +71,7 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
         $consulta = "SELECT p.* FROM productos p
         JOIN productos_categorias pc ON p.id = pc.producto_id
         JOIN categorias c ON c.id = pc.categoria_id
-        WHERE c.nombre = ?";
+        WHERE c.nombre = ? and  p.producto_estado = 1";
 
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
@@ -93,7 +93,7 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
             JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id
             JOIN subcategorias s ON pcs.subcategoria_id = s.id
             JOIN categorias c ON s.categoria_id = c.id
-            WHERE s.descripcion = :subcategoriaDescripcion";
+            WHERE s.descripcion = :subcategoriaDescripcion and  p.producto_estado = 1";
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
         $PDOStatement->execute(['subcategoriaDescripcion' => $subcategoriaDescripcion]);

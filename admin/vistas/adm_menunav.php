@@ -52,10 +52,7 @@
             Usuarios
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
-            <li><a class="dropdown-item" href="#">Alta</a></li>
-            <li><a class="dropdown-item" href="#">Baja</a></li>
-            <li><a class="dropdown-item" href="#">Modificación</a></li>
-              <li><a class="dropdown-item" href="../admin/accion/auth_logout.php">Desloguearse</a></li>
+              <li><a class="dropdown-item" href="../admin/accion/auth_logout.php">Salir</a></li>
           </ul>
         </li>
       </ul>
