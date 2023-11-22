@@ -27,7 +27,7 @@
 
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
-<a href="vistas/registro.php">Registrarse</a>
+<a href="index.php?sec=registro">Registrarse</a>
 
     </div>
 </div>

@@ -3,16 +3,6 @@ $postData = $_POST;
 $datosArchivo = $_FILES['imagen'];
 $subcategoriasSeleccionadas = $_POST['subcategorias'] ?? [];
 
-echo "<pre>";
-print_r($subcategoriasSeleccionadas);
-echo "</pre>";
-
-//echo "<pre>";
-//print_r($datosArchivo);
-//echo "</pre>";
-//echo "<pre>";
-//print_r($datosArchivo);
-//echo "</pre>";
 if (!empty($datosArchivo['tmp_name'])) {
 
   $og_name = explode(".", $datosArchivo['name']);
@@ -70,7 +60,7 @@ try {
 
   $conexion->commit();
 
-  //header('Location: index.php?sec=productos&ruta=vistas');
+  header('Location: index.php?sec=productos&ruta=vistas');
 } catch (Exception $ex) {
   if (isset($conexion)) {
     $conexion->rollBack();

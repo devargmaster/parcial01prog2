@@ -14,7 +14,7 @@ class Productos_Categorias_Subcategorias
         $this->categoria_id = null;
         $this->subcategoria_id = null;
     }
-    
+
 
     /**
      * Asigna un producto a una o más subcategorías.

@@ -40,9 +40,10 @@ class Usuario
         return $result;
     }
 
-    public function insertar() {
+    public function insertar(): bool
+    {
         $conexion = Conexion::getConexion();
-        $consulta = "INSERT INTO usuarios (nombre, apellido, email, clave, estado, rol) VALUES (:nombre, :apellido, :email, :clave, :estado, :rol)";
+        $consulta = "INSERT INTO usuarios (nombre, apellido, email, usuario, clave, rol) VALUES (:nombre, :apellido, :email,:usuario, :clave, :rol)";
 
         $sentencia = $conexion->prepare($consulta);
 
@@ -51,8 +52,8 @@ class Usuario
                 ':nombre' => $this->nombre,
                 ':apellido' => $this->apellido,
                 ':email' => $this->email,
-                ':password' => $this->clave,
-                ':habilitado' => $this->habilitado,
+                ':usuario' => $this->usuario,
+                ':clave' => $this->clave,
                 ':rol' => $this->rol
             ]
         );
@@ -63,6 +64,7 @@ class Usuario
 
         return $resultado;
     }
+
 
     public function eliminar(): void
     {
