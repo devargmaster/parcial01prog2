@@ -27,6 +27,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
           <td><?php echo $subcategoria['nombre']; ?></td>
           <td><?php echo $subcategoria['descripcion']; ?></td>
           <td><?php echo $subcategoria['categoria_nombre'] ?? 'No Asignado'; ?></td>
+
         <td>
             <a href="index.php?sec=editar_subcategoria&ruta=adm&id=<?= $subcategoria['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-subcategoria-id="<?= $subcategoria['id']; ?>">Eliminar</button>
@@ -67,6 +68,19 @@ $categorias = (new Categoria())->categorias_completas();
                                 <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
                             <?php endforeach; ?>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">¿Es Menú?</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="es_menu" id="esMenuSi" value="1">
+                                <label class="form-check-label" for="esMenuSi">Sí</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="es_menu" id="esMenuNo" value="0" checked>
+                                <label class="form-check-label" for="esMenuNo">No</label>
+                            </div>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>

@@ -6,6 +6,7 @@ class Subcategoria {
   private $categoria_id;
   private $producto_id;
   private $subcategoria_id;
+  private $esmenu;
   public function __construct() {}
 
   /**
@@ -15,7 +16,9 @@ class Subcategoria {
   public function subcategorias_completas(): array
   {
     $conexion = Conexion::getConexion();
-    $consulta = "SELECT subcategorias.*, categorias.nombre as categoria_nombre FROM subcategorias LEFT JOIN categorias ON subcategorias.categoria_id = categorias.id";
+    $consulta = "SELECT subcategorias.*, categorias.nombre as categoria_nombre FROM subcategorias 
+    LEFT JOIN categorias ON subcategorias.categoria_id = categorias.id
+    WHERE esmenu = 0";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->execute();
     return $PDOStatement->fetchAll(PDO::FETCH_ASSOC);

@@ -24,6 +24,19 @@ $categorias_completas = (new Categoria())->categorias_completas();
                 <?php endforeach; ?>
             </select>
         </div>
+        <div class="mb-3">
+            <label class="form-label">¿Es Menú?</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="es_menu" id="esMenuSi" value="1">
+                    <label class="form-check-label" for="esMenuSi">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="es_menu" id="esMenuNo" value="0" checked>
+                    <label class="form-check-label" for="esMenuNo">No</label>
+                </div>
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
 </div>
