@@ -50,8 +50,8 @@ try {
 
     if (!empty($postData['producto_categoria'])) {
         $categoria_id = $postData['producto_categoria'];
-        $stmt = $conexion->prepare("INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (?, ?)");
-        $stmt->execute([$producto_id, $categoria_id]);
+        $PDOStatement = $conexion->prepare("INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (?, ?)");
+        $PDOStatement->execute([$producto_id, $categoria_id]);
     }
 
     if (!empty($postData['subcategorias'])) {

@@ -17,21 +17,21 @@ class Productos_Categorias
     {
         $conexion = Conexion::getConexion();
         $query = "SELECT * FROM productos_categorias WHERE producto_id = ?";
-        $stmt = $conexion->prepare($query);
-        $stmt->execute(
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(
             [
                 $producto_id
             ]
         );
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $PDOStatement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function insertar($producto_id, $categoria_id)
     {
         $conexion = Conexion::getConexion();
         $query = "INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (:producto_id, :categoria_id)";
-        $stmt = $conexion->prepare($query);
-        $stmt->execute(
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(
             [
                 ':producto_id' => $producto_id,
                 ':categoria_id' => $categoria_id
@@ -44,8 +44,8 @@ class Productos_Categorias
     {
         $conexion = Conexion::getConexion();
         $query = "DELETE FROM productos_categorias WHERE producto_id = :id";
-        $stmt = $conexion->prepare($query);
-        $stmt->execute(
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(
             [
                 ':id' => $this->id
             ]
@@ -56,8 +56,8 @@ class Productos_Categorias
     {
         $conexion = Conexion::getConexion();
         $query = "UPDATE productos_categorias SET producto_id = :nuevo_producto_id, categoria_id = :nueva_categoria_id WHERE producto_id = :id_actual";
-        $stmt = $conexion->prepare($query);
-        $stmt->execute(
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(
             [
                 ':nuevo_producto_id' => $producto_id,
                 ':nueva_categoria_id' => $categoria_id,

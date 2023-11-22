@@ -27,8 +27,8 @@ class Productos_Categorias_Subcategorias
         $conexion = Conexion::getConexion();
         foreach ($subcategorias as $subcategoriaId) {
             $query = "INSERT INTO productos_categorias_subcategorias (producto_id, subcategoria_id) VALUES (?, ?)";
-            $stmt = $conexion->prepare($query);
-            $stmt->execute([$productoId, $subcategoriaId]);
+            $PDOStatement = $conexion->prepare($query);
+            $PDOStatement->execute([$productoId, $subcategoriaId]);
         }
     }
 
@@ -58,9 +58,9 @@ class Productos_Categorias_Subcategorias
     {
         $conexion = Conexion::getConexion();
         $query = "DELETE FROM productos_categorias_subcategorias WHERE producto_id = :productoId";
-        $stmt = $conexion->prepare($query);
-        $stmt->bindParam(':productoId', $productoId, PDO::PARAM_INT);
-        $stmt->execute();
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->bindParam(':productoId', $productoId, PDO::PARAM_INT);
+        $PDOStatement->execute();
 
     }
 }
