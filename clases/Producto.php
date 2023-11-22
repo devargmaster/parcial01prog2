@@ -227,10 +227,10 @@ class Producto
 }
 
 
-    public function actualizarSubcategoriasDelProducto($productoId, $subcategoriasSeleccionadas): void
+    public function actualizarSubcategoriasDelProducto($productoId, $subcategoriasSeleccionadas,$todasLasSubcategorias): void
     {
         if (!empty($subcategoriasSeleccionadas)) {
-            (new Productos_Categorias_Subcategorias())->actualizarSubcategoriasDelProducto($productoId, $subcategoriasSeleccionadas);
+            (new Productos_Categorias_Subcategorias())->actualizarSubcategoriasDelProducto($productoId, $subcategoriasSeleccionadas,$todasLasSubcategorias);
         }
     }
 

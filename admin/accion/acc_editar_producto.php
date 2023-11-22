@@ -4,6 +4,7 @@ $postData = $_POST;
 $productoId = $_GET['id'] ?? FALSE;
 $fileData = $_FILES['imagen'];
 $subcategoriasSeleccionadas = $_POST['subcategorias'] ?? [];
+$todasLasSubcategorias = $_POST['todasSubcategorias'] ?? [];
 //echo "<pre>";
 //print_r($postData);
 //echo "</pre>";
@@ -24,9 +25,9 @@ try {
         $imagen = $postData['imagen_og'];
     }
 
-//    echo "<pre>";
-//    print_r($producto);
-//    echo "</pre>";
+    echo "<pre>";
+    print_r($producto);
+    echo "</pre>";
 
     $id = $producto->getID();
     $marca_id = intval($postData['marca_id']);
@@ -44,8 +45,8 @@ try {
         intval($postData['destacado']),
         $imagen,
     );
-    $producto->actualizarSubcategoriasDelProducto($id, $subcategoriasSeleccionadas);
-    header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
+    $producto->actualizarSubcategoriasDelProducto($id, $subcategoriasSeleccionadas,$todasLasSubcategorias);
+    //header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=productos&ruta=vistas');
     die();
 }
 catch (Exception $e) {

@@ -39,10 +39,21 @@ class Productos_Categorias_Subcategorias
      * @param int $productoId ID del producto.
      * @param array $subcategorias IDs de las subcategorías seleccionadas.
      */
-    public function actualizarSubcategoriasDelProducto($productoId, $subcategorias): void
+
+    public function actualizarSubcategoriasDelProducto($productoId, $subcategoriasSeleccionadas, $todasLasSubcategorias): void
     {
-        $this->eliminarSubcategoriasProducto($productoId);
-        $this->asignarProductoASubcategorias($productoId, $subcategorias);
+        $subcategoriasADesmarcar = array_diff($todasLasSubcategorias, $subcategoriasSeleccionadas);
+
+
+        foreach ($subcategoriasADesmarcar as $subcategoriaId) {
+            $this->eliminarSubcategoriaEspecificaDelProducto($productoId, $subcategoriaId);
+        }
+
+
+        if (!empty($subcategoriasSeleccionadas)) {
+            $this->asignarProductoASubcategorias($productoId, $subcategoriasSeleccionadas);
+
+        }
     }
 
     /**
@@ -50,12 +61,15 @@ class Productos_Categorias_Subcategorias
      *
      * @param int $productoId ID del producto.
      */
-    private function eliminarSubcategoriasProducto($productoId): void
+    private function eliminarSubcategoriaEspecificaDelProducto($productoId, $subcategoriaId): void
     {
         $conexion = Conexion::getConexion();
-        $query = "DELETE FROM productos_categorias_subcategorias WHERE producto_id = ?";
+        $query = "DELETE FROM productos_categorias_subcategorias WHERE producto_id = :productoId AND subcategoria_id = :subcategoriaId";
         $stmt = $conexion->prepare($query);
-        $stmt->execute([$productoId]);
+        $stmt->bindParam(':productoId', $productoId, PDO::PARAM_INT);
+        $stmt->bindParam(':subcategoriaId', $subcategoriaId, PDO::PARAM_INT);
+        $stmt->execute();
     }
+
 
 }

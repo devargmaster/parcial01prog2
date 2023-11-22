@@ -50,7 +50,7 @@ if (is_object($idsubcategoriaxproductoid)) {
             <?php foreach ($subcategorias as $subcategoria): ?>
                 <label>
                     <?php
-                    // Verifica si la subcategoría actual está en el array de subcategorías actuales
+                    echo '<input type="hidden" name="todasSubcategorias[]" value="' . $subcategoria['id'] . '">';
                     $checked = in_array($subcategoria['id'], $idsubcategoriaxproductoid) ? 'checked' : '';
                     ?>
                     <input type="checkbox" name="subcategorias[]" value="<?= $subcategoria['id'] ?>" <?= $checked ?>>
