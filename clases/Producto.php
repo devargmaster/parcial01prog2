@@ -36,7 +36,7 @@ class Producto
     public function todos_los_productos(): array
     {
         $conexion = Conexion::getConexion();
-        $consulta = "SELECT * FROM productos p 
+        $consulta = "SELECT p.* FROM productos p 
 JOIN productos_categorias pc ON p.id = pc.producto_id
 JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where producto_estado = 1";
         $PDOStatement = $conexion->prepare($consulta);

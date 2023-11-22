@@ -4,14 +4,19 @@ $id = $_GET['id'];
 
 try {
     $producto = (new Producto())->producto_x_id($id);
+    if ($producto === null) {
+        throw new Exception("Producto no encontrado");
+    }
 } catch (Exception $e) {
-  echo "<div class='alert alert-danger' role='alert'>
-    No se encontraron productos para el id: $id
-  </div>";
-}
-$cantidad = 1; // Cantidad inicial
+    echo "<div class='alert alert-danger' role='alert'>
+        No se encontraron productos para el id: $id
+    </div>";
 
-// Si se recibe una actualización de cantidad desde el formulario
+    return;
+}
+$cantidad = 1;
+
+
 if (isset($_POST['actualizar_cantidad'])) {
     $cantidad = $_POST['cantidad'];
 }
