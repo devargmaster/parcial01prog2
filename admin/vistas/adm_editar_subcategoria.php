@@ -28,11 +28,11 @@ $categorias_completas = (new Categoria())->categorias_completas();
             <label class="form-label">¿Es Menú?</label>
             <div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="es_menu" id="esMenuSi" value="1">
+                    <input class="form-check-input" type="radio" name="es_menu" id="esMenuSi" value="1" <?= $subcategoria->getEsmenu() ? 'checked' : ''; ?>>
                     <label class="form-check-label" for="esMenuSi">Sí</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="es_menu" id="esMenuNo" value="0" checked>
+                    <input class="form-check-input" type="radio" name="es_menu" id="esMenuNo" value="0" <?= !$subcategoria->getEsmenu() ? 'checked' : ''; ?>>
                     <label class="form-check-label" for="esMenuNo">No</label>
                 </div>
             </div>

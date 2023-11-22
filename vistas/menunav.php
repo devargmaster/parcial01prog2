@@ -9,7 +9,7 @@ if (str_contains($currentPath, '/vistas/')) {
 }
 
 $secciones_completas = (new Categoria())->categorias_completas();
-$subcategorias_completas = (new Subcategoria())->subcategorias_completas();
+$subcategorias_completas = (new Subcategoria())->subcategorias_completas_nofiltrada();
 $subcategorias_por_categoria = [];
 foreach ($subcategorias_completas as $subcategoria) {
     $subcategorias_por_categoria[$subcategoria['categoria_id']][] = $subcategoria;

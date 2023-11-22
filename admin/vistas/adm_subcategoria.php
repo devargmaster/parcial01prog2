@@ -1,5 +1,5 @@
 <?php
-$subcategorias = (new Subcategoria())->subcategorias_completas();
+$subcategorias = (new Subcategoria())->subcategorias_completas_nofiltrada();
 //echo "<pre>";
 //print_r($subcategorias);
 //echo "</pre>";

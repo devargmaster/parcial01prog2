@@ -25,6 +25,19 @@ class Subcategoria {
   }
 
   /**
+   * @return array
+   * Devuelve todas las subcategorías para el backend
+   */
+  public function subcategorias_completas_nofiltrada(): array
+  {
+    $conexion = Conexion::getConexion();
+    $consulta = "SELECT subcategorias.*, categorias.nombre as categoria_nombre FROM subcategorias 
+    LEFT JOIN categorias ON subcategorias.categoria_id = categorias.id";
+    $PDOStatement = $conexion->prepare($consulta);
+    $PDOStatement->execute();
+    return $PDOStatement->fetchAll(PDO::FETCH_ASSOC);
+  }
+  /**
    * @param $categoria_id
    * @return array|false
    * Devuelve todas las subcategorías de una categoría
@@ -73,13 +86,14 @@ class Subcategoria {
   public function actualizar(): bool
   {
     $conexion = Conexion::getConexion();
-    $consulta = "UPDATE subcategorias SET nombre = :nombre, descripcion = :descripcion, categoria_id = :categoria_id WHERE id = :id";
+    $consulta = "UPDATE subcategorias SET nombre = :nombre, descripcion = :descripcion, categoria_id = :categoria_id , esmenu = :esmenu WHERE id = :id";
     $sentencia = $conexion->prepare($consulta);
     return $sentencia->execute(
       [
         ':nombre' => $this->nombre,
         ':descripcion' => $this->descripcion,
         ':categoria_id' => $this->categoria_id,
+        ':esmenu' => $this->esmenu,
         ':id' => $this->id
       ]
     );
@@ -159,6 +173,13 @@ class Subcategoria {
   public function setSubcategoriaId($subcategoria_id): void
   {
     $this->subcategoria_id = $subcategoria_id;
+  }
+  public function getEsmenu() {
+    return $this->esmenu;
+  }
+
+  public function setEsmenu($esmenu) {
+    $this->esmenu = $esmenu;
   }
 
 }

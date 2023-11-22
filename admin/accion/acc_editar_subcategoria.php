@@ -8,6 +8,7 @@ try {
     $subcategoria->setNombre($postData['nombre']);
     $subcategoria->setDescripcion($postData['descripcion']);
     $subcategoria->setCategoriaId($postData['categoria_id']);
+    $subcategoria->setEsmenu($postData['es_menu']);
     $subcategoria->actualizar();
     header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=subcategoria&ruta=vistas');
 } catch (Exception $e) {
