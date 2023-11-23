@@ -205,7 +205,7 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
     /**
      * Elimina esta instancia de la base de datos
      */
-    public function delete()
+    public function delete(): void
     {
         $conexion = Conexion::getConexion();
         $query = "DELETE FROM productos WHERE id = ?";
@@ -226,9 +226,7 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
         $PDOStatement->execute(['precioMinimo' => $precioMinimo, 'precioMaximo' => $precioMaximo]);
-        $productos = $PDOStatement->fetchAll();
-
-        return $productos;
+        return $PDOStatement->fetchAll();
     }
 
 
@@ -251,8 +249,7 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
                 $productos[] = $producto;
             }
         }
-        $productosDestacados = array_slice($productos, 0, 3);
-        return $productosDestacados;
+        return array_slice($productos, 0, 3);
     }
 
     /**
@@ -376,7 +373,7 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
     /**
      * @param mixed $producto_nombre
      */
-    public function setProductoNombre($producto_nombre): void
+    public function setProductoNombre(mixed $producto_nombre): void
     {
         $this->producto_nombre = $producto_nombre;
     }

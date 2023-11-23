@@ -49,9 +49,7 @@ try {
     }
 
     if (!empty($postData['producto_categoria'])) {
-        $categoria_id = $postData['producto_categoria'];
-        $PDOStatement = $conexion->prepare("INSERT INTO productos_categorias (producto_id, categoria_id) VALUES (?, ?)");
-        $PDOStatement->execute([$producto_id, $categoria_id]);
+        (new Productos_Categorias())->insertar($producto_id, $postData['producto_categoria']);
     }
 
     if (!empty($postData['subcategorias'])) {
