@@ -1,0 +1,10 @@
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Home', 'home', 1);
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Catálogo', 'catalogo', 1);
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Bazar', 'bazar', 1);
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Comedor', 'comedor', 1);
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Decor', 'decor', 1);
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Iluminación', 'iluminacion', 1);
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Mis Datos', 'datos_alumno', 1);
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Contactanos!', 'contacto', 1);
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Carrito', 'carrito', 1);
+INSERT INTO decotutti.categorias (nombre, descripcion, habilitada) VALUES ('Usuario', 'usuario', 1);

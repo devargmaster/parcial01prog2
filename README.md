@@ -10,6 +10,8 @@ Contenido que se entrega:
 Sistema de Ecommerce
 ```
 ## Consideraciones:
+Se entrega en carpeta ArchivosCreateInsert los archivos necesarios para crear la base de datos y cargar los datos de prueba
+```
 - Primero debe crear un esquema de base de datos con el nombre de "decotutti"
 - Luego debe ejecutar el script "00_create_tables.sql" crea las tablas y las relaciones
 - Luego debe ejecutar el script "01_marcas.sql" inserta las marcas

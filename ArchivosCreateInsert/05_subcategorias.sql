@@ -1,0 +1,13 @@
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Utensillos', 'utensillos', 3, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Textiles', 'textiles', 3, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Floreros', 'floreros', 5, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Ingresar', 'login', 10, 1);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Salir', 'logout', 10, 1);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Cuadros', 'cuadros', 5, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Almacenaje', 'almacenaje', 5, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Sillas', 'sillas', 4, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Mesas', 'mesas', 4, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Iluminacion de pie', 'iluminacion_pie', 6, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Iluminación de Mesa', 'iluminacion_mesa', 6, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Carteles', 'carteles', 5, 0);
+INSERT INTO decotutti.subcategorias (nombre, descripcion, categoria_id, esmenu) VALUES ('Accesorios', 'accesorios', 3, 0);
