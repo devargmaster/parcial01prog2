@@ -55,6 +55,14 @@ if (isset($_GET['producto'])) {
                     <?php } ?>
                 <?php } ?>
             </ul>
+            <?php
+
+            if (isset($_SESSION['loggedIn'])) {
+                $nombreUsuario = $_SESSION['loggedIn']['nombre_completo'];
+                echo "<span class='text-sm font-weight-light me-1'>(Hola, $nombreUsuario)</span>";
+            }
+
+            ?>
             <form class="d-flex" action="index.php" method="get" role="search">
                 <input class="form-control me-2" type="search" name="producto" placeholder="Buscar" aria-label="Search">
                 <button class="btn carrito_boton_estilo" type="submit">Buscar</button>
