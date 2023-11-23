@@ -28,36 +28,37 @@ if (count($items) == 0) {
     <form action="index.php?sec=procesar_pago" method="post">
         <div class="mb-3">
             <label for="nombreCompleto" class="form-label">Nombre Completo</label>
-            <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" >
+            <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" value="Juan Pérez">
         </div>
         <div class="mb-3">
             <label for="direccion" class="form-label">Dirección de Entrega</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" >
+            <input type="text" class="form-control" id="direccion" name="direccion" value="Calle Falsa 123">
         </div>
         <div class="mb-3">
             <label for="ciudad" class="form-label">Ciudad</label>
-            <input type="text" class="form-control" id="ciudad" name="ciudad" >
+            <input type="text" class="form-control" id="ciudad" name="ciudad" value="Ciudad Ejemplo">
         </div>
         <div class="mb-3">
             <label for="codigoPostal" class="form-label">Código Postal</label>
-            <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" >
+            <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" value="28000">
         </div>
         <div class="mb-3">
             <label for="telefono" class="form-label">Teléfono de Contacto</label>
-            <input type="tel" class="form-control" id="telefono" name="telefono" >
+            <input type="tel" class="form-control" id="telefono" name="telefono" value="+54911548886633">
         </div>
         <div class="mb-3">
             <label for="metodoEnvio" class="form-label">Método de Envío</label>
             <select class="form-select" id="metodoEnvio" name="metodoEnvio">
                 <option value="estandar">Estándar</option>
-                <option value="express">Express</option>
+                <option value="express" selected>Express</option>
                 <option value="internacional">Internacional</option>
             </select>
         </div>
         <div class="mb-3">
             <label for="comentarios" class="form-label">Comentarios Adicionales</label>
-            <textarea class="form-control" id="comentarios" name="comentarios" rows="3"></textarea>
+            <textarea class="form-control" id="comentarios" name="comentarios" rows="3">Por favor, dejar el paquete en la recepción.</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Finalizar Compra</button>
     </form>
+
 </div>
