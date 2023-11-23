@@ -8,7 +8,9 @@ var_dump($postData);
 echo "</pre>";
 
 $login = (new Autenticacion())->log_in($postData['username'], $postData['pass']);
-
+echo "<pre>";
+var_dump($login);
+echo "</pre>";
 if ($login) {
    $rolUsuario = $_SESSION['loggedIn']['rol'];
     if ($rolUsuario == 'administrador') {

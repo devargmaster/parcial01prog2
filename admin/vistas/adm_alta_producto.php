@@ -111,7 +111,6 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
     const toggleButton = document.getElementById('toggleInfoAdicional');
 
     toggleButton.addEventListener('click', function() {
-      // Esto alterna la visibilidad del contenedor
       if (container.style.display === 'none') {
         container.style.display = 'block';
         toggleButton.textContent = 'Ocultar Información Adicional';

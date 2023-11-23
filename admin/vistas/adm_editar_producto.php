@@ -20,7 +20,7 @@ if (is_object($idsubcategoriaxproductoid)) {
 
 ?>
 <div class="">
-    <form  action="/admin/accion/acc_editar_producto.php?id=<?= $producto->getId(); ?>" method="post" enctype="multipart/form-data">
+    <form  action="accion/acc_editar_producto.php?id=<?= $producto->getId(); ?>" method="post" enctype="multipart/form-data">
         <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $producto->getProducto_nombre(); ?>">

@@ -33,7 +33,6 @@ class Autenticacion
         $datosUsuario = (new Usuario())->usuario_x_username($username);
         if ($datosUsuario) {
             if (password_verify($clave, $datosUsuario->getClave())) {
-                echo "rol". $datosUsuario->getRol();
                 $datosLogin['username'] = $datosUsuario->getUsuario();
                 $datosLogin['nombre_completo'] = $datosUsuario->getNombre();
                 $datosLogin['id'] = $datosUsuario->getId();

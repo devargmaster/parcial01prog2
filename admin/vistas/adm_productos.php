@@ -71,7 +71,7 @@ if (strpos($currentPath, '/vistas/') !== false) {
 
     var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
     confirmDeleteButton.onclick = function() {
-      window.location.href = '/admin/accion/acc_borra_producto.php?id=' + productoId;
+      window.location.href = 'accion/acc_borra_producto.php?id=' + productoId;
     };
   });
 </script>

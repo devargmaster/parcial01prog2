@@ -4,7 +4,7 @@ $oferta = (new Oferta())->ofertaxId($id);
 $productos = (new Producto())->todos_los_productos();
 ?>
 <div class="">
-    <form class="" action="/admin/accion/acc_editar_oferta.php?id=<?= $oferta->getId(); ?>" method="post">
+    <form class="" action="accion/acc_editar_oferta.php?id=<?= $oferta->getId(); ?>" method="post">
         <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $oferta->getOfertaTitulo(); ?>">

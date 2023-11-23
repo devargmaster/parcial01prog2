@@ -1,13 +1,10 @@
 <?php
-// Primero, obtenemos las categorías completas.
 $categorias = (new Categoria())->categorias_completas();
 ?>
 
 <div class="container mt-5">
   <h2>Administrar Categorías</h2>
   <button class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#modalCategoria">Nueva Categoría</button>
-
-  <!-- Tabla para mostrar categorías -->
   <table class="table">
     <thead>
     <tr>
@@ -27,7 +24,6 @@ $categorias = (new Categoria())->categorias_completas();
         <td><?=$categoria['habilitada'] ? 'Sí' : 'No'; ?></td>
         <td>
             <a href="index.php?sec=editar_categoria&ruta=adm&id=<?= $categoria['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
-          <!-- Botón para eliminar una categoría -->
             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-categoria-id="<?= $categoria['id']; ?>">Eliminar</button>
         </td>
       </tr>
@@ -35,7 +31,7 @@ $categorias = (new Categoria())->categorias_completas();
     </tbody>
   </table>
 </div>
-<!-- Modal para añadir/editar categorías -->
+
 <div class="modal fade" id="modalCategoria" tabindex="-1" aria-labelledby="modalCategoriaLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -65,9 +61,6 @@ $categorias = (new Categoria())->categorias_completas();
   </div>
 </div>
 
-
-
-<!-- Modal de Confirmación de Eliminación -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -93,7 +86,7 @@ $categorias = (new Categoria())->categorias_completas();
 
         var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
         confirmDeleteButton.onclick = function() {
-            window.location.href = '/admin/accion/acc_borra_categoria.php?id=' + categoriaId;
+            window.location.href = 'accion/acc_borra_categoria.php?id=' + categoriaId;
         };
     });
 </script>

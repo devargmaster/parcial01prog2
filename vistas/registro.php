@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h1 class="mb-4 text-center">Registro</h1>
-            <form action="../accion/acc_registro.php" method="POST">
+            <form action="accion/acc_registro.php" method="POST">
                 <div class="form-group mb-3">
                     <label for="username">Nombre de Usuario</label>
                     <input type="text" class="form-control" name="username" id="username" required>

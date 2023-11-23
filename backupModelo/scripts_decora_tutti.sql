@@ -114,6 +114,7 @@ create table subcategorias
     nombre       varchar(250) charset utf8mb4 null,
     descripcion  varchar(500) charset utf8mb4 null,
     categoria_id int                          not null,
+    esmenu    tinyint(1)                   null,
     constraint subcategorias_categorias_id_fk
         foreign key (categoria_id) references categorias (id)
             on update cascade

@@ -5,7 +5,7 @@ $categorias_completas = (new Categoria())->categorias_completas();
 ?>
 
 <div class="">
-    <form class="" action="/admin/accion/acc_editar_subcategoria.php?id=<?= $subcategoria->getId(); ?>" method="post">
+    <form class="" action="accion/acc_editar_subcategoria.php?id=<?= $subcategoria->getId(); ?>" method="post">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $subcategoria->getNombre(); ?>">

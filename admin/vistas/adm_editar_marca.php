@@ -3,7 +3,7 @@ $id = $_GET['id'] ?? FALSE;
 $marca = (new Marca())->marcaxid($id);
 ?>
 <div class="">
-    <form  action="/admin/accion/acc_editar_marca.php?id=<?= $marca->getId(); ?>" method="POST">
+    <form  action="accion/acc_editar_marca.php?id=<?= $marca->getId(); ?>" method="POST">
         <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $marca->getMarcaTitulo(); ?>">

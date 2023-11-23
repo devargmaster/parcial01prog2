@@ -11,11 +11,6 @@
         </div>
       </div>
       <div class="col-md-4">
-        <p>Categorías</p>
-
-        </ul>
-      </div>
-      <div class="col-md-4">
         <p>Contacto</p>
         <p>Email: walter.arce@davinci.edu.ar</p>
         <p>Teléfono: 5551115550</p>
