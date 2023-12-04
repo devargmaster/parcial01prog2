@@ -56,20 +56,6 @@ class Autenticacion
 
     }
 
-    public function usuario_x_id($id)
-    {
-        $conexion = Conexion::getConexion();
-        $query = "SELECT * FROM usuarios WHERE id = ?";
-        $PDOStatement = $conexion->prepare($query);
-        $PDOStatement->execute(
-            [
-                $id
-            ]
-        );
-        return $PDOStatement->fetch(PDO::FETCH_ASSOC);
-    }
-
-
 
     public function verify($admin = FALSE): bool
     {

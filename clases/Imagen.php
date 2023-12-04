@@ -18,7 +18,10 @@ class Imagen
     }
   }
 
-  public function actualizarImagen($directorio, $datosArchivo, $imagenActual): string
+    /**
+     * @throws Exception
+     */
+    public function actualizarImagen($directorio, $datosArchivo, $imagenActual): string
   {
     $this->borrarImagen($directorio . $imagenActual);
     return $this->subirImagen($directorio, $datosArchivo);
@@ -29,9 +32,9 @@ class Imagen
 
     if (file_exists(($archivo))) {
 
-      echo "<pre>";
-      print_r($archivo);
-      echo "</pre>";
+//      echo "<pre>";
+//      print_r($archivo);
+//      echo "</pre>";
 
       $fileDelete =  unlink($archivo);
 

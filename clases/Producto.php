@@ -113,6 +113,25 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
         return $productos;
     }
 
+    public function productos_destacados_cantidad_subcategoria()
+    {
+        $conexion = Conexion::getConexion();
+        $consulta = "SELECT 
+    p.producto_nombre, 
+    (SELECT COUNT(DISTINCT pcs.subcategoria_id) 
+     FROM productos_categorias_subcategorias pcs 
+     WHERE pcs.producto_id = p.id) AS cantidad_subcategorias 
+FROM 
+    productos p 
+JOIN 
+    productos_categorias pc ON pc.producto_id = p.id 
+WHERE 
+    p.producto_destacado = 1 
+LIMIT 3;";
+        $PDOStatement = $conexion->prepare($consulta);
+        $PDOStatement->execute();
+        return $PDOStatement->fetchAll();
+    }
     /**
      * Devuelve un producto en particular caso contrario retorna nulo
      * @param string $idProducto Un entero con el id de producto a buscar

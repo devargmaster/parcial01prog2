@@ -13,6 +13,8 @@ class Categoria
 
   }
 
+
+
   public function categorias_completas(): array
   {
     $conexion = Conexion::getConexion();
@@ -23,6 +25,14 @@ class Categoria
     return $PDOStatement->fetchAll();
   }
 
+  public function categoria_con_cantidad(): array
+    {
+        $conexion = Conexion::getConexion();
+        $consulta = "SELECT c.nombre, COUNT(*) as cantidad FROM categorias c join subcategorias s on c.id=s.categoria_id where s.esmenu=0 group by c.nombre";
+        $PDOStatement =  $conexion->prepare($consulta);
+        $PDOStatement->execute();
+        return $PDOStatement->fetchAll();
+    }
     public function insertar() {
         $conexion = Conexion::getConexion();
         $consulta = "INSERT INTO categorias (nombre, descripcion, habilitada) VALUES (:nombre, :descripcion, :habilitada)";
@@ -44,6 +54,11 @@ class Categoria
         return $resultado;
     }
 
+    /**
+     * @param mixed $id
+     * @return Categoria|null
+     */
+
 public function eliminar(): void
     {
         $conexion = Conexion::getConexion();
@@ -56,7 +71,10 @@ public function eliminar(): void
         );
     }
 
-
+/**
+     * @param mixed $id
+     * @return Categoria|null
+     */
     public function editar(): void
     {
         $conexion = Conexion::getConexion();

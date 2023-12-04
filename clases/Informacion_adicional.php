@@ -66,8 +66,5 @@ class Informacion_adicional
     return $this->origen;
   }
 
-  public function getProductoId()
-  {
-    return $this->producto_id;
-  }
+
 }
