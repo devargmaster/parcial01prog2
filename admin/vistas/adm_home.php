@@ -21,8 +21,8 @@ $destacados = (new Producto())->productos_destacados_cantidad_subcategoria();
         </div>
 
 
-        <div class="col-md-6 col-lg-3 mb-4">
-            <div class="card h-100">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+
                 <div class="card-header">Categorías</div>
                 <div class="card-body">
                     <?php
@@ -31,7 +31,6 @@ $destacados = (new Producto())->productos_destacados_cantidad_subcategoria();
                     }
                     ?>
                 </div>
-            </div>
         </div>
 
 

@@ -11,10 +11,10 @@ if (strpos($currentPath, '/vistas/') !== false) {
 <div class="container mt-5">
 
   <div class="mb-4">
-    <a href="index.php?sec=alta_producto&ruta=vistas" class="btn btn-primary" data-toggle="modal" data-target="#modalProducto">Nuevo Producto</a>
+    <a href="index.php?sec=alta_producto&ruta=vistas" class="btn btn-primary btn-back" data-toggle="modal" data-target="#modalProducto">Nuevo Producto</a>
   </div>
 
-  <table class="table">
+  <table class="table table-striped">
     <thead>
     <tr>
       <th>ID</th>
