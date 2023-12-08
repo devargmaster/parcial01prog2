@@ -66,7 +66,7 @@ if (str_contains($currentPath, '/vistas/')) {
 
             var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
             confirmDeleteButton.onclick = function() {
-                window.location.href = '/admin/accion/acc_borra_oferta.php?id=' + ofertaId;
+                window.location.href = 'accion/acc_borra_oferta.php?id=' + ofertaId;
             };
         });
     </script>

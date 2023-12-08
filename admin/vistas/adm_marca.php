@@ -86,7 +86,7 @@
 
         var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
         confirmDeleteButton.onclick = function() {
-            window.location.href = '/admin/accion/acc_borra_marca.php?id=' + marcaId;
+            window.location.href = 'accion/acc_borra_marca.php?id=' + marcaId;
         };
     });
 </script>

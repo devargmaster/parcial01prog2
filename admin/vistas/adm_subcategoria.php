@@ -117,7 +117,7 @@ $categorias = (new Categoria())->categorias_completas();
 
         var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
         confirmDeleteButton.onclick = function() {
-            window.location.href = '/admin/accion/acc_borra_subcategoria.php?id=' + subcategoriaId;
+            window.location.href = 'accion/acc_borra_subcategoria.php?id=' + subcategoriaId;
         };
     });
 
