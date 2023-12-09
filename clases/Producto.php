@@ -2,6 +2,8 @@
 
 class Producto
 {
+    private  $informacionAdicional = [];
+
     private $id;
     private $producto_nombre;
     private $producto_descripcion;
@@ -17,16 +19,45 @@ class Producto
 
     private $producto_nuevo;
     private $producto_fecha;
-    private $marca_id;
+
 
     private $fecha_upd;
     private $usuario_upd;
 
     private $producto_marca;
+
+
     private $categoria_id;
     private $subcategoria_id;
 
     private $producto_id;
+
+    private static $createValues = [
+        'id',
+        'producto_nombre',
+        'producto_descripcion',
+        'producto_precio',
+        'producto_imagen',
+        'producto_stock',
+        'producto_destacado',
+        'producto_estado',
+        'producto_nuevo',
+        'producto_fecha',
+        'marca_id'
+    ];
+    private function createProducto($productoData) : Producto
+    {
+        $producto = new self();
+
+
+        foreach (self::$createValues as $value) {
+            $producto->{$value} = $productoData[$value];
+        }
+        $producto->producto_marca = (new Marca())->marcaxid($productoData['marca_id']);
+        $producto->producto_categoria = (new Productos_Categorias())->producto_x_categoria($productoData['id']);
+        $producto->producto_info_adicional = (new Informacion_adicional())->get_x_id($productoData['id']);
+        return $producto;
+    }
 
     /**
      * Devuelve el catalogo completo de productos frontend
@@ -35,14 +66,22 @@ class Producto
      */
     public function todos_los_productos(): array
     {
+        $productos = [];
         $conexion = Conexion::getConexion();
         $consulta = "SELECT p.* FROM productos p 
-JOIN productos_categorias pc ON p.id = pc.producto_id
-JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where producto_estado = 1";
+        JOIN productos_categorias pc ON p.id = pc.producto_id
+        JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where producto_estado = 1";
         $PDOStatement = $conexion->prepare($consulta);
-        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute();
-        return $PDOStatement->fetchAll();
+//        $catalogo = $PDOStatement->fetchAll();
+//        echo "<pre>";
+//        print_r($catalogo);
+//        echo "</pre>";
+        while ($result= $PDOStatement->fetch()) {
+            $productos[] = $this->createProducto($result);
+        }
+    return $productos ?? [];
     }
 
     /**
@@ -52,12 +91,16 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
      */
     public function todos_los_productos_back(): array
     {
+        $productos = [];
         $conexion = Conexion::getConexion();
         $consulta = "SELECT * FROM productos";
         $PDOStatement = $conexion->prepare($consulta);
-        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute();
-        return $PDOStatement->fetchAll();
+        while ($result= $PDOStatement->fetch()) {
+            $productos[] = $this->createProducto($result);
+        }
+        return $productos ?? [];
     }
 
     /**
@@ -65,8 +108,9 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
      * @param string $categoria Un string con el nombre de categoria a buscar
      *
      */
-    public static function obtenerPorCategoria($categoria): array
+    public  function obtenerPorCategoria($categoria): array
     {
+        $productos = [];
         $conexion = Conexion::getConexion();
         $consulta = "SELECT p.* FROM productos p
         JOIN productos_categorias pc ON p.id = pc.producto_id
@@ -74,9 +118,11 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
         WHERE c.nombre = ? and  p.producto_estado = 1";
 
         $PDOStatement = $conexion->prepare($consulta);
-        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute([$categoria]);
-        $productos = $PDOStatement->fetchAll();
+        while ($result= $PDOStatement->fetch()) {
+            $productos[] = $this->createProducto($result);
+        }
         return $productos;
     }
 
@@ -87,6 +133,7 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
      */
     public function obtenerProductosPorSubCategoriaDescripcion($subcategoriaDescripcion): ?array
     {
+        $productos = [];
         $conexion = Conexion::getConexion();
         $consulta = "SELECT p.*
             FROM productos p
@@ -95,10 +142,12 @@ JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where prod
             JOIN categorias c ON s.categoria_id = c.id
             WHERE s.descripcion = :subcategoriaDescripcion and  p.producto_estado = 1";
         $PDOStatement = $conexion->prepare($consulta);
-        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute(['subcategoriaDescripcion' => $subcategoriaDescripcion]);
-        $productos = $PDOStatement->fetchAll();
-        return $productos ?? null;
+        while ($result= $PDOStatement->fetch()) {
+            $productos[] = $this->createProducto($result);
+        }
+        return $productos ?? [];
     }
 
 
@@ -137,18 +186,18 @@ LIMIT 3;";
      * @param string $idProducto Un entero con el id de producto a buscar
      * @return $producto un producto en particular.
      */
-    public function producto_x_id(int $idProducto): ?Producto
+    public function producto_x_id(int $idProducto): array
     {
+        $productos =[];
         $conexion = Conexion::getConexion();
         $catalogo = "SELECT * FROM productos WHERE id = ?";
         $PDOStatement = $conexion->prepare($catalogo);
-        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute([$idProducto]);
-        $producto = $PDOStatement->fetch();
-        if ($producto === false) {
-            throw new Exception("Producto con ID $idProducto no encontrado.");
+        while ($result= $PDOStatement->fetch()) {
+            $productos[] = $this->createProducto($result);
         }
-        return $producto;
+        return $productos ?? [];
     }
 
     public function insertarProducto($producto_nombre, $producto_descripcion, $producto_precio, $producto_imagen, $producto_stock, $producto_destacado, $producto_estado, $producto_nuevo, $marca_id)
@@ -311,24 +360,15 @@ LIMIT 3;";
         return $this->producto_precio;
     }
 
-    public function getProducto_categoria()
-    {
-        return $this->producto_categoria;
-    }
-
-    public function getProducto_subcategoria()
-    {
-        return $this->producto_subcategoria;
-    }
 
     public function getProducto_imagen(): string
     {
         return $this->producto_imagen ?? '';
     }
 
-    public function getProductoInfoAdicional(): ?Informacion_adicional
+    public function getProductoInfoAdicional()
     {
-        return (new Informacion_adicional())->get_x_id($this->id);
+        return self::$informacionAdicional;
     }
 
 
@@ -340,30 +380,6 @@ LIMIT 3;";
         return $this->producto_estado;
     }
 
-
-    /**
-     * @return mixed
-     */
-    public function getProductoNuevo()
-    {
-        return $this->producto_nuevo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProductoFecha()
-    {
-        return $this->producto_fecha;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMarcaId()
-    {
-        return $this->marca_id;
-    }
 
     /**
      * @return mixed
@@ -380,125 +396,11 @@ LIMIT 3;";
     {
         return $this->producto_destacado;
     }
-
     /**
      * @return mixed
      */
-    public function getProductoMarca(): mixed
+    public function getProductoMarca()
     {
-        return (new Marca())->marcaxid($this->id);
+        return $this->producto_marca->getMarcaTitulo();
     }
-
-    /**
-     * @param mixed $producto_nombre
-     */
-    public function setProductoNombre(mixed $producto_nombre): void
-    {
-        $this->producto_nombre = $producto_nombre;
-    }
-
-    /**
-     * @param mixed $producto_descripcion
-     */
-    public function setProductoDescripcion($producto_descripcion): void
-    {
-        $this->producto_descripcion = $producto_descripcion;
-    }
-
-    /**
-     * @param mixed $producto_precio
-     */
-    public function setProductoPrecio($producto_precio): void
-    {
-        $this->producto_precio = $producto_precio;
-    }
-
-    /**
-     * @param mixed $producto_imagen
-     */
-    public function setProductoImagen($producto_imagen): void
-    {
-        $this->producto_imagen = $producto_imagen;
-    }
-
-    /**
-     * @param mixed $producto_stock
-     */
-    public function setProductoStock($producto_stock): void
-    {
-        $this->producto_stock = $producto_stock;
-    }
-
-    /**
-     * @param mixed $producto_destacado
-     */
-    public function setProductoDestacado($producto_destacado): void
-    {
-        $this->producto_destacado = $producto_destacado;
-    }
-
-    /**
-     * @param mixed $producto_info_adicional
-     */
-    public function setProductoInfoAdicional($producto_info_adicional): void
-    {
-        $this->producto_info_adicional = $producto_info_adicional;
-    }
-
-    /**
-     * @param mixed $producto_categoria
-     */
-    public function setProductoCategoria($producto_categoria): void
-    {
-        $this->producto_categoria = $producto_categoria;
-    }
-
-    /**
-     * @param mixed $producto_subcategoria
-     */
-    public function setProductoSubcategoria($producto_subcategoria): void
-    {
-        $this->producto_subcategoria = $producto_subcategoria;
-    }
-
-    /**
-     * @param mixed $producto_estado
-     */
-    public function setProductoEstado($producto_estado): void
-    {
-        $this->producto_estado = $producto_estado;
-    }
-
-    /**
-     * @param mixed $producto_nuevo
-     */
-    public function setProductoNuevo($producto_nuevo): void
-    {
-        $this->producto_nuevo = $producto_nuevo;
-    }
-
-    /**
-     * @param mixed $producto_fecha
-     */
-    public function setProductoFecha($producto_fecha): void
-    {
-        $this->producto_fecha = $producto_fecha;
-    }
-
-    /**
-     * @param mixed $marca_id
-     */
-    public function setMarcaId($marca_id): void
-    {
-        $this->marca_id = $marca_id;
-    }
-
-    /**
-     * @param mixed $producto_marca
-     */
-    public function setProductoMarca($producto_marca): void
-    {
-        $this->producto_marca = $producto_marca;
-    }
-
 }

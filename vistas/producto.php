@@ -4,6 +4,9 @@ $id = $_GET['id'];
 
 try {
     $producto = (new Producto())->producto_x_id($id);
+    echo "<pre>";
+    print_r($producto);
+    echo "</pre>";
     if ($producto === null) {
         throw new Exception("Producto no encontrado");
     }
@@ -22,7 +25,7 @@ if (isset($_POST['actualizar_cantidad'])) {
 }
 
 // Calcular subtotal
-$subtotal = $producto->getProducto_precio() * $cantidad;
+$subtotal = $producto['producto_precio'] * $cantidad;
 
 //  echo "<pre>";
 //  print_r($producto);
@@ -32,32 +35,32 @@ $subtotal = $producto->getProducto_precio() * $cantidad;
   <div class="row">
 
     <div class="col-md-6">
-      <img class="producto_imagen_estilo" src="img/productos/<?= $producto->getProducto_imagen() ?>"
-           alt="<?= $producto->getProducto_nombre() ?>">
+      <img class="producto_imagen_estilo" src="img/productos/<?= $producto['producto_imagen'] ?>"
+           alt="<?= $producto['producto_nombre'] ?>">
     </div>
 
     <div class="col-md-6">
       <div class="detalle_producto">
-        <h2 class="producto_titulo_estilo"><?= $producto->getProducto_nombre() ?></h2>
+        <h2 class="producto_titulo_estilo"><?= $producto->getProducto_nombre()?></h2>
         <p class="producto_descripcion_estilo"><?= $producto->getProducto_descripcion() ?></p>
         <p class="producto_precio_estilo_formulario"><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?>
           ARS</p>
         <div class="informacion_adicional_estilo">
           <img src="img/detalle.png" alt="informacion adicional"> Informacion adicional
 
-          <?php
-          $infoAdicional = $producto->getProductoInfoAdicional();
-
-          if ($infoAdicional !== null) {
-            echo (!empty($infoAdicional->getMedidas()) ? "<p class='producto_descripcion_estilo'>Medidas:" . $infoAdicional->getMedidas() . "</p>" : "");
-            echo (!empty($infoAdicional->getMaterial()) ? "<p class='producto_descripcion_estilo'>Material:" . $infoAdicional->getMaterial() . "</p>" : "");
-            echo (!empty($infoAdicional->getPeso()) ? "<p class='producto_descripcion_estilo'>Peso:" . $infoAdicional->getPeso() . "</p>" : "");
-            echo (!empty($infoAdicional->getOrigen()) ? "<p class='producto_descripcion_estilo'>Origen:" . $infoAdicional->getOrigen() . "</p>" : "");
-
-          } else {
-            echo "<p class='producto_descripcion_estilo'>Información no disponible</p>";
-          }
-          ?>
+    <!--          --><?php
+    //          $infoAdicional = $producto->getProductoInfoAdicional();
+    //
+    //          if ($infoAdicional !== null) {
+    //            echo (!empty($infoAdicional->getMedidas()) ? "<p class='producto_descripcion_estilo'>Medidas:" . $infoAdicional->getMedidas() . "</p>" : "");
+    //            echo (!empty($infoAdicional->getMaterial()) ? "<p class='producto_descripcion_estilo'>Material:" . $infoAdicional->getMaterial() . "</p>" : "");
+    //            echo (!empty($infoAdicional->getPeso()) ? "<p class='producto_descripcion_estilo'>Peso:" . $infoAdicional->getPeso() . "</p>" : "");
+    //            echo (!empty($infoAdicional->getOrigen()) ? "<p class='producto_descripcion_estilo'>Origen:" . $infoAdicional->getOrigen() . "</p>" : "");
+    //
+    //          } else {
+    //            echo "<p class='producto_descripcion_estilo'>Información no disponible</p>";
+    //          }
+    //          ?>
         </div>
       </div>
 

@@ -23,9 +23,9 @@ class Marca
         $conexion = Conexion::getConexion();
         $consulta = "INSERT INTO marcas (marca_titulo, marca_descripcion) VALUES (:marca_titulo, :marca_descripcion)";
 
-        $sentencia = $conexion->prepare($consulta);
+        $PDOStatement = $conexion->prepare($consulta);
 
-        $resultado = $sentencia->execute(
+        $resultado = $PDOStatement->execute(
           [
             ':marca_titulo' => $this->marca_titulo,
             ':marca_descripcion' => $this->marca_descripcion
@@ -42,9 +42,9 @@ class Marca
       {
             $conexion = Conexion::getConexion();
             $consulta = "DELETE FROM marcas WHERE id = :id";
-            $sentencia = $conexion->prepare($consulta);
+            $PDOStatement = $conexion->prepare($consulta);
 
-            return $sentencia->execute(
+            return $PDOStatement->execute(
                 [
                     ':id' => $this->id
                 ]
@@ -54,14 +54,14 @@ class Marca
         {
             $conexion = Conexion::getConexion();
             $consulta = "SELECT * FROM marcas WHERE id = :id";
-            $sentencia = $conexion->prepare($consulta);
-            $sentencia->setFetchMode(PDO::FETCH_CLASS, self::class);
-            $sentencia->execute(
+            $PDOStatement = $conexion->prepare($consulta);
+            $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+            $PDOStatement->execute(
                 [
                     ':id' => $id
                 ]
             );
-            return $sentencia->fetch();
+            return $PDOStatement->fetch();
         }
         public function editar($nombre, $descripcion)
         {
