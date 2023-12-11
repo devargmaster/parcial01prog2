@@ -1,83 +1,57 @@
 <?php
-require_once 'clases/Producto.php';
 $id = $_GET['id'];
+$catalogo = new Producto();
+$productos = $catalogo->producto_x_id($id);
+//echo "<pre>";
+//print_r($productos);
+//echo "</pre>";
+foreach ($productos as $producto) {
+    ?>
+    <div class="container mt-4 mb-4">
+        <div class="row">
 
-try {
-    $producto = (new Producto())->producto_x_id($id);
-    echo "<pre>";
-    print_r($producto);
-    echo "</pre>";
-    if ($producto === null) {
-        throw new Exception("Producto no encontrado");
-    }
-} catch (Exception $e) {
-    echo "<div class='alert alert-danger' role='alert'>
-        No se encontraron productos para el id: $id
-    </div>";
+            <div class="col-md-6">
+                <img class="producto_imagen_estilo" src="img/productos/<?= $producto->getProducto_imagen() ?>"
+                     alt="<?= $producto->getProducto_imagen() ?>">
+            </div>
 
-    return;
-}
-$cantidad = 1;
+            <div class="col-md-6">
+                <div class="detalle_producto">
+                    <h2 class="producto_titulo_estilo"><?= $producto->getProducto_nombre() ?></h2>
+                    <p class="producto_descripcion_estilo"><?= $producto->getProducto_descripcion() ?></p>
+                    <p class="producto_precio_estilo_formulario"><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?>
+                        ARS</p>
+
+                    <div class="informacion_adicional_estilo">
+                        <img src="img/detalle.png" alt="informacion adicional"> Informacion adicional
+
+                        <?php
+                        $infoAdicional = $producto->getInformacionAdicional();
+                        foreach ($infoAdicional as $info) {
+                            echo(!empty($info->getMedidas()) ? "<p class='producto_descripcion_estilo'>Medidas:" . $info->getMedidas() . "</p>" : "");
+                            echo(!empty($info->getMaterial()) ? "<p class='producto_descripcion_estilo'>Material:" . $info->getMaterial() . "</p>" : "");
+                            echo(!empty($info->getPeso()) ? "<p class='producto_descripcion_estilo'>Peso:" . $info->getPeso() . "</p>" : "");
+                            echo(!empty($info->getOrigen()) ? "<p class='producto_descripcion_estilo'>Origen:" . $info->getOrigen() . "</p>" : "");
+
+                        }
+
+                        ?>
+                    </div>
+                </div>
 
 
-if (isset($_POST['actualizar_cantidad'])) {
-    $cantidad = $_POST['cantidad'];
-}
+                <form action="accion/add_item_acc.php" method="GET" class="row">
+                    <div class="col-6 d-flex align-items-center">
+                        <label for="q" class="fw-bold me-2">Cantidad: </label>
+                        <input type="number" class="form-control" value="1" name="q" id="q">
+                    </div>
+                    <div class="col-6">
+                        <input type="submit" value="AGREGAR A CARRITO" class="btn btn-danger w-100 fw-bold">
+                        <input type="hidden" value="<?= $id ?>" name="id" id="id">
 
-// Calcular subtotal
-$subtotal = $producto['producto_precio'] * $cantidad;
-
-//  echo "<pre>";
-//  print_r($producto);
-//  echo "</pre>";
-?>
-<div class="container mt-4 mb-4">
-  <div class="row">
-
-    <div class="col-md-6">
-      <img class="producto_imagen_estilo" src="img/productos/<?= $producto['producto_imagen'] ?>"
-           alt="<?= $producto['producto_nombre'] ?>">
-    </div>
-
-    <div class="col-md-6">
-      <div class="detalle_producto">
-        <h2 class="producto_titulo_estilo"><?= $producto->getProducto_nombre()?></h2>
-        <p class="producto_descripcion_estilo"><?= $producto->getProducto_descripcion() ?></p>
-        <p class="producto_precio_estilo_formulario"><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?>
-          ARS</p>
-        <div class="informacion_adicional_estilo">
-          <img src="img/detalle.png" alt="informacion adicional"> Informacion adicional
-
-    <!--          --><?php
-    //          $infoAdicional = $producto->getProductoInfoAdicional();
-    //
-    //          if ($infoAdicional !== null) {
-    //            echo (!empty($infoAdicional->getMedidas()) ? "<p class='producto_descripcion_estilo'>Medidas:" . $infoAdicional->getMedidas() . "</p>" : "");
-    //            echo (!empty($infoAdicional->getMaterial()) ? "<p class='producto_descripcion_estilo'>Material:" . $infoAdicional->getMaterial() . "</p>" : "");
-    //            echo (!empty($infoAdicional->getPeso()) ? "<p class='producto_descripcion_estilo'>Peso:" . $infoAdicional->getPeso() . "</p>" : "");
-    //            echo (!empty($infoAdicional->getOrigen()) ? "<p class='producto_descripcion_estilo'>Origen:" . $infoAdicional->getOrigen() . "</p>" : "");
-    //
-    //          } else {
-    //            echo "<p class='producto_descripcion_estilo'>Información no disponible</p>";
-    //          }
-    //          ?>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
-
-
-        <form action="accion/add_item_acc.php" method="GET" class="row">
-            <div class="col-6 d-flex align-items-center">
-                <label for="q" class="fw-bold me-2">Cantidad: </label>
-                <input type="number" class="form-control" value="1" name="q" id="q">
-            </div>
-            <div class="col-6">
-                <input type="submit" value="AGREGAR A CARRITO" class="btn btn-danger w-100 fw-bold">
-                <input type="hidden" value="<?= $id ?>" name="id" id="id">
-
-            </div>
-        </form>
     </div>
-  </div>
-</div>
-
-
+<?php } ?>

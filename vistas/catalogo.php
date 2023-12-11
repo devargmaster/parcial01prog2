@@ -29,9 +29,6 @@ foreach ($productos as $producto) {?>
                                                class="producto_titulo_estilo"><?= $producto->getProducto_nombre(); ?></a></h2>
                 <p class="card-text mb-2"><?= $producto->descripcion_limite() ?></p>
                 <div class="fs-3 mb-3 fw-bold text-center producto_precio_estilo">
-                    <?= $producto->getProductoMarca() ?>
-                </div>
-                <div class="fs-3 mb-3 fw-bold text-center producto_precio_estilo">
                     <?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS
                 </div>
                 <a href="index.php?sec=producto&id=<?= $producto->getID() ?>"

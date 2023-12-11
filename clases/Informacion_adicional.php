@@ -9,21 +9,29 @@ class Informacion_adicional
   private $origen;
   private $producto_id;
 
-  public function get_x_id(int $idProducto) : ?Informacion_adicional
+  public function get_x_id(int $idProducto) : array
   {
     $conexion = (new Conexion())->getConexion();
     $consulta = "select * from informacion_adicional WHERE producto_id = $idProducto";
     $PDOStatement = $conexion->prepare($consulta);
     $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
     $PDOStatement->execute();
-
-    $infoAdicional = null;
-    foreach ($PDOStatement as $row) {
-      $infoAdicional = $row;
-      break;
-    }
-    return $infoAdicional;
+    return $PDOStatement->fetchAll();
   }
+//  {
+//    $conexion = (new Conexion())->getConexion();
+//    $consulta = "select * from informacion_adicional WHERE producto_id = $idProducto";
+//    $PDOStatement = $conexion->prepare($consulta);
+//    $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+//    $PDOStatement->execute();
+//
+//    $infoAdicional = null;
+//    foreach ($PDOStatement as $row) {
+//      $infoAdicional = $row;
+//      break;
+//    }
+//    return $infoAdicional;
+//  }
   public function insertarInformacionAdicional(
     string $medidas,
     string $peso,

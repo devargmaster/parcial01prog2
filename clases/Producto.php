@@ -2,18 +2,24 @@
 
 class Producto
 {
-    private  $informacionAdicional = [];
-
     private $id;
     private $producto_nombre;
     private $producto_descripcion;
     private $producto_precio;
     private $producto_imagen;
     private $producto_stock;
-
     private $producto_destacado;
     private $producto_info_adicional;
+
     private $producto_categoria;
+
+    /**
+     * @return mixed
+     */
+    public function getProductoCategoria()
+    {
+        return $this->producto_categoria->getCategoriaNombre();
+    }
     private $producto_subcategoria;
     private $producto_estado;
 
@@ -56,6 +62,7 @@ class Producto
         $producto->producto_marca = (new Marca())->marcaxid($productoData['marca_id']);
         $producto->producto_categoria = (new Productos_Categorias())->producto_x_categoria($productoData['id']);
         $producto->producto_info_adicional = (new Informacion_adicional())->get_x_id($productoData['id']);
+
         return $producto;
     }
 
@@ -131,7 +138,7 @@ class Producto
      * @param string $subcategoria Un string con el nombre de subcategoria a buscar
      *
      */
-    public function obtenerProductosPorSubCategoriaDescripcion($subcategoriaDescripcion): ?array
+    public function obtenerProductosPorSubCategoriaDescripcion($subcategoriaDescripcion): array
     {
         $productos = [];
         $conexion = Conexion::getConexion();
@@ -153,30 +160,33 @@ class Producto
 
     public function productos_x_busqueda($nombre_producto): array
     {
+        $productos = [];
         $conexion = Conexion::getConexion();
         $consulta = "SELECT * FROM productos WHERE producto_nombre LIKE ?";
         $PDOStatement = $conexion->prepare($consulta);
-        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute(["%$nombre_producto%"]);
-        $productos = $PDOStatement->fetchAll();
-        return $productos;
+        while ($result= $PDOStatement->fetch()) {
+            $productos[] = $this->createProducto($result);
+        }
+        return $productos ?? [];
     }
 
     public function productos_destacados_cantidad_subcategoria()
     {
         $conexion = Conexion::getConexion();
         $consulta = "SELECT 
-    p.producto_nombre, 
-    (SELECT COUNT(DISTINCT pcs.subcategoria_id) 
-     FROM productos_categorias_subcategorias pcs 
-     WHERE pcs.producto_id = p.id) AS cantidad_subcategorias 
-FROM 
-    productos p 
-JOIN 
-    productos_categorias pc ON pc.producto_id = p.id 
-WHERE 
-    p.producto_destacado = 1 
-LIMIT 3;";
+            p.producto_nombre, 
+            (SELECT COUNT(DISTINCT pcs.subcategoria_id) 
+             FROM productos_categorias_subcategorias pcs 
+             WHERE pcs.producto_id = p.id) AS cantidad_subcategorias 
+        FROM 
+            productos p 
+        JOIN 
+            productos_categorias pc ON pc.producto_id = p.id 
+        WHERE 
+            p.producto_destacado = 1 
+        LIMIT 3;";
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->execute();
         return $PDOStatement->fetchAll();
@@ -366,10 +376,7 @@ LIMIT 3;";
         return $this->producto_imagen ?? '';
     }
 
-    public function getProductoInfoAdicional()
-    {
-        return self::$informacionAdicional;
-    }
+
 
 
     /**
@@ -402,5 +409,9 @@ LIMIT 3;";
     public function getProductoMarca()
     {
         return $this->producto_marca->getMarcaTitulo();
+    }
+    public function getInformacionAdicional(): array
+    {
+        return $this->producto_info_adicional;
     }
 }
