@@ -10,16 +10,15 @@ class Producto
     private $producto_stock;
     private $producto_destacado;
     private $producto_info_adicional;
-
     private $producto_categoria;
+    private ?Oferta $producto_oferta;
 
-    /**
-     * @return mixed
-     */
-    public function getProductoCategoria()
+    public function getProductoOferta(): ?Oferta
     {
-        return $this->producto_categoria->getCategoriaNombre();
+        return $this->producto_oferta;
     }
+
+
     private $producto_subcategoria;
     private $producto_estado;
 
@@ -51,6 +50,8 @@ class Producto
         'producto_fecha',
         'marca_id'
     ];
+
+
     private function createProducto($productoData) : Producto
     {
         $producto = new self();
@@ -62,6 +63,7 @@ class Producto
         $producto->producto_marca = (new Marca())->marcaxid($productoData['marca_id']);
         $producto->producto_categoria = (new Productos_Categorias())->producto_x_categoria($productoData['id']);
         $producto->producto_info_adicional = (new Informacion_adicional())->get_x_id($productoData['id']);
+        $producto->producto_oferta = (new Oferta())->ofertaxId($productoData['id']);
 
         return $producto;
     }
@@ -413,5 +415,12 @@ class Producto
     public function getInformacionAdicional(): array
     {
         return $this->producto_info_adicional;
+    }
+    /**
+     * @return mixed
+     */
+    public function getProductoCategoria()
+    {
+        return $this->producto_categoria->getCategoriaNombre();
     }
 }
