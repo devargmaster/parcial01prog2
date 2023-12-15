@@ -4,21 +4,29 @@ $datosArchivo = $_FILES['imagen'];
 $subcategoriasSeleccionadas = $_POST['subcategorias'] ?? [];
 
 if (!empty($datosArchivo['tmp_name'])) {
+    if ($datosArchivo['error'] !== UPLOAD_ERR_OK) {
+        die('Error al subir el archivo: ' . $datosArchivo['error']);
+    }
 
-  $og_name = explode(".", $datosArchivo['name']);
-  $extension = end($og_name);
-  $filename = time() . ".$extension";
+    $og_name = explode(".", $datosArchivo['name']);
+    $extension = end($og_name);
+    $filename = time() . ".$extension";
+    $targetPath =  '../img/productos/' . $filename;
 
-  $fileUpload = move_uploaded_file($datosArchivo['tmp_name'], "../img/productos/$filename");
+    if (file_exists($datosArchivo['tmp_name'])) {
+        $fileUpload = move_uploaded_file($datosArchivo['tmp_name'], $targetPath);
+        if (!$fileUpload) {
+            echo $targetPath;
 
-  if (!$fileUpload) {
-    die('no se pudo subir la imagen');
-  }else{
-    $imagen = $filename;
-  }
-  print_r($og_name);
-}else{
-  $imagen = "img/imagen123.png";
+            echo "Error al subir el archivo";
+        } else {
+            $imagen = $filename;
+        }
+    } else {
+        die('El archivo temporal no existe.');
+    }
+} else {
+    $imagen = "img/imagen123.png";
 }
 try {
   $conexion = Conexion::getConexion();

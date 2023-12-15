@@ -2,9 +2,7 @@
 $id = $_GET['id'];
 $catalogo = new Producto();
 $productos = $catalogo->producto_x_id($id);
-//echo "<pre>";
-//print_r($productos);
-//echo "</pre>";
+
 foreach ($productos as $producto) {
     ?>
     <div class="container mt-4 mb-4">

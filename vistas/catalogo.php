@@ -25,7 +25,7 @@ foreach ($productos as $producto) {?>
                 <img src="img/productos/<?= $producto->getProducto_imagen() ?>" class='card-img-top'
                      alt='<?= $producto->getProducto_nombre(); ?>'>
                 <?php if ($producto->getProductoOferta()) {  ?>
-                    <span class="oferta-label !important">¡Oferta!</span>
+                    <span class="ofertaestilo">¡Oferta!</span>
                 <?php } ?>
             </div>
             <div class="card-body">

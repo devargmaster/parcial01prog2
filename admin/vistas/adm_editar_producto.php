@@ -1,6 +1,9 @@
 <?php
 $productoId = $_GET['id']?? FALSE;
-$producto = (new Producto())->producto_x_id($productoId);
+$catalogo = new Producto();
+$productos = $catalogo->producto_x_id($productoId);
+foreach ($productos as $producto) {
+
 $marcas = (new Marca())->todas_las_marcas();
 $categorias = (new Categoria())->categorias_completas();
 $subcategorias = (new Subcategoria())->subcategorias_completas();
@@ -109,3 +112,4 @@ if (is_object($idsubcategoriaxproductoid)) {
     </form>
 </div>
 
+<?php } ?>

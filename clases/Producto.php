@@ -25,7 +25,6 @@ class Producto
     private $producto_nuevo;
     private $producto_fecha;
 
-
     private $fecha_upd;
     private $usuario_upd;
 
@@ -422,5 +421,17 @@ class Producto
     public function getProductoCategoria()
     {
         return $this->producto_categoria->getCategoriaNombre();
+    }
+    public function clear_info_adicional()
+    {
+        $conexion = Conexion::getConexion();
+        $query = "DELETE FROM informacion_adicional WHERE producto_id = :producto_id";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(
+            [
+                'producto_id' => $this->id
+            ]
+        );
     }
 }

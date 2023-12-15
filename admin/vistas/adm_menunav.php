@@ -52,6 +52,8 @@
             Usuarios
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
+
+              <li><a class="dropdown-item" href="index.php?sec=carritos&ruta=vistas">Administrar Carritos</a></li>
               <li><a class="dropdown-item" href="../admin/accion/auth_logout.php">Salir</a></li>
           </ul>
         </li>
