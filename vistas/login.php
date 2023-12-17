@@ -7,6 +7,7 @@
         <div>
 
             <?php
+            echo (new Alerta())->get_alertas();
             $auth = new Autenticacion();
             if ($auth->verify()) {
                 (new Alerta())->add_alerta('warning', "Ya estás logueado, podes seguir comprando.");
@@ -21,8 +22,8 @@
             </div>
 
             <div class="col-12 mb-3">
-                <label for="pass" class="form-label">Password</label>
-                <input type="password" class="form-control" id="pass" name="pass">
+                <label for="password" class="form-label">Clave</label>
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Login</button>

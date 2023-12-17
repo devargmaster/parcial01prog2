@@ -9,7 +9,7 @@ class Alerta
      * @param string $tipo el tipo de alerta danger/warning/success
      * @param string $mensaje El contenido de la alerta
      */
-    public function add_alerta(string $tipo, string $mensaje)
+    public function add_alerta(string $tipo, string $mensaje): void
     {
         $_SESSION['alertas'][] = [
             'tipo' => $tipo,
@@ -20,24 +20,22 @@ class Alerta
     /**
      * Vacia la lista de alertas
      */
-    public function clear_alertas()
+    public function clear_alertas(): void
     {
         $_SESSION['alertas'] = [];
     }
 
 
-    /**
-     * Devuelve todas las alertas acumuladas en el sistema, y vacia la lista
-     * @return string
-     */
-    public function get_alertas()
+  /**
+   * Devuelve el contenido de las alertas en formato HTML
+   * @return string|null
+   */
+    public function get_alertas(): ?string
     {
-
         if (!empty($_SESSION['alertas'])) {
             $alertasActuales = "";
             foreach ($_SESSION['alertas'] as $alerta) {
                 $alertasActuales .= $this->print_alerta($alerta);
-                echo $alertasActuales;
             }
             $this->clear_alertas();
             return $alertasActuales;

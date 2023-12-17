@@ -29,8 +29,6 @@ class Producto
     private $usuario_upd;
 
     private $producto_marca;
-
-
     private $categoria_id;
     private $subcategoria_id;
 
@@ -173,7 +171,7 @@ class Producto
         return $productos ?? [];
     }
 
-    public function productos_destacados_cantidad_subcategoria()
+    public function productos_destacados_cantidad_subcategoria(): bool|array
     {
         $conexion = Conexion::getConexion();
         $consulta = "SELECT 

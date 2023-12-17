@@ -21,29 +21,26 @@ class Autenticacion
         $this->estado = null;
     }
 
-    /**
-     * verifica si el usuario existe en la base de datos
-     *
-     * @param $username  -el nombre de usuario
-     * @param $clave -la contraseña
-     * @return bool|null devuelve true si el usuario existe, false si no existe
-     */
-    public function log_in($username, $clave): ?bool
+    public function log_in(string $usuario, string $password): ?bool
     {
-        $datosUsuario = (new Usuario())->usuario_x_username($username);
+        $datosUsuario = (new Usuario())->usuario_x_username($usuario);
+
         if ($datosUsuario) {
-            if (password_verify($clave, $datosUsuario->getClave())) {
+            if (password_verify($password, $datosUsuario->getClave())) {
                 $datosLogin['username'] = $datosUsuario->getUsuario();
                 $datosLogin['nombre_completo'] = $datosUsuario->getNombre();
                 $datosLogin['id'] = $datosUsuario->getId();
                 $datosLogin['rol'] = $datosUsuario->getRol();
                 $_SESSION['loggedIn'] = $datosLogin;
-                return TRUE;
+
+                return $datosLogin['rol'];
             } else {
+                (new Alerta())->add_alerta('danger', "El password ingresado no es correcto.");
                 return FALSE;
             }
         } else {
-            return null;
+            (new Alerta())->add_alerta('warning', "El usuario ingresado no se encontró en nuestra base de datos.");
+            return NULL;
         }
     }
 
@@ -65,7 +62,6 @@ class Autenticacion
                 if ($_SESSION['loggedIn']['rol'] == "administrador"){
                     return TRUE;
                 }else{
-                    (new Alerta())->add_alerta('warning', "El usuario no tiene permisos para ingresar a este area");
                     header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=login');
                 }
             }else{

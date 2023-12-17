@@ -3,7 +3,6 @@
 
 if (isset($_SESSION['loggedIn']['rol'])) {
     $rolUsuario = $_SESSION['loggedIn']['rol'];
-    // solo si soy administrador me deja entrar al admin
     if ($rolUsuario == 'administrador') {
 
         ?>
@@ -38,11 +37,10 @@ if (isset($_SESSION['loggedIn']['rol'])) {
         </html>
         <?php
     } elseif ($rolUsuario == 'usuario') {
-        // si es rol usuario lo redirijo al front
-        (new Alerta())->add_alerta('warning', "El usuario no tiene permisos para ingresar a este area administrativa");
+        (new Alerta())->add_alerta('warning', "El usuario no tiene permisos para ingresar a esta area administrativa");
         header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=login');
     }
-} //si no estoy logueado, me redirige al login del front
+}
 else {
     header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=login');
 }

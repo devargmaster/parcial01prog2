@@ -9,7 +9,7 @@ class Usuario
     private $usuario;
     private $rol;
     private $estado;
-
+    private $clave;
     public function __construct()
     {
     }
@@ -140,7 +140,7 @@ class Usuario
     {
         $this->usuario = $usuario;
     }
-    private $clave;
+
 
     /**
      * @return mixed
@@ -180,19 +180,5 @@ class Usuario
         $this->rol = $rol;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEstado()
-    {
-        return $this->estado;
-    }
 
-    /**
-     * @param mixed $estado
-     */
-    public function setEstado($estado): void
-    {
-        $this->estado = $estado;
-    }
 }
