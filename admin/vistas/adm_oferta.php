@@ -3,7 +3,7 @@ $ofertas = (new Oferta())->obtenerOfertas();
 $currentPath = $_SERVER['PHP_SELF'];
 $basePath = '';
 
-
+echo (new Alerta())->get_alertas();
 if (str_contains($currentPath, '/vistas/')) {
     $basePath = '../';
 }

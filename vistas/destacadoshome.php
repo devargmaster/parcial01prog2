@@ -20,11 +20,15 @@ $catalogo = $productos_destacados->productos_destacados();
               <h2 class="card-title mb-2"><a href="index.php?sec=producto&id=<?= $producto->getID(); ?>"
                                              class="producto_titulo_estilo"><?= $producto->getProducto_nombre(); ?></a>
               </h2>
+                <span class="badge bg-primary badge_categoria"><?php echo $producto->getProductoCategoria(); ?></span>
+                <?php foreach ($producto->getProductoSubcategoria() as $subcategoria): ?>
+                    <span class="badge bg-secondary badge_subcategoria"><?= $subcategoria->getNombre(); ?></span>
+                <?php endforeach; ?>
               <div class="fs-3 mb-3 fw-bold text-center producto_precio_estilo_formulario">
                 <?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS
               </div>
               <a href="index.php?sec=producto&id=<?= $producto->getID() ?>"
-                 class="btn carrito_boton_estilo  mt-2">VER MÁS</a>
+                 class="btn botones_general  mt-2">VER MÁS</a>
             </div>
           </div>
         </div>

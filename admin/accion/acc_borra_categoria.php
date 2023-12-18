@@ -11,6 +11,7 @@ $alerta = new Alerta();
 try {
     $categoria = (new Categoria())->categoriaxid($id);
     $categoria->eliminar();
+    $alerta->add_alerta('success', "Categoria eliminada correctamente.", "Categoria");
     header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=categoria&ruta=vistas');
 } catch (Exception $e) {
     $message = $e->getMessage();

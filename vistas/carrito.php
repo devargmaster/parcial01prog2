@@ -64,9 +64,9 @@ $items = (new Carrito())->get_carrito();
             </table>
             <div class="d-flex justify-content-end gap-2">
                 <input type="submit" value="Actualizar Cantidades" class="btn btn-warning">
-                <a href="index.php?sec=catalogo" role="button" class=" btn btn-danger">Seguir comprando</a>
+                <a href="index.php?sec=catalogo" role="button" class=" btn btn-danger boton_carrito_seguir_comprando">Seguir comprando</a>
                 <a href="accion/clear_items_acc.php" role="button" class="btn btn-danger">Vaciar Carrito</a>
-                <a href="index.php?sec=procesar_pedido" role="button" class="btn btn-primary">Finalizar Compra</a>
+                <a href="index.php?sec=procesar_pedido" role="button" class="btn btn-primary boton_carrito_finalizar_compra">Finalizar Compra</a>
             </div>
 
         </form>

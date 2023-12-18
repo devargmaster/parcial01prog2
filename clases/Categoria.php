@@ -1,53 +1,55 @@
 <?php
+
 class Categoria
 {
-  private $id;
-  private $nombre;
-  private $habilitada;
-  private  $descripcion;
+    private $id;
+    private $nombre;
+    private $habilitada;
+    private $descripcion;
     private $producto_id;
     private $categoria_id;
+    private $es_menu;
 
-  public function __construct()
-  {
+    public function __construct()
+    {
 
-  }
+    }
 
 
-
-  public function categorias_completas(): array
-  {
-    $conexion = Conexion::getConexion();
-    $consulta = "SELECT * FROM categorias";
-    $PDOStatement =  $conexion->prepare($consulta);
-    $PDOStatement->fetchAll(PDO::FETCH_CLASS, self::class);
-    $PDOStatement->execute();
-    return $PDOStatement->fetchAll();
-  }
-
-  public function categoria_con_cantidad(): array
+    public function categorias_completas(): array
     {
         $conexion = Conexion::getConexion();
-        $consulta = "SELECT c.nombre, COUNT(*) as cantidad FROM categorias c join subcategorias s on c.id=s.categoria_id where s.esmenu=0 group by c.nombre";
-        $PDOStatement =  $conexion->prepare($consulta);
+        $consulta = "SELECT * FROM categorias ORDER BY es_menu ASC";
+        $PDOStatement = $conexion->prepare($consulta);
+        $PDOStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         $PDOStatement->execute();
         return $PDOStatement->fetchAll();
     }
-    public function insertar() {
+
+    public function categoria_con_cantidad(): array
+    {
         $conexion = Conexion::getConexion();
-        $consulta = "INSERT INTO categorias (nombre, descripcion, habilitada) VALUES (:nombre, :descripcion, :habilitada)";
+        $consulta = "SELECT c.nombre, COUNT(*) as cantidad FROM categorias c join subcategorias s on c.id=s.categoria_id where s.esmenu=0 group by c.nombre";
+        $PDOStatement = $conexion->prepare($consulta);
+        $PDOStatement->execute();
+        return $PDOStatement->fetchAll();
+    }
 
+    public function insertar()
+    {
+        $conexion = Conexion::getConexion();
+        $consulta = "INSERT INTO categorias (nombre, descripcion, habilitada, es_menu) VALUES (:nombre, :descripcion, :habilitada, :es_menu)";
         $sentencia = $conexion->prepare($consulta);
-
         $resultado = $sentencia->execute(
             [
                 ':nombre' => $this->nombre,
                 ':descripcion' => $this->descripcion,
-                ':habilitada' => $this->habilitada
+                ':habilitada' => $this->habilitada,
+                ':es_menu' => $this->es_menu
             ]
         );
 
-        if($resultado) {
+        if ($resultado) {
             $this->id = $conexion->lastInsertId();
         }
 
@@ -59,7 +61,7 @@ class Categoria
      * @return Categoria|null
      */
 
-public function eliminar(): void
+    public function eliminar(): void
     {
         $conexion = Conexion::getConexion();
         $consulta = "DELETE FROM categorias WHERE id = :id";
@@ -71,7 +73,7 @@ public function eliminar(): void
         );
     }
 
-/**
+    /**
      * @param mixed $id
      * @return Categoria|null
      */
@@ -85,10 +87,12 @@ public function eliminar(): void
                 ':nombre' => $this->nombre,
                 ':descripcion' => $this->descripcion,
                 ':habilitada' => $this->habilitada,
+                ':es_menu' => $this->es_menu,
                 ':id' => $this->id
             ]
         );
     }
+
     public function categoriaxid(mixed $id)
     {
         $conexion = Conexion::getConexion();
@@ -117,45 +121,46 @@ public function eliminar(): void
         $resultado = $sentencia->fetch();
         return $resultado !== false ? $resultado : null;
     }
-  public function getNombre()
-  {
-    return $this->nombre;
-  }
 
-  public function setNombre($nombre)
-  {
-    $this->nombre = $nombre;
-  }
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
 
-  public  function getDescripcion()
-  {
-    return $this->descripcion;
-  }
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    }
 
-  public function getHabilitada()
-  {
-    return $this->habilitada;
-  }
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
 
-  public function setHabilitada($habilitada)
-  {
-    $this->habilitada = $habilitada;
-  }
+    public function getHabilitada()
+    {
+        return $this->habilitada;
+    }
 
-  public function getID()
-  {
-    return $this->id;
-  }
+    public function setHabilitada($habilitada)
+    {
+        $this->habilitada = $habilitada;
+    }
 
-  public function setID(mixed $id)
-  {
-    $this->id = $id;
-  }
+    public function getID()
+    {
+        return $this->id;
+    }
 
-  public function setDescripcion(mixed $descripcion)
-  {
-    $this->descripcion = $descripcion;
-  }
+    public function setID(mixed $id)
+    {
+        $this->id = $id;
+    }
+
+    public function setDescripcion(mixed $descripcion)
+    {
+        $this->descripcion = $descripcion;
+    }
 
     /**
      * @return mixed
@@ -189,6 +194,15 @@ public function eliminar(): void
         $this->categoria_id = $categoria_id;
     }
 
+    public function getEsMenu()
+    {
+        return $this->es_menu;
+    }
+
+    public function setEsMenu($es_menu)
+    {
+        $this->es_menu = $es_menu;
+    }
 
 }
 

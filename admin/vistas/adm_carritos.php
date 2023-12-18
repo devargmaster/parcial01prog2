@@ -3,6 +3,7 @@ $carritos = (new Carrito())->todos_los_carritos();
 //echo '<pre>';
 //print_r($carritos);
 //echo '</pre>';
+echo (new Alerta())->get_alertas();
 ?>
 <div class="container mt-5">
     <h2>Administrar Carritos</h2>

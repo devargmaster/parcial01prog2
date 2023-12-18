@@ -1,7 +1,7 @@
 <?php
 $categorias_contador= (new Categoria())->categoria_con_cantidad();
 $destacados = (new Producto())->productos_destacados_cantidad_subcategoria();
-
+echo (new Alerta())->get_alertas();
 ?>
 <div class="container mt-4">
     <h1 class="text-center mb-4">HOME ADMIN</h1>

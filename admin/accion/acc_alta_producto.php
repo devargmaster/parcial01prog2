@@ -2,9 +2,10 @@
 $postData = $_POST;
 $datosArchivo = $_FILES['imagen'];
 $subcategoriasSeleccionadas = $_POST['subcategorias'] ?? [];
-
+$alerta = new Alerta();
 if (!empty($datosArchivo['tmp_name'])) {
     if ($datosArchivo['error'] !== UPLOAD_ERR_OK) {
+
         die('Error al subir el archivo: ' . $datosArchivo['error']);
     }
 
@@ -65,7 +66,7 @@ try {
     }
 
   $conexion->commit();
-
+    $alerta->add_alerta('success', "Producto dado de alta!.", "Producto");
   header('Location: index.php?sec=productos&ruta=vistas');
 } catch (Exception $ex) {
   if (isset($conexion)) {

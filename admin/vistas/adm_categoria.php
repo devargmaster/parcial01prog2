@@ -52,6 +52,13 @@ if (strpos($currentPath, '/vistas/') !== false) {
             <label for="nombreCategoria" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombreCategoria" name="nombre" required>
           </div>
+            <div class="mb-3">
+                <label for="es_menu">Es menú:</label>
+                <select id="es_menu" name="es_menu">
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
+                </select>
+            </div>
           <div class="mb-3">
             <label for="descripcionCategoria" class="form-label">Descripción</label>
             <textarea class="form-control" id="descripcionCategoria" name="descripcion" rows="3"></textarea>

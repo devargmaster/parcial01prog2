@@ -5,6 +5,7 @@ $subcategorias = (new Subcategoria())->subcategorias_completas();
 //echo "<pre>";
 //print_r($subcategorias);
 //echo "</pre>";
+echo (new Alerta())->get_alertas();
 ?>
 <div class="container mt-5">
   <h2>Agregar Nuevo Producto</h2>

@@ -48,7 +48,7 @@ foreach ($productos as $producto) {
                     <?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS
                 </div>
                 <a href="index.php?sec=producto&id=<?= $producto->getID() ?>"
-                   class="btn carrito_boton_estilo  w-100 fw-bold mt-2 ">VER MÁS</a>
+                   class="btn botones_general  w-100 fw-bold mt-2 ">VER MÁS</a>
             </div>
         </div>
     </div>

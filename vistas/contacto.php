@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="form-group">
-      <input type="submit" class="btn carrito_boton_estilo mt-2 mb-2" value="Enviar">
+      <input type="submit" class="btn botones_general mt-2 mb-2" value="Enviar">
     </div>
   </form>
 </div>

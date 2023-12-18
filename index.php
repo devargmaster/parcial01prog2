@@ -1,5 +1,6 @@
 <?php
 require_once 'functions/autoload.php';
+echo (new Alerta())->get_alertas();
 ?>
 <!DOCTYPE html>
 <html lang="es">

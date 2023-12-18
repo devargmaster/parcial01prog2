@@ -1,6 +1,6 @@
 <?php
 $productos = (new Producto())->todos_los_productos_back();
-
+echo (new Alerta())->get_alertas();
 ?>
 <div class="container mt-5">
     <h2>Agregar Nueva Oferta</h2>

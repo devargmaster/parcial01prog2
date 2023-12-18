@@ -19,9 +19,9 @@ foreach ($productos as $producto) {
             <div class="col-md-6">
                 <div class="detalle_producto">
                     <h2 class="producto_titulo_estilo"><?= $producto->getProducto_nombre() ?></h2>
-                    <span class="badge bg-primary"><?= $producto->getProductoCategoria(); ?></span>
+                    <span class="badge bg-primary badge_categoria"><?php echo $producto->getProductoCategoria(); ?></span>
                     <?php foreach ($producto->getProductoSubcategoria() as $subcategoria): ?>
-                        <span class="badge bg-secondary"><?= $subcategoria->getNombre(); ?></span>
+                        <span class="badge bg-secondary badge_subcategoria"><?= $subcategoria->getNombre(); ?></span>
                     <?php endforeach; ?>
 
                     <p class="producto_descripcion_estilo"><?= $producto->getProducto_descripcion() ?></p>

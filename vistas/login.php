@@ -26,9 +26,9 @@
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary botones_general">Login</button>
         </form>
-<a href="index.php?sec=registro">Registrarse</a>
+<a href="index.php?sec=registro" class="links_general">Registrarse</a>
 
     </div>
 </div>

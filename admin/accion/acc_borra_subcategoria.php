@@ -11,6 +11,7 @@ $alerta = new Alerta();
 try {
     $subcategoria = (new Subcategoria())->subcategoriaxid($id);
     $subcategoria->eliminar();
+    $alerta->add_alerta('success', "Subcategoria eliminada correctamente.", "Subcategoria");
     header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=subcategoria&ruta=vistas');
 } catch (Exception $e) {
     $message = $e->getMessage();

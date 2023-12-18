@@ -37,8 +37,8 @@ if (isset($_SESSION['loggedIn']['rol'])) {
         </html>
         <?php
     } elseif ($rolUsuario == 'usuario') {
-        (new Alerta())->add_alerta('warning', "El usuario no tiene permisos para ingresar a esta area administrativa");
-        header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=login');
+        (new Alerta())->add_alerta('warning', "El usuario no tiene permisos para ingresar a esta área administrativa", "Seccion administrativa");
+        header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=home');
     }
 }
 else {
