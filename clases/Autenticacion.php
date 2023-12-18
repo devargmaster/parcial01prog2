@@ -35,11 +35,11 @@ class Autenticacion
 
                 return $datosLogin['rol'];
             } else {
-                (new Alerta())->add_alerta('danger', "El password ingresado no es correcto.");
+                (new Alerta())->add_alerta('danger', "El password ingresado no es correcto.","Autenticación");
                 return FALSE;
             }
         } else {
-            (new Alerta())->add_alerta('warning', "El usuario ingresado no se encontró en nuestra base de datos.");
+            (new Alerta())->add_alerta('warning', "El usuario ingresado no se encontró en nuestra base de datos.","Autenticación");
             return NULL;
         }
     }

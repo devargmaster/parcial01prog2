@@ -10,7 +10,7 @@
             echo (new Alerta())->get_alertas();
             $auth = new Autenticacion();
             if ($auth->verify()) {
-                (new Alerta())->add_alerta('warning', "Ya estás logueado, podes seguir comprando.");
+                (new Alerta())->add_alerta('warning', "Ya estás logueado, podes seguir comprando.", "Login");
                 (new Alerta())->get_alertas();
             }
             ?>

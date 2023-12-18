@@ -3,6 +3,12 @@ $subcategorias = (new Subcategoria())->subcategorias_completas_nofiltrada();
 //echo "<pre>";
 //print_r($subcategorias);
 //echo "</pre>";
+$currentPath = $_SERVER['PHP_SELF'];
+$basePath = '';
+echo (new Alerta())->get_alertas();
+if (strpos($currentPath, '/vistas/') !== false) {
+    $basePath = '../';
+}
 ?>
 <div class="container mt-5">
   <h2>Administrar Subcategorías</h2>

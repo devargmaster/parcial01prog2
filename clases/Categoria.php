@@ -93,14 +93,14 @@ public function eliminar(): void
     {
         $conexion = Conexion::getConexion();
         $consulta = "SELECT * FROM categorias WHERE id = :id";
-        $sentencia = $conexion->prepare($consulta);
-        $sentencia->setFetchMode(PDO::FETCH_CLASS, self::class);
-        $sentencia->execute(
+        $PDOStatement = $conexion->prepare($consulta);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute(
             [
                 ':id' => $id
             ]
         );
-        return $sentencia->fetch();
+        return $PDOStatement->fetch();
     }
 
     public function categoriaxproducto(mixed $id)

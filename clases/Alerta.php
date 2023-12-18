@@ -9,11 +9,12 @@ class Alerta
      * @param string $tipo el tipo de alerta danger/warning/success
      * @param string $mensaje El contenido de la alerta
      */
-    public function add_alerta(string $tipo, string $mensaje): void
+    public function add_alerta(string $tipo, string $mensaje, string $modulo): void
     {
         $_SESSION['alertas'][] = [
             'tipo' => $tipo,
-            'mensaje' => $mensaje
+            'mensaje' => $mensaje,
+            'modulo' => $modulo
         ];
     }
 
@@ -47,7 +48,7 @@ class Alerta
     private function print_alerta($alerta): string
     {
         $html = "<div class='alert alert-{$alerta['tipo']} alert-dismissible fade show' role='alert'>";
-        $html .= $alerta['mensaje'];
+        $html .= "[{$alerta['modulo']}] {$alerta['mensaje']}";
         $html .= "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
         $html .= "</div>";
 

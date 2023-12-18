@@ -3,6 +3,8 @@
 class Productos_Categorias
 {
     private $id;
+
+
     private $producto_id;
     private $categoria_id;
 
@@ -65,6 +67,12 @@ class Productos_Categorias
             ]
         );
     }
-
+    /**
+     * @return null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
 }

@@ -1,11 +1,16 @@
 <?php
+$currentPath = $_SERVER['PHP_SELF'];
+$basePath = '';
+echo (new Alerta())->get_alertas();
+if (strpos($currentPath, '/vistas/') !== false) {
+    $basePath = '../';
+}
 ?>
 
 <div class="container mt-5">
   <h2>Administrar Marcas</h2>
   <button class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#modalMarca">Nueva Marca</button>
 
-  <!-- Tabla para mostrar marcas -->
   <table class="table">
     <thead>
     <tr>

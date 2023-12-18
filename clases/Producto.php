@@ -10,29 +10,32 @@ class Producto
     private $producto_stock;
     private $producto_destacado;
     private $producto_info_adicional;
-    private $producto_categoria;
+    private $productoId_categoria_id;
     private ?Oferta $producto_oferta;
-
-    public function getProductoOferta(): ?Oferta
-    {
-        return $this->producto_oferta;
-    }
-
-
     private $producto_subcategoria;
+    private $producto_subcategoria_id;
     private $producto_estado;
-
+    private $producto_marca;
+    private $subcategoria_id;
+    private mixed $producto_categoria;
     private $producto_nuevo;
     private $producto_fecha;
+    private $marca_id;
 
-    private $fecha_upd;
-    private $usuario_upd;
+    /**
+     * @return mixed
+     */
+    public function getProductoSubcategoria():array
+    {
+        $subcategorias = [];
+        if ($this->producto_subcategoria !== null) {
+            foreach ($this->producto_subcategoria as $subcategoria) {
+                $subcategorias[] = $subcategoria;
+            }
+        }
+        return $subcategorias;
+    }
 
-    private $producto_marca;
-    private $categoria_id;
-    private $subcategoria_id;
-
-    private $producto_id;
 
     private static $createValues = [
         'id',
@@ -49,6 +52,7 @@ class Producto
     ];
 
 
+
     private function createProducto($productoData) : Producto
     {
         $producto = new self();
@@ -58,7 +62,17 @@ class Producto
             $producto->{$value} = $productoData[$value];
         }
         $producto->producto_marca = (new Marca())->marcaxid($productoData['marca_id']);
-        $producto->producto_categoria = (new Productos_Categorias())->producto_x_categoria($productoData['id']);
+        $producto->productoId_categoria_id = (new Productos_Categorias())->producto_x_categoria($productoData['id']);
+        $producto->producto_categoria = (new Categoria())->categoriaxid($producto->productoId_categoria_id['categoria_id']);
+        $subcategoriasIds = (new Productos_Categorias_Subcategorias())->producto_x_subcategoria($productoData['id']);
+        $producto->producto_subcategoria = [];
+        foreach ($subcategoriasIds as $subcategoriaId) {
+            $subcategoria = (new Subcategoria())->subcategoriaxid($subcategoriaId['subcategoria_id']);
+            if ($subcategoria) {
+                $producto->producto_subcategoria[] = $subcategoria;
+            }
+        }
+
         $producto->producto_info_adicional = (new Informacion_adicional())->get_x_id($productoData['id']);
         $producto->producto_oferta = (new Oferta())->ofertaxId($productoData['id']);
 
@@ -80,10 +94,6 @@ class Producto
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute();
-//        $catalogo = $PDOStatement->fetchAll();
-//        echo "<pre>";
-//        print_r($catalogo);
-//        echo "</pre>";
         while ($result= $PDOStatement->fetch()) {
             $productos[] = $this->createProducto($result);
         }
@@ -375,7 +385,10 @@ class Producto
         return $this->producto_imagen ?? '';
     }
 
-
+    public function getProductoCategoria(): mixed
+    {
+        return $this->producto_categoria->getNombre() ?? '';
+    }
 
 
     /**
@@ -409,6 +422,8 @@ class Producto
     {
         return $this->producto_marca->getMarcaTitulo();
     }
+
+
     public function getInformacionAdicional(): array
     {
         return $this->producto_info_adicional;
@@ -416,11 +431,18 @@ class Producto
     /**
      * @return mixed
      */
-    public function getProductoCategoria()
+
+    public function getProductoOferta(): ?Oferta
     {
-        return $this->producto_categoria->getCategoriaNombre();
+        return $this->producto_oferta;
     }
-    public function clear_info_adicional()
+    /**
+     * @return mixed
+     */
+
+
+
+    public function clear_info_adicional(): void
     {
         $conexion = Conexion::getConexion();
         $query = "DELETE FROM informacion_adicional WHERE producto_id = :producto_id";
@@ -431,5 +453,13 @@ class Producto
                 'producto_id' => $this->id
             ]
         );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductoSubcategoriaId()
+    {
+        return $this->producto_subcategoria_id;
     }
 }

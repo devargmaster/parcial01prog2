@@ -73,7 +73,7 @@ class Oferta
     public function ofertaxId($id): ?self
     {
         $conexion = Conexion::getConexion();
-        $consulta = "SELECT ofertas.*, productos.producto_nombre as nombre_producto FROM ofertas JOIN productos ON ofertas.producto_id = productos.id WHERE producto_id = :id";
+        $consulta = "SELECT ofertas.*, productos.producto_nombre as nombre_producto FROM ofertas JOIN productos ON ofertas.producto_id = productos.id WHERE ofertas.producto_id = :id";
 
         $sentencia = $conexion->prepare($consulta);
         $sentencia->execute([':id' => $id]);

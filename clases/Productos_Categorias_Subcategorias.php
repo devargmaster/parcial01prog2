@@ -64,5 +64,16 @@ class Productos_Categorias_Subcategorias
 
     }
 
-
+    public function producto_x_subcategoria(mixed $id)
+    {
+        $conexion = Conexion::getConexion();
+        $query = "SELECT * FROM productos_categorias_subcategorias WHERE producto_id = ?";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(
+            [
+                $id
+            ]
+        );
+        return $PDOStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

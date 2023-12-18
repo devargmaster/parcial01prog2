@@ -4,15 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once "../functions/autoload.php";
 $postData = $_POST;
-
-echo "<pre>";
-print_r($postData);
-echo "</pre>";
-
 $login = (new Autenticacion())->log_in($postData['username'], $postData['password']);
-echo "<pre>";
-print_r($login);
-echo "</pre>";
 if ($login === true) {
     $rolUsuario = $_SESSION['loggedIn']['rol'];
     if ($rolUsuario == 'administrador') {
@@ -22,12 +14,12 @@ if ($login === true) {
     }
 } else {
     if ($login === 'usuario_incorrecto') {
-        (new Alerta())->add_alerta('warning', "Usuario incorrecto");
+        (new Alerta())->add_alerta('warning', "Usuario incorrecto", "Login");
     } elseif ($login === 'clave_incorrecta') {
-        (new Alerta())->add_alerta('warning', "Contraseña incorrecta");
+        (new Alerta())->add_alerta('warning', "Contraseña incorrecta", "Login");
     }
     elseif ($login === 'no_existe') {
-        (new Alerta())->add_alerta('warning', "Verificar usuario y contraseña");
+        (new Alerta())->add_alerta('warning', "Verificar usuario y contraseña", "Login");
     }
-    //header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=login');
+    header("Location: " . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=login');
 }

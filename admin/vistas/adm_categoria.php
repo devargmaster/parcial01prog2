@@ -1,5 +1,11 @@
 <?php
 $categorias = (new Categoria())->categorias_completas();
+$currentPath = $_SERVER['PHP_SELF'];
+$basePath = '';
+echo (new Alerta())->get_alertas();
+if (strpos($currentPath, '/vistas/') !== false) {
+    $basePath = '../';
+}
 ?>
 
 <div class="container mt-5">

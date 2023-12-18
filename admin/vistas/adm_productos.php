@@ -6,7 +6,7 @@ $listaDeProductos = (new Producto())->todos_los_productos_back();
 $currentPath = $_SERVER['PHP_SELF'];
 $basePath = '';
 
-
+echo (new Alerta())->get_alertas();
 if (strpos($currentPath, '/vistas/') !== false) {
     $basePath = '../';
 }

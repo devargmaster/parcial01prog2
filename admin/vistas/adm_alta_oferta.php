@@ -1,5 +1,5 @@
 <?php
-$productos = (new Producto())->todos_los_productos();
+$productos = (new Producto())->todos_los_productos_back();
 
 ?>
 <div class="container mt-5">

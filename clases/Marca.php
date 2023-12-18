@@ -38,8 +38,9 @@ class Marca
 
         return $resultado;
     }
-      public function eliminar(): bool
-      {
+    public function eliminar(): bool
+    {
+        try {
             $conexion = Conexion::getConexion();
             $consulta = "DELETE FROM marcas WHERE id = :id";
             $PDOStatement = $conexion->prepare($consulta);
@@ -49,7 +50,11 @@ class Marca
                     ':id' => $this->id
                 ]
             );
+        } catch (PDOException $e) {
+            error_log("Error al eliminar la marca: " . $e->getMessage());
+            throw new Exception("Error al eliminar la marca: " . $e->getMessage());
         }
+    }
         public function marcaxid(mixed $id)
         {
             $conexion = Conexion::getConexion();
@@ -63,7 +68,7 @@ class Marca
             );
             return $PDOStatement->fetch();
         }
-        public function editar($nombre, $descripcion)
+        public function editar($nombre, $descripcion): bool
         {
             $conexion = Conexion::getConexion();
             $consulta = "UPDATE marcas SET marca_titulo = :marca_titulo, marca_descripcion = :marca_descripcion WHERE id = :id";
