@@ -1,7 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 $catalogo = new Producto();
 
 if (isset($_GET['sec'])) {
@@ -38,9 +38,9 @@ foreach ($productos as $producto) {
                                                class="producto_titulo_estilo"><?= $producto->getProducto_nombre(); ?></a>
                 </h2>
 
-                <span class="badge bg-secondary"><?php echo $producto->getProductoCategoria(); ?></span>
+                <span class="badge bg-primary badge_categoria"><?php echo $producto->getProductoCategoria(); ?></span>
                 <?php foreach ($producto->getProductoSubcategoria() as $subcategoria): ?>
-                    <span class="badge bg-secondary"><?= $subcategoria->getNombre(); ?></span>
+                    <span class="badge bg-secondary badge_subcategoria"><?= $subcategoria->getNombre(); ?></span>
                 <?php endforeach; ?>
 
                 <p class="card-text mb-2"><?= $producto->descripcion_limite() ?></p>

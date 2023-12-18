@@ -8,21 +8,27 @@ foreach ($productos as $producto) {
     <div class="container mt-4 mb-4">
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-6 producto-imagen">
                 <img class="producto_imagen_estilo" src="img/productos/<?= $producto->getProducto_imagen() ?>"
                      alt="<?= $producto->getProducto_imagen() ?>">
+                <?php if ($producto->getProductoOferta()): ?>
+                    <span class="badge bg-secondary oferta-pildora">Oferta</span>
+                <?php endif; ?>
             </div>
 
             <div class="col-md-6">
                 <div class="detalle_producto">
                     <h2 class="producto_titulo_estilo"><?= $producto->getProducto_nombre() ?></h2>
+                    <span class="badge bg-primary"><?= $producto->getProductoCategoria(); ?></span>
+                    <?php foreach ($producto->getProductoSubcategoria() as $subcategoria): ?>
+                        <span class="badge bg-secondary"><?= $subcategoria->getNombre(); ?></span>
+                    <?php endforeach; ?>
+
                     <p class="producto_descripcion_estilo"><?= $producto->getProducto_descripcion() ?></p>
                     <p class="producto_precio_estilo_formulario"><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?>
                         ARS</p>
-
                     <div class="informacion_adicional_estilo">
                         <img src="img/detalle.png" alt="informacion adicional"> Informacion adicional
-
                         <?php
                         $infoAdicional = $producto->getInformacionAdicional();
                         foreach ($infoAdicional as $info) {
@@ -30,9 +36,7 @@ foreach ($productos as $producto) {
                             echo(!empty($info->getMaterial()) ? "<p class='producto_descripcion_estilo'>Material:" . $info->getMaterial() . "</p>" : "");
                             echo(!empty($info->getPeso()) ? "<p class='producto_descripcion_estilo'>Peso:" . $info->getPeso() . "</p>" : "");
                             echo(!empty($info->getOrigen()) ? "<p class='producto_descripcion_estilo'>Origen:" . $info->getOrigen() . "</p>" : "");
-
                         }
-
                         ?>
                     </div>
                 </div>

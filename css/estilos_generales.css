@@ -76,9 +76,10 @@ footer h5 {
   height: auto;
 }
 .producto_titulo_estilo {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #333;
   margin-top: 20px;
+  text-decoration: none;
 }
 .producto_descripcion_estilo {
   color: #666;
@@ -117,7 +118,7 @@ footer h5 {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: red;
+  background: #59171e !important;
   color: white;
   padding: 5px;
 
@@ -139,9 +140,36 @@ label{
   border: 2px solid #988c8c;
   border-radius: 4px;
   resize: vertical;
+}
+.producto-imagen {
+  position: relative;
+}
 
+.oferta-pildora {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  font-size: 1.2em;
+  background: #59171e !important;
+  z-index: 1;
+}
 
-
-
-
+.badge_categoria {
+  background-color: #59171e !important;
+  color: #fff;
+  padding: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.badge_subcategoria {
+  background-color: #195917 !important;
+  color: #fff;
+  padding: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-right: 10px;
 }

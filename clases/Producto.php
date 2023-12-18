@@ -88,7 +88,7 @@ class Producto
     {
         $productos = [];
         $conexion = Conexion::getConexion();
-        $consulta = "SELECT p.* FROM productos p 
+        $consulta = "SELECT distinct p.* FROM productos p 
         JOIN productos_categorias pc ON p.id = pc.producto_id
         JOIN productos_categorias_subcategorias pcs ON p.id = pcs.producto_id where producto_estado = 1";
         $PDOStatement = $conexion->prepare($consulta);
