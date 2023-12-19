@@ -15,9 +15,7 @@ if (isset($_GET['ruta'])) {
 }
 
 $archivo = $path . $seccion_elegida_ . '.php';
-//echo "<pre>";
-//print_r($archivo);
-//echo "</pre>";
+
 if (file_exists($archivo)) {
   require_once $path . $seccion_elegida_ . '.php';
 } else {

@@ -1,6 +1,6 @@
 <?php
 $id = $_GET['id'] ?? FALSE;
-$oferta = (new Oferta())->ofertaxId($id);
+$oferta = (new Oferta())->ofertaxIdBack($id);
 $productos = (new Producto())->todos_los_productos();
 ?>
 <div class="">

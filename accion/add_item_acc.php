@@ -11,6 +11,6 @@ if($id){
         $carrito->create_cart();
     }
     $carrito->add_item($id, $q);
-    (new Alerta())->add_alerta('success', "Genial! ya agregue tu producto!", "Carrito");
+    (new Alerta())->add_alerta('success', 'Genial! ya agregue tu producto! <a href="index.php?sec=carrito" class="links_general">Ver carrito</a>', "Carrito");
     header('location: ../index.php?sec=home');
 }

@@ -6,7 +6,6 @@
   $currentPath = $_SERVER['PHP_SELF'];
   $basePath = '';
 
-  // Aca lo hago retroceder un nivel para manejar la jerarquia del index respecto a las vistas
   if (str_contains($currentPath, '/vistas/')) {
     $basePath = '../';
   }

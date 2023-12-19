@@ -13,9 +13,10 @@ try {
     $categoria->eliminar();
     $alerta->add_alerta('success', "Categoria eliminada correctamente.", "Categoria");
     header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=categoria&ruta=vistas');
-} catch (Exception $e) {
+} catch (PDOException $e) {
     $message = $e->getMessage();
-    if (preg_match('/CONSTRAINT `(.*?)` FOREIGN KEY/', $message, $matches)) {
+    if ($e->getCode() == 23000) {
+        preg_match('/CONSTRAINT `(.*?)` FOREIGN KEY/', $message, $matches);
         $fkName = $matches[1];
         $alerta->add_alerta('danger', "No se puede eliminar debido a la restricción de la clave foránea: $fkName contacte al administrador de sistema, para mas información.", "Categoria");
     } else {

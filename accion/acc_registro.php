@@ -1,5 +1,7 @@
 <?php
 require_once "../functions/autoload.php";
+$alerta = new Alerta();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['nombre'] ?? '';
     $apellido = $_POST['apellido'] ?? '';
@@ -8,14 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $clave = $_POST['pass'] ?? '';
     $clave2 = $_POST['pass2'] ?? '';
 
-
     if ($clave !== $clave2) {
-        exit('Las contraseñas no coinciden.');
+        $alerta->add_alerta('danger', "Las contraseñas no coinciden.", "Registro");
+        header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=registro');
+        exit;
     }
 
-
     $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
-
 
     $usuarioObj = new Usuario();
     $usuarioObj->setNombre($nombre);
@@ -26,9 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuarioObj->setRol('usuario');
 
     if ($usuarioObj->insertar()) {
-        header( "Location: ". dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=exito_registro');
+        $alerta->add_alerta('success', "Usuario registrado correctamente.", "Registro");
+        header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=exito_registro');
     } else {
-        exit('Error al registrar el usuario.');
+        $alerta->add_alerta('danger', "Error al registrar el usuario.", "Registro");
+        header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=registro');
     }
 }
-?>

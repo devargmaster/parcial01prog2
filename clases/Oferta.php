@@ -73,6 +73,20 @@ class Oferta
     public function ofertaxId($id): ?self
     {
         $conexion = Conexion::getConexion();
+        $consulta = "SELECT ofertas.*, productos.producto_nombre as nombre_producto FROM ofertas JOIN productos ON ofertas.producto_id = productos.id WHERE ofertas.producto_id = :id";
+
+        $sentencia = $conexion->prepare($consulta);
+        $sentencia->execute([':id' => $id]);
+
+        $sentencia->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $oferta = $sentencia->fetch();
+
+        return $oferta ?: null;
+    }
+
+    public function ofertaxIdBack($id): ?self
+    {
+        $conexion = Conexion::getConexion();
         $consulta = "SELECT ofertas.*, productos.producto_nombre as nombre_producto FROM ofertas JOIN productos ON ofertas.producto_id = productos.id WHERE ofertas.id = :id";
 
         $sentencia = $conexion->prepare($consulta);

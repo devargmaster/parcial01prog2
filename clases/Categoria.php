@@ -29,7 +29,12 @@ class Categoria
     public function categoria_con_cantidad(): array
     {
         $conexion = Conexion::getConexion();
-        $consulta = "SELECT c.nombre, COUNT(*) as cantidad FROM categorias c join subcategorias s on c.id=s.categoria_id where s.esmenu=0 group by c.nombre";
+        $consulta = "SELECT c.id, c.nombre, COUNT(p.id) as cantidad 
+                 FROM categorias c  
+                    LEFT JOIN productos_categorias pc ON c.id = pc.categoria_id
+                    LEFT JOIN productos p ON pc.producto_id = p.id
+                 where es_menu = 0 and c.descripcion not in ('catalogo', 'home')
+                 GROUP BY c.id, c.nombre";
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->execute();
         return $PDOStatement->fetchAll();
@@ -66,6 +71,9 @@ class Categoria
         $conexion = Conexion::getConexion();
         $consulta = "DELETE FROM categorias WHERE id = :id";
         $sentencia = $conexion->prepare($consulta);
+        if (!$sentencia->execute([':id' => $this->id])) {
+            throw new PDOException('Error al eliminar la categoría');
+        }
         $sentencia->execute(
             [
                 ':id' => $this->id
@@ -203,6 +211,7 @@ class Categoria
     {
         $this->es_menu = $es_menu;
     }
+
 
 }
 

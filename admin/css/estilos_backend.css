@@ -109,3 +109,10 @@ footer h5 {
 h1 {
     visibility: hidden;
 }
+.links_general {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 10px;
+}

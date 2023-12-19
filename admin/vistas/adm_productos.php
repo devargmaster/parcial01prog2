@@ -1,5 +1,10 @@
 <?php
-$listaDeProductos = (new Producto())->todos_los_productos_back();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+$marcaId = $_GET['marca_id'] ?? null;
+$categoriaId = $_GET['categoria_id'] ?? null;
+$listaDeProductos = (new Producto())->todos_los_productos_back($marcaId, $categoriaId);
 //echo "<pre>";
 //print_r($listaDeProductos);
 //echo "</pre>";

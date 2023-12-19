@@ -12,7 +12,7 @@ if (!empty($datosArchivo['tmp_name'])) {
     $og_name = explode(".", $datosArchivo['name']);
     $extension = end($og_name);
     $filename = time() . ".$extension";
-    $targetPath =  '../img/productos/' . $filename;
+    $targetPath = '../img/productos/' . $filename;
 
     if (file_exists($datosArchivo['tmp_name'])) {
         $fileUpload = move_uploaded_file($datosArchivo['tmp_name'], $targetPath);
@@ -30,21 +30,21 @@ if (!empty($datosArchivo['tmp_name'])) {
     $imagen = "img/imagen123.png";
 }
 try {
-  $conexion = Conexion::getConexion();
-  $conexion->beginTransaction();
+    $conexion = Conexion::getConexion();
+    $conexion->beginTransaction();
 
-  $producto = new Producto();
-  $producto_id = $producto->insertarProducto(
-    $postData['producto_nombre'],
-    $postData['producto_descripcion'],
-    $postData['producto_precio'],
-    $imagen,
-    $postData['producto_stock'],
-    $postData['producto_destacado'],
-    $postData['producto_estado'],
-    $postData['producto_nuevo'],
-    $postData['marca_id']
-  );
+    $producto = new Producto();
+    $producto_id = $producto->insertarProducto(
+        $postData['producto_nombre'],
+        $postData['producto_descripcion'],
+        $postData['producto_precio'],
+        $imagen,
+        $postData['producto_stock'],
+        $postData['producto_destacado'],
+        $postData['producto_estado'],
+        $postData['producto_nuevo'],
+        $postData['marca_id']
+    );
 
 
     if (isset($_POST['medidas']) || isset($_POST['peso']) || isset($_POST['material']) || isset($_POST['origen'])) {
@@ -65,13 +65,14 @@ try {
         (new Productos_Categorias_Subcategorias())->asignarProductoASubcategorias($producto_id, $subcategoriasSeleccionadas);
     }
 
-  $conexion->commit();
+    $conexion->commit();
     $alerta->add_alerta('success', "Producto dado de alta!.", "Producto");
-  header('Location: index.php?sec=productos&ruta=vistas');
+    header('Location: index.php?sec=productos&ruta=vistas');
 } catch (Exception $ex) {
-  if (isset($conexion)) {
-    $conexion->rollBack();
-  }
-  die($ex->getMessage());
+    if (isset($conexion)) {
+        $conexion->rollBack();
+    }
+    $alerta->add_alerta('danger', "Ocurrió un error al dar de alta el producto. Por favor, inténtelo de nuevo.", "Producto");
+    header('Location: index.php?sec=alta_producto&ruta=vistas');
 }
 

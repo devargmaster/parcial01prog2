@@ -25,7 +25,7 @@ class Producto
     /**
      * @return mixed
      */
-    public function getProductoSubcategoria():array
+    public function getProductoSubcategoria(): array
     {
         $subcategorias = [];
         if ($this->producto_subcategoria !== null) {
@@ -52,8 +52,7 @@ class Producto
     ];
 
 
-
-    private function createProducto($productoData) : Producto
+    private function createProducto($productoData): Producto
     {
         $producto = new self();
 
@@ -94,10 +93,10 @@ class Producto
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute();
-        while ($result= $PDOStatement->fetch()) {
+        while ($result = $PDOStatement->fetch()) {
             $productos[] = $this->createProducto($result);
         }
-    return $productos ?? [];
+        return $productos ?? [];
     }
 
     /**
@@ -105,15 +104,34 @@ class Producto
      *
      *
      */
-    public function todos_los_productos_back(): array
+
+
+    public function todos_los_productos_back($marcaId = null, $categoriaId = null): array
     {
         $productos = [];
         $conexion = Conexion::getConexion();
-        $consulta = "SELECT * FROM productos";
+
+        if ($marcaId !== null) {
+            $consulta = "SELECT productos.*, marcas.marca_titulo FROM productos JOIN marcas ON productos.marca_id = marcas.id WHERE productos.marca_id = :marca_id";
+        }
+        if ($categoriaId !== null) {
+            $consulta = "SELECT productos.* FROM productos join productos_categorias pc on productos.id = pc.producto_id join categorias c on c.id = pc.categoria_id WHERE pc.categoria_id = :categoria_id";
+        }
+        if ($marcaId === null && $categoriaId === null) {
+            $consulta = "SELECT productos.* FROM productos";
+        }
+
         $PDOStatement = $conexion->prepare($consulta);
+        if ($marcaId !== null) {
+            $PDOStatement->bindParam(':marca_id', $marcaId);
+        }
+        if ($categoriaId !== null) {
+            $PDOStatement->bindParam(':categoria_id', $categoriaId);
+        }
+
         $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute();
-        while ($result= $PDOStatement->fetch()) {
+        while ($result = $PDOStatement->fetch()) {
             $productos[] = $this->createProducto($result);
         }
         return $productos ?? [];
@@ -124,7 +142,7 @@ class Producto
      * @param string $categoria Un string con el nombre de categoria a buscar
      *
      */
-    public  function obtenerPorCategoria($categoria): array
+    public function obtenerPorCategoria($categoria): array
     {
         $productos = [];
         $conexion = Conexion::getConexion();
@@ -136,7 +154,7 @@ class Producto
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute([$categoria]);
-        while ($result= $PDOStatement->fetch()) {
+        while ($result = $PDOStatement->fetch()) {
             $productos[] = $this->createProducto($result);
         }
         return $productos;
@@ -160,7 +178,7 @@ class Producto
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute(['subcategoriaDescripcion' => $subcategoriaDescripcion]);
-        while ($result= $PDOStatement->fetch()) {
+        while ($result = $PDOStatement->fetch()) {
             $productos[] = $this->createProducto($result);
         }
         return $productos ?? [];
@@ -175,7 +193,7 @@ class Producto
         $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute(["%$nombre_producto%"]);
-        while ($result= $PDOStatement->fetch()) {
+        while ($result = $PDOStatement->fetch()) {
             $productos[] = $this->createProducto($result);
         }
         return $productos ?? [];
@@ -200,6 +218,7 @@ class Producto
         $PDOStatement->execute();
         return $PDOStatement->fetchAll();
     }
+
     /**
      * Devuelve un producto en particular caso contrario retorna nulo
      * @param string $idProducto Un entero con el id de producto a buscar
@@ -207,13 +226,13 @@ class Producto
      */
     public function producto_x_id(int $idProducto): array
     {
-        $productos =[];
+        $productos = [];
         $conexion = Conexion::getConexion();
         $catalogo = "SELECT * FROM productos WHERE id = ?";
         $PDOStatement = $conexion->prepare($catalogo);
         $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
         $PDOStatement->execute([$idProducto]);
-        while ($result= $PDOStatement->fetch()) {
+        while ($result = $PDOStatement->fetch()) {
             $productos[] = $this->createProducto($result);
         }
         return $productos ?? [];
@@ -415,6 +434,7 @@ class Producto
     {
         return $this->producto_destacado;
     }
+
     /**
      * @return mixed
      */
@@ -428,6 +448,7 @@ class Producto
     {
         return $this->producto_info_adicional;
     }
+
     /**
      * @return mixed
      */
@@ -436,10 +457,10 @@ class Producto
     {
         return $this->producto_oferta;
     }
+
     /**
      * @return mixed
      */
-
 
 
     public function clear_info_adicional(): void

@@ -13,12 +13,13 @@ foreach ($productos as $producto) {
         $alerta->add_alerta('success', "Producto eliminado correctamente.", "Producto");
         header('Location: ' . dirname(dirname($_SERVER['PHP_SELF'])). '/index.php?sec=productos&ruta=vistas');
     } catch (PDOException $e) {
-        $message = $e->getMessage();
-        if (preg_match('/CONSTRAINT `(.*?)` FOREIGN KEY/', $message, $matches)) {
-            $fkName = $matches[1];
-            $alerta->add_alerta('danger', "No se puede eliminar debido a la restricción de la clave foránea: $fkName contacte al administrador de sistema, para mas información.", "Producto");
+        $alerta = new Alerta();
+        if ($e->getCode() == 23000) {
+            preg_match('/CONSTRAINT `(.*?)` FOREIGN KEY/', $e->getMessage(), $matches);
+            $fkName = $matches[1] ?? '';
+            $alerta->add_alerta('danger', "No se puede eliminar debido a la restricción de la clave foránea: $fkName. Contacte al administrador de sistema para más información.", "Producto");
         } else {
-            $alerta->add_alerta('danger', "Ocurrió un error inesperado, por favor pongase en contacto con el administrador de sistema.","Producto");
+            $alerta->add_alerta('danger', "Ocurrió un error inesperado, por favor póngase en contacto con el administrador de sistema.","Producto");
         }
         header('Location: ' . dirname(dirname($_SERVER['PHP_SELF'])). '/index.php?sec=productos&ruta=vistas');
     }
