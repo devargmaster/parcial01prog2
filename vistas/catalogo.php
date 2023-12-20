@@ -29,7 +29,7 @@ foreach ($productos as $producto) {
             <div class="card-img-container">
                 <img src="img/productos/<?= $producto->getProducto_imagen() ?>" class='card-img-top'
                      alt='<?= $producto->getProducto_nombre(); ?>'>
-                <?php if ($producto->getProductoOferta()) {  ?>
+                <?php if ($producto->getProductoOferta()) { ?>
                     <span class="ofertaestilo"><?= $ofertaProducto ? $ofertaProducto->getOfertaTitulo() : 'Oferta' ?></span>
                 <?php } ?>
             </div>
@@ -39,9 +39,19 @@ foreach ($productos as $producto) {
                                                class="producto_titulo_estilo"><?= $producto->getProducto_nombre(); ?></a>
                 </h2>
 
-                <span class="badge bg-primary badge_categoria"><?php echo $producto->getProductoCategoria(); ?></span>
+                <span class="badge bg-primary badge_categoria">
+    <a href="index.php?sec=<?= urlencode($producto->getProductoCategoria()) ?>"
+       class="text-white text-decoration-none">
+        <?php echo $producto->getProductoCategoria(); ?>
+    </a>
+</span>
                 <?php foreach ($producto->getProductoSubcategoria() as $subcategoria): ?>
-                    <span class="badge bg-secondary badge_subcategoria"><?= $subcategoria->getNombre(); ?></span>
+                    <span class="badge bg-secondary badge_subcategoria">
+        <a href="index.php?sec=<?= urlencode($producto->getProductoCategoria()) ?>&subsec=<?= urlencode($subcategoria->getDescripcion()) ?>"
+           class="text-white text-decoration-none">
+            <?= $subcategoria->getNombre(); ?>
+        </a>
+    </span>
                 <?php endforeach; ?>
 
                 <p class="card-text mb-2"><?= $producto->descripcion_limite() ?></p>
@@ -53,5 +63,5 @@ foreach ($productos as $producto) {
             </div>
         </div>
     </div>
-<?php
+    <?php
 } ?>
