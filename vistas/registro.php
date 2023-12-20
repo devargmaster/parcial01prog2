@@ -19,6 +19,23 @@
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" name="nombre" id="nombre" required>
                 </div>
+
+                <div class="form-group mb-3">
+                    <label for="domicilio">Domicilio</label>
+                    <input type="text" class="form-control" name="domicilio" id="domicilio" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control" name="telefono" id="telefono" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="codigopostal">Código Postal</label>
+                    <input type="text" class="form-control" name="codigopostal" id="codigopostal" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="ciudad">Ciudad</label>
+                    <input type="text" class="form-control" name="ciudad" id="ciudad" required>
+                </div>
                 <div class="form-group mb-3">
                     <label for="apellido">Apellido</label>
                     <input type="text" class="form-control" name="apellido" id="apellido" required>

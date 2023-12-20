@@ -1,18 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-:root {
-    --primary-color: #59171e;
-    --secondary-color: #6c757d;
-    --background-color: #f8f9fa;
-}
-.fondo_verde {
-    background-color: #555b54;
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #988c8c;
-    border-radius: 4px;
-    resize: vertical;
-}
-/* Estilo Base para Botones */
+
 .btn {
     padding: 10px 15px;
     font-size: 16px;
@@ -27,7 +19,7 @@
 .btn:hover {
     background-color: #555b54;
 }
-/* Botón Primario */
+
 .btn-primary {
     background-color: #88967c;
 }
@@ -36,7 +28,6 @@
     background-color: #363f35;
 }
 
-/* Botón Secundario */
 .btn-secondary {
     background-color: #6c757d;
 }
@@ -45,7 +36,6 @@
     background-color: #545b62;
 }
 
-/* Botón de Alerta */
 .btn-danger {
     background-color: #59171e;
 }
@@ -61,19 +51,26 @@
 .btn-icon i {
     margin-right: 8px;
 }
+
 nav {
     font-size: 1em;
     font-weight: bold;
     color: rgb(136, 72, 72);
     border-bottom: 2px solid #884848;
     margin-bottom: 10px;
-    margin-top: -25px;
+    margin-top: 20px;
 }
-
+.navbar {
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+}
 footer {
     background-color: #333;
     color: #fff;
     padding: 20px 0;
+    text-align: center;
+    margin: 0;
 }
 
 
@@ -107,7 +104,7 @@ footer h5 {
     height: auto;
 }
 h1 {
-    visibility: hidden;
+    display: none;
 }
 .links_general {
     color: #333;
@@ -115,4 +112,9 @@ h1 {
     font-size: 1.2em;
     font-weight: bold;
     margin-right: 10px;
+}
+@media (max-width: 600px) {
+    .navbar, .footer {
+        width: 100%;
+    }
 }

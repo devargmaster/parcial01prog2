@@ -10,6 +10,11 @@ class Usuario
     private $rol;
     private $estado;
     private $clave;
+    private $domicilio;
+    private $ciudad;
+    private $codigopostal;
+    private $telefono;
+
     public function __construct()
     {
     }
@@ -18,12 +23,13 @@ class Usuario
     {
         $conexion = Conexion::getConexion();
         $consulta = "SELECT * FROM usuarios";
-        $PDOStatement =  $conexion->prepare($consulta);
+        $PDOStatement = $conexion->prepare($consulta);
         $PDOStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         $PDOStatement->execute();
         return $PDOStatement->fetchAll();
     }
-  public function usuario_x_username(string $username): ?Usuario
+
+    public function usuario_x_username(string $username): ?Usuario
     {
         $conexion = Conexion::getConexion();
         $query = "SELECT * FROM usuarios WHERE usuario = ?";
@@ -43,7 +49,7 @@ class Usuario
     public function insertar(): bool
     {
         $conexion = Conexion::getConexion();
-        $consulta = "INSERT INTO usuarios (nombre, apellido, email, usuario, clave, rol) VALUES (:nombre, :apellido, :email,:usuario, :clave, :rol)";
+        $consulta = "INSERT INTO usuarios (nombre, apellido, email, usuario, clave, rol, domicilio, telefono, codigopostal, ciudad) VALUES (:nombre, :apellido, :email,:usuario, :clave, :rol, :domicilio, :telefono, :codigopostal, :ciudad)";
 
         $sentencia = $conexion->prepare($consulta);
 
@@ -54,11 +60,15 @@ class Usuario
                 ':email' => $this->email,
                 ':usuario' => $this->usuario,
                 ':clave' => $this->clave,
-                ':rol' => $this->rol
+                ':rol' => $this->rol,
+                'domicilio' => $this->getDomicilio(),
+                'telefono' => $this->getTelefono(),
+                'codigopostal' => $this->getCodigoPostal(),
+                'ciudad' => $this->getCiudad()
             ]
         );
 
-        if($resultado) {
+        if ($resultado) {
             $this->id = $conexion->lastInsertId();
         }
 
@@ -77,6 +87,7 @@ class Usuario
             ]
         );
     }
+
     /**
      * @return mixed
      */
@@ -157,6 +168,7 @@ class Usuario
     {
         $this->clave = $clave;
     }
+
     /**
      * @return mixed
      */
@@ -164,6 +176,7 @@ class Usuario
     {
         return $this->id;
     }
+
     /**
      * @return mixed
      */
@@ -180,5 +193,68 @@ class Usuario
         $this->rol = $rol;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDomicilio()
+    {
+        return $this->domicilio;
+    }
+
+    /**
+     * @param mixed $domicilio
+     */
+    public function setDomicilio($domicilio): void
+    {
+        $this->domicilio = $domicilio;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * @param mixed $telefono
+     */
+    public function setTelefono($telefono): void
+    {
+        $this->telefono = $telefono;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCodigopostal()
+    {
+        return $this->codigopostal;
+    }
+
+    /**
+     * @param mixed $codigopostal
+     */
+    public function setCodigopostal($codigopostal): void
+    {
+        $this->codigopostal = $codigopostal;
+    }
+    /**
+     * @return mixed
+     */
+    public function getCiudad()
+    {
+        return $this->ciudad;
+    }
+
+    /**
+     * @param mixed $ciudad
+     */
+    public function setCiudad($ciudad): void
+    {
+        $this->ciudad = $ciudad;
+    }
 
 }

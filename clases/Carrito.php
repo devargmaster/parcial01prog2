@@ -1,14 +1,17 @@
 <?php
-
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 class Carrito
 {
     private $id;
     private $usuario_id;
-
     private $producto_id;
     private $cantidad;
+    private $fecha;
     private $carrito_guid;
     private $precio;
+
     public function create_cart(): void
     {
         $carritoGUID = $this->generate_guid();
@@ -161,7 +164,8 @@ class Carrito
         try {
             $conexion = new Conexion();
             $db = $conexion->getConexion();
-            $query = "SELECT c.*, p.producto_nombre, p.producto_imagen FROM carrito c JOIN productos p ON c.producto_id = p.id ORDER BY carrito_guid";
+            $query = "SELECT c.*, p.producto_nombre, p.producto_imagen FROM carrito c JOIN productos 
+                    p ON c.producto_id = p.id ORDER BY fecha,carrito_guid";
             $PDOStatement = $db->prepare($query);
             $PDOStatement->execute();
             $result = $PDOStatement->fetchAll(PDO::FETCH_ASSOC);
@@ -173,6 +177,7 @@ class Carrito
                 $carrito->setUsuarioId($row['usuario_id']);
                 $carrito->setProductoId($row['producto_id']);
                 $carrito->setCantidad($row['cantidad']);
+                $carrito->setFecha($row['fecha']);
                 $carrito->setCarritoGuid($row['carrito_guid']);
                 $carrito->setPrecio($row['precio']);
                 $carrito->producto_nombre = $row['producto_nombre'];
@@ -280,5 +285,21 @@ class Carrito
     public function setId(mixed $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * @param mixed $fecha
+     */
+    public function setFecha($fecha): void
+    {
+        $this->fecha = $fecha;
     }
 }

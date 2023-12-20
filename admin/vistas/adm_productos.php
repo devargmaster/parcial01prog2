@@ -17,46 +17,46 @@ if (strpos($currentPath, '/vistas/') !== false) {
 }
 ?>
 <div class="container mt-5">
+            <div class="mb-4">
+                <a href="index.php?sec=alta_producto&ruta=vistas" class="btn btn-primary btn-back" data-toggle="modal"
+                   data-target="#modalProducto">Nuevo Producto</a>
+            </div>
 
-    <div class="mb-4">
-        <a href="index.php?sec=alta_producto&ruta=vistas" class="btn btn-primary btn-back" data-toggle="modal"
-           data-target="#modalProducto">Nuevo Producto</a>
-    </div>
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Marca</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($listaDeProductos as $producto) { ?>
-            <tr>
-                <td><?= $producto->getID(); ?></td>
-                <td>
-                    <img src="../img/productos/<?= $producto->getProducto_imagen() ?>"
-                         alt="<?= $producto->getProducto_nombre(); ?>" style="width: 50px; height: auto;">
-                </td>
-                <td><?= $producto->getProducto_nombre(); ?></td>
-                <td><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS</td>
-                <td><?= $producto->getProductoMarca(); ?></td>
-                <td>
-                    <a href="<?= $basePath ?>index.php?sec=editar_producto&ruta=vistas&id=<?= $producto->getID() ?>"
-                       class="btn btn-primary btn-sm">Editar</a>
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
-                            data-producto-id="<?= $producto->getID(); ?>">Eliminar
-                    </button>
-                </td>
-            </tr>
-        <?php } ?>
-        </tbody>
-    </table>
-</div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="col-auto d-none d-md-table-cell">ID</th>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th class="col-auto d-none d-md-table-cell">Marca</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($listaDeProductos as $producto) { ?>
+                    <tr>
+                        <td class="col-auto d-none d-md-table-cell"><?= $producto->getID(); ?></td>
+                        <td>
+                            <img src="../img/productos/<?= $producto->getProducto_imagen() ?>"
+                                 alt="<?= $producto->getProducto_nombre(); ?>" style="width: 50px; height: auto;">
+                        </td>
+                        <td><?= $producto->getProducto_nombre(); ?></td>
+                        <td><?= number_format($producto->getProducto_precio(), 2, ",", ".") ?> ARS</td>
+                        <td class="col-auto d-none d-md-table-cell"><?= $producto->getProductoMarca(); ?></td>
+                        <td>
+                            <a href="<?= $basePath ?>index.php?sec=editar_producto&ruta=vistas&id=<?= $producto->getID() ?>"
+                               class="btn btn-primary btn-sm">Editar</a>
+                            <button class="btn btn-danger btn-sm btn-md" data-bs-toggle="modal"
+                                    data-bs-target="#confirmDeleteModal"
+                                    data-producto-id="<?= $producto->getID(); ?>">Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
 
 
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"

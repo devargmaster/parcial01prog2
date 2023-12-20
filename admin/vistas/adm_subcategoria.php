@@ -11,45 +11,49 @@ if (strpos($currentPath, '/vistas/') !== false) {
 }
 ?>
 <div class="container mt-5">
-  <h2>Administrar Subcategorías</h2>
+    <h2>Administrar Subcategorías</h2>
 
-  <!-- Botón para añadir nueva subcategoría -->
-  <button class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#modalSubcategoria">Nueva Subcategoría</button>
+    <button class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#modalSubcategoria">Nueva Subcategoría
+    </button>
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="col-auto d-none d-md-table-cell">ID</th>
+                <th>Nombre</th>
+                <th class="col-auto d-none d-md-table-cell">Descripción</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($subcategorias as $subcategoria): ?>
+                <tr>
+                    <td class="col-auto d-none d-md-table-cell"><?php echo $subcategoria['id']; ?></td>
+                    <td><?php echo $subcategoria['nombre']; ?></td>
+                    <td class="col-auto d-none d-md-table-cell"><?php echo $subcategoria['descripcion']; ?></td>
+                    <td><?php echo $subcategoria['categoria_nombre'] ?? 'No Asignado'; ?></td>
 
-  <table class="table">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Descripción</th>
-      <th>Categoría</th>
-      <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach($subcategorias as $subcategoria): ?>
-      <tr>
-          <td><?php echo $subcategoria['id']; ?></td>
-          <td><?php echo $subcategoria['nombre']; ?></td>
-          <td><?php echo $subcategoria['descripcion']; ?></td>
-          <td><?php echo $subcategoria['categoria_nombre'] ?? 'No Asignado'; ?></td>
+                    <td>
+                        <a href="index.php?sec=editar_subcategoria&ruta=adm&id=<?= $subcategoria['id']; ?>"
+                           class="btn btn-primary btn-sm">Editar</a>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeleteModal" data-subcategoria-id="<?= $subcategoria['id']; ?>">
+                            Eliminar
+                        </button>
 
-        <td>
-            <a href="index.php?sec=editar_subcategoria&ruta=adm&id=<?= $subcategoria['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-subcategoria-id="<?= $subcategoria['id']; ?>">Eliminar</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 
-        </td>
-      </tr>
-    <?php endforeach; ?>
-    </tbody>
-  </table>
-</div>
 
-<!-- Me quedo con modales solo para el alta de pequeñas entidades, el resto lo manejo como en clase -->
 <?php
 $categorias = (new Categoria())->categorias_completas();
 ?>
-<div class="modal fade" id="modalSubcategoria" tabindex="-1" aria-labelledby="modalSubcategoriaLabel" aria-hidden="true">
+<div class="modal fade" id="modalSubcategoria" tabindex="-1" aria-labelledby="modalSubcategoriaLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -65,12 +69,13 @@ $categorias = (new Categoria())->categorias_completas();
                     </div>
                     <div class="mb-3">
                         <label for="descripcionSubcategoria" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcionSubcategoria" name="descripcion" rows="3"></textarea>
+                        <textarea class="form-control" id="descripcionSubcategoria" name="descripcion"
+                                  rows="3"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="categoriaSubcategoria" class="form-label">Categoría</label>
                         <select class="form-select" id="categoriaSubcategoria" name="categoria_id" required>
-                            <?php foreach($categorias as $categoria): ?>
+                            <?php foreach ($categorias as $categoria): ?>
                                 <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -83,7 +88,8 @@ $categorias = (new Categoria())->categorias_completas();
                                 <label class="form-check-label" for="esMenuSi">Sí</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="es_menu" id="esMenuNo" value="0" checked>
+                                <input class="form-check-input" type="radio" name="es_menu" id="esMenuNo" value="0"
+                                       checked>
                                 <label class="form-check-label" for="esMenuNo">No</label>
                             </div>
                         </div>
@@ -96,7 +102,8 @@ $categorias = (new Categoria())->categorias_completas();
 </div>
 
 
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -122,7 +129,7 @@ $categorias = (new Categoria())->categorias_completas();
         var subcategoriaId = button.getAttribute('data-subcategoria-id');
 
         var confirmDeleteButton = confirmDeleteModal.querySelector('#confirmDeleteButton');
-        confirmDeleteButton.onclick = function() {
+        confirmDeleteButton.onclick = function () {
             window.location.href = 'accion/acc_borra_subcategoria.php?id=' + subcategoriaId;
         };
     });

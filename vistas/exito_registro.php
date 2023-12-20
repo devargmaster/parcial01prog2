@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-md-6 offset-md-3">
             <div class="alert alert-success">
                 <h4 class="alert-heading">¡Registro Exitoso!</h4>
@@ -7,7 +7,7 @@
                 <hr>
                 <p class="mb-0">Ahora puedes iniciar sesión para acceder a tu cuenta.</p>
             </div>
-            <a href="index.php?sec=login" class="btn btn-primary">Iniciar Sesión</a>
+            <a href="index.php?sec=login" class="btn botones_general btn-primary">Iniciar Sesión</a>
         </div>
     </div>
 </div>

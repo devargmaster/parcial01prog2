@@ -11,39 +11,38 @@ if (str_contains($currentPath, '/vistas/')) {
 }
 ?>
 <div class="container mt-4">
-    <h1 class="text-center mb-4">HOME ADMIN</h1>
+    <h2 class="text-center mb-4">Tablero de Administración</h2>
     <div class="row justify-content-center align-items-center">
 
         <div class="col-md-6 col-lg-3 mb-4">
             <div class="card mb-3">
-                <div class="card-header">Categorías</div>
-                <div class="card-body">
+                <div class="card-header bg-primary text-white">Categorías</div>
+                <ul class="list-group list-group-flush">
                     <?php
                     foreach ($categorias_contador as $categoria) {
                         $categoria_id = $categoria['id'];
                         $categoria_nombre = $categoria['nombre'];
                         $categoria_cantidad = $categoria['cantidad'];
-                        echo "<p>{$categoria_nombre} <a href='{$basePath}index.php?sec=productos&ruta=vistas&filtrado=categoria&categoria_id={$categoria_id}' class='links_general'>{$categoria_cantidad}</a></p>";
+                        echo "<li class='list-group-item'>{$categoria_nombre} <a href='{$basePath}index.php?sec=productos&ruta=vistas&filtrado=categoria&categoria_id={$categoria_id}' class='badge bg-secondary float-end'>{$categoria_cantidad}</a></li>";
                     }
                     ?>
-                </div>
+                </ul>
             </div>
         </div>
 
         <div class="col-md-6 col-lg-3 mb-4">
             <div class="card h-100">
-                <div class="card-header">Marcas</div>
-                <div class="card-body">
+                <div class="card-header bg-primary text-white">Marcas</div>
+                <ul class="list-group list-group-flush">
                     <?php
-
                     foreach ($marcascantidad as $marca) {
                         $marcaId = $marca['id'];
                         $marcaTitulo = $marca['marca_titulo'];
                         $marcaCantidad = $marca['cantidad'];
-                        echo "<p>{$marcaTitulo} <a href='{$basePath}index.php?sec=productos&ruta=vistas&filtrado=marca&marca_id={$marcaId}'>{$marcaCantidad}</a></p>";
+                        echo "<li class='list-group-item'>{$marcaTitulo} <a href='{$basePath}index.php?sec=productos&ruta=vistas&filtrado=marca&marca_id={$marcaId}' class='badge bg-secondary float-end'>{$marcaCantidad}</a></li>";
                     }
                     ?>
-                </div>
+                </ul>
             </div>
         </div>
     </div>

@@ -11,11 +11,18 @@ $catalogo = $productos_destacados->productos_destacados();
     <h2 class="text-center">Productos Destacados</h2>
     <div class="row">
       <?PHP
-      foreach ($catalogo as $producto) { ?>
+      $oferta = new Oferta();
+      foreach ($catalogo as $producto) {
+          $ofertaProducto = $oferta->ofertaxId($producto->getID());?>
         <div class="col-md-4">
           <div class="card">
-            <img src="img/productos/<?= $producto->getProducto_imagen() ?>" class='card-img-top'
-                 alt='<?= $producto->getProducto_nombre(); ?>'>
+              <div class="card-img-container">
+                  <img src="img/productos/<?= $producto->getProducto_imagen() ?>" class='card-img-top'
+                       alt='<?= $producto->getProducto_nombre(); ?>'>
+                  <?php if ($producto->getProductoOferta()) {  ?>
+                      <span class="ofertaestilo"><?= $ofertaProducto ? $ofertaProducto->getOfertaTitulo() : 'Oferta' ?></span>
+                  <?php } ?>
+              </div>
             <div class="card-body">
               <h2 class="card-title mb-2"><a href="index.php?sec=producto&id=<?= $producto->getID(); ?>"
                                              class="producto_titulo_estilo"><?= $producto->getProducto_nombre(); ?></a>

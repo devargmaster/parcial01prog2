@@ -9,6 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuario = $_POST['username'] ?? '';
     $clave = $_POST['pass'] ?? '';
     $clave2 = $_POST['pass2'] ?? '';
+    $domicilio = $_POST['domicilio'] ?? '';
+    $telefono = $_POST['telefono'] ?? '';
+    $codigopostal = $_POST['codigopostal'] ?? '';
+    $ciudad = $_POST['ciudad'] ?? '';
+
 
     if ($clave !== $clave2) {
         $alerta->add_alerta('danger', "Las contraseñas no coinciden.", "Registro");
@@ -23,6 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuarioObj->setApellido($apellido);
     $usuarioObj->setEmail($email);
     $usuarioObj->setUsuario($usuario);
+    $usuarioObj->setDomicilio($domicilio);
+    $usuarioObj->setTelefono($telefono);
+    $usuarioObj->setCodigoPostal($codigopostal);
+    $usuarioObj->setCiudad($ciudad);
     $usuarioObj->setClave($claveEncriptada);
     $usuarioObj->setRol('usuario');
 

@@ -26,6 +26,3 @@ echo (new Alerta())->get_alertas();
 
     </form>
 </div>
-
-
-

@@ -20,8 +20,9 @@ if (isset($_GET['sec'])) {
 } else {
     $productos = $catalogo->todos_los_productos();
 }
-
+$oferta = new Oferta();
 foreach ($productos as $producto) {
+    $ofertaProducto = $oferta->ofertaxId($producto->getID());
     ?>
     <div class="col-12 col-md-4 ">
         <div class='card mb-3'>
@@ -29,7 +30,7 @@ foreach ($productos as $producto) {
                 <img src="img/productos/<?= $producto->getProducto_imagen() ?>" class='card-img-top'
                      alt='<?= $producto->getProducto_nombre(); ?>'>
                 <?php if ($producto->getProductoOferta()) {  ?>
-                    <span class="ofertaestilo">¡Oferta!</span>
+                    <span class="ofertaestilo"><?= $ofertaProducto ? $ofertaProducto->getOfertaTitulo() : 'Oferta' ?></span>
                 <?php } ?>
             </div>
             <div class="card-body">

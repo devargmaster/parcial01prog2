@@ -2,8 +2,9 @@
 $id = $_GET['id'];
 $catalogo = new Producto();
 $productos = $catalogo->producto_x_id($id);
-
+$oferta = new Oferta();
 foreach ($productos as $producto) {
+    $ofertaProducto = $oferta->ofertaxId($producto->getID());
     ?>
     <div class="container mt-4 mb-4">
         <div class="row">
@@ -12,7 +13,7 @@ foreach ($productos as $producto) {
                 <img class="producto_imagen_estilo" src="img/productos/<?= $producto->getProducto_imagen() ?>"
                      alt="<?= $producto->getProducto_imagen() ?>">
                 <?php if ($producto->getProductoOferta()): ?>
-                    <span class="badge bg-secondary oferta-pildora">Oferta</span>
+                    <span class="badge bg-secondary oferta-pildora"><?= $ofertaProducto ? $ofertaProducto->getOfertaTitulo() : 'Oferta' ?></span>
                 <?php endif; ?>
             </div>
 

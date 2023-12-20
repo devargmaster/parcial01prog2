@@ -9,14 +9,15 @@ if (strpos($currentPath, '/vistas/') !== false) {
 ?>
 
 <div class="container mt-5">
+
   <h2>Administrar Categorías</h2>
   <button class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#modalCategoria">Nueva Categoría</button>
   <table class="table">
     <thead>
     <tr>
-      <th>ID</th>
+      <th class="col-auto d-none d-md-table-cell">ID</th>
       <th>Nombre</th>
-      <th>Descripción</th>
+      <th class="col-auto d-none d-md-table-cell">Descripción</th>
       <th>Habilitada</th>
       <th>Acciones</th>
     </tr>
@@ -24,9 +25,9 @@ if (strpos($currentPath, '/vistas/') !== false) {
     <tbody>
     <?php foreach($categorias as $categoria): ?>
       <tr>
-        <td><?=$categoria['id']; ?></td>
+        <td class="col-auto d-none d-md-table-cell"><?=$categoria['id']; ?></td>
         <td><?=$categoria['nombre']; ?></td>
-        <td><?=$categoria['descripcion']; ?></td>
+        <td class="col-auto d-none d-md-table-cell"><?=$categoria['descripcion']; ?></td>
         <td><?=$categoria['habilitada'] ? 'Sí' : 'No'; ?></td>
         <td>
             <a href="index.php?sec=editar_categoria&ruta=adm&id=<?= $categoria['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
