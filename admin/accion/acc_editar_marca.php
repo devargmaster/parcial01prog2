@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once '../../functions/autoload.php';
 $postData = $_POST;
 $id = $_GET['id'] ?? FALSE;
@@ -6,9 +9,7 @@ $alerta = new Alerta();
 
 try {
     $marca = (new Marca())->marcaxid($id);
-    $marca->setMarcaTitulo($postData['nombre']);
-    $marca->setMarcaDescripcion($postData['descripcion']);
-    $marca->editar();
+    $marca->editar($postData['nombre'], $postData['descripcion']);
     $alerta->add_alerta('success', "Marca actualizada correctamente.", "Marca");
     header('Location: ' . dirname($_SERVER['PHP_SELF'], 2) . '/index.php?sec=marca&ruta=vistas');
 } catch (PDOException $e) {

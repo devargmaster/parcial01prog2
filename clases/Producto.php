@@ -62,7 +62,11 @@ class Producto
         }
         $producto->producto_marca = (new Marca())->marcaxid($productoData['marca_id']);
         $producto->productoId_categoria_id = (new Productos_Categorias())->producto_x_categoria($productoData['id']);
-        $producto->producto_categoria = (new Categoria())->categoriaxid($producto->productoId_categoria_id['categoria_id']);
+        if (is_array($producto->productoId_categoria_id)) {
+            $producto->producto_categoria = (new Categoria())->categoriaxid($producto->productoId_categoria_id['categoria_id']);
+        } else {
+            $producto->producto_categoria = null;
+        }
         $subcategoriasIds = (new Productos_Categorias_Subcategorias())->producto_x_subcategoria($productoData['id']);
         $producto->producto_subcategoria = [];
         foreach ($subcategoriasIds as $subcategoriaId) {

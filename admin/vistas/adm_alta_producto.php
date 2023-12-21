@@ -90,27 +90,27 @@ echo (new Alerta())->get_alertas();
                     <?php endforeach; ?>
                 </div>
                 <div class="form-group">
-                    <label for="productoEstado">Estado del Producto</label>
-                    <select class="form-select" id="productoEstado" name="producto_estado">
-                        <option value="1">Activo</option>
-                        <option value="0">No Activo</option>
-                    </select>
+                    <label for="producto_estado">Activo:</label>
+                    <input type="radio" id="producto_estado_si" name="producto_estado" value="1" checked>
+                    <label for="producto_estado_si">Sí</label>
+                    <input type="radio" id="producto_estado_no" name="producto_estado" value="0">
+                    <label for="producto_estado_no">No</label>
                 </div>
 
                 <div class="form-group">
-                    <label for="productoNuevo">Producto Nuevo</label>
-                    <select class="form-select" id="productoNuevo" name="producto_nuevo">
-                        <option value="1">Sí</option>
-                        <option value="0">No</option>
-                    </select>
+                    <label for="producto_nuevo">Producto Nuevo:</label>
+                    <input type="radio" id="producto_nuevo_si" name="producto_nuevo" value="1" checked>
+                    <label for="producto_nuevo_si">Sí</label>
+                    <input type="radio" id="producto_nuevo_no" name="producto_nuevo" value="0">
+                    <label for="producto_nuevo_no">No</label>
                 </div>
 
                 <div class="form-group">
-                    <label for="productoDestacado">Producto Destacado</label>
-                    <select class="form-select" id="productoDestacado" name="producto_destacado">
-                        <option value="1">Sí</option>
-                        <option value="0">No</option>
-                    </select>
+                    <label for="producto_destacado">Destacado:</label>
+                    <input type="radio" id="producto_destacado_si" name="producto_destacado" value="1" checked>
+                    <label for="producto_destacado_si">Sí</label>
+                    <input type="radio" id="producto_destacado_no" name="producto_destacado" value="0">
+                    <label for="producto_destacado_no">No</label>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Agregar Producto</button>

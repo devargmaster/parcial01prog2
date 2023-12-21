@@ -1,5 +1,5 @@
 <?php
-// lo mantengo para algunas vistas estaticas
+
 $archivo = 'vistas/' . $seccion_elegida_ . '.php';
 
 if (!isset($_GET['sec']) && !isset($_GET['producto'])) {
